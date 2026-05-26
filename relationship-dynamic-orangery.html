@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Relational Dynamics - orangery.pro</title>
+<meta name="orangery-worker-url" content="orangery-relational-dynamics.cwwq46sn7m.workers.dev">
 <link rel="icon" href="ORANGE.png" type="image/png">
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +24,9 @@
   --stone-deep: #d8cfc0;
   --white: #fffdf8;
   --muted: #6a6a60;
+  --warning: #7a6020;
+  --warning-bg: #f5eccf;
+  --danger-bg: #fceae4;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
   --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
@@ -36,6 +40,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-body);
   background: var(--off);
@@ -45,6 +53,12 @@ body {
 
 a {
   color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 nav {
@@ -111,7 +125,7 @@ nav {
 }
 
 .hero {
-  padding: 72px 0 28px;
+  padding: 72px 0 30px;
   background:
     radial-gradient(circle at top right, rgba(201, 160, 82, 0.16), transparent 32%),
     linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
@@ -150,7 +164,7 @@ nav {
 }
 
 .hero p {
-  max-width: 720px;
+  max-width: 760px;
   font-size: 17px;
   color: var(--muted);
   line-height: 1.8;
@@ -173,40 +187,489 @@ nav {
 }
 
 .tool-wrap {
-  padding: 0 0 84px;
+  padding: 0 0 90px;
 }
 
-.tool-frame-shell {
+.tool-shell {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
-  padding: 18px;
+  border-radius: 18px;
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
 }
 
-.tool-frame {
-  width: 100%;
-  min-height: 760px;
-  border: none;
-  display: block;
-  background: #faf9f6;
-  border-radius: 12px;
+.tool-top {
+  padding: 28px 28px 24px;
+  border-bottom: 1px solid var(--stone-deep);
+  background: linear-gradient(180deg, rgba(243, 240, 232, 0.68) 0%, rgba(255, 253, 248, 1) 100%);
 }
 
-.tool-note {
-  margin-top: 14px;
-  font-size: 13px;
+.tool-top h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.tool-top h2 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.tool-top p {
+  max-width: 720px;
+  font-size: 15px;
   color: var(--muted);
+  line-height: 1.75;
+}
+
+.coaching-note {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 160, 82, 0.36);
+  background: var(--warning-bg);
+}
+
+.coaching-note strong {
+  display: block;
+  font-size: 13px;
+  color: var(--warning);
+  margin-bottom: 4px;
+}
+
+.coaching-note p {
+  font-size: 13px;
+  color: #5d5220;
   line-height: 1.7;
 }
 
-.tool-note a {
-  color: var(--rust);
-  text-decoration: none;
+.tool-body {
+  padding: 28px;
 }
 
-.tool-note a:hover {
-  text-decoration: underline;
+.direction-group {
+  margin-bottom: 24px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--char-light);
+  margin-bottom: 10px;
+}
+
+.direction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.direction-option input {
+  display: none;
+}
+
+.direction-card {
+  display: block;
+  height: 100%;
+  padding: 16px 16px 18px;
+  border-radius: 14px;
+  border: 1.5px solid var(--stone-deep);
+  background: var(--off);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.direction-card:hover {
+  border-color: var(--sage);
+  transform: translateY(-1px);
+}
+
+.direction-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--char);
+  margin-bottom: 6px;
+}
+
+.direction-card span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.direction-option input:checked + .direction-card {
+  background: rgba(122, 153, 128, 0.12);
+  border-color: var(--sage);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-card {
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 22px;
+  background: #fff;
+}
+
+.form-card h3 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.form-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid var(--stone-deep);
+  background: var(--off);
+  color: var(--char);
+  padding: 13px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field textarea {
+  min-height: 132px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--sage);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(122, 153, 128, 0.12);
+}
+
+.field-help {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.context-card {
+  margin-top: 18px;
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 22px;
+  background: rgba(232, 224, 212, 0.36);
+}
+
+.context-card h3 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.context-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.submit-row {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 4px;
+  padding: 13px 22px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: #fff;
+  border: 1px solid var(--rust);
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--rust-light);
+  border-color: var(--rust-light);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background: var(--stone-deep);
+  border-color: var(--stone-deep);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--char);
+  border: 1px solid rgba(30, 32, 32, 0.18);
+}
+
+.btn-secondary:hover {
+  border-color: var(--sage);
+  transform: translateY(-1px);
+}
+
+.loading-copy {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--sage);
+}
+
+.loading-copy.visible {
+  display: inline-flex;
+}
+
+.loading-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rust);
+  animation: pulse 1s ease infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.status-message {
+  margin-top: 14px;
+  display: none;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.status-message.visible {
+  display: block;
+}
+
+.status-message.error {
+  background: var(--danger-bg);
+  border: 1px solid rgba(200, 84, 58, 0.24);
+  color: var(--char-mid);
+}
+
+.status-message.info {
+  background: rgba(122, 153, 128, 0.12);
+  border: 1px solid rgba(122, 153, 128, 0.22);
+  color: var(--char-mid);
+}
+
+.result-shell {
+  display: none;
+  margin-top: 26px;
+  border-top: 1px solid var(--stone-deep);
+  padding-top: 26px;
+}
+
+.result-shell.visible {
+  display: block;
+}
+
+.result-top {
+  margin-bottom: 22px;
+}
+
+.result-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 10px;
+}
+
+.result-kicker::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.result-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.result-title em {
+  color: var(--rust);
+  font-style: italic;
+}
+
+.result-summary {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 800px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.result-card {
+  background: #fff;
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.result-card.full {
+  grid-column: 1 / -1;
+}
+
+.result-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.result-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.result-card ul {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.result-card li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.result-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.result-card.warning li::before {
+  background: var(--rust);
+}
+
+.result-card.tip li::before {
+  background: var(--gold);
+}
+
+.result-footer {
+  margin-top: 8px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(201, 160, 82, 0.34);
+  background: var(--warning-bg);
+}
+
+.result-footer strong {
+  display: block;
+  font-size: 13px;
+  color: var(--warning);
+  margin-bottom: 6px;
+}
+
+.result-footer p {
+  font-size: 14px;
+  color: #5d5220;
+  line-height: 1.8;
+}
+
+.tool-footer {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+@media (max-width: 920px) {
+  .direction-grid,
+  .form-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 700px) {
@@ -219,8 +682,9 @@ nav {
     padding-top: 60px;
   }
 
-  .tool-frame-shell {
-    padding: 12px;
+  .tool-top,
+  .tool-body {
+    padding: 22px;
   }
 }
 </style>
@@ -242,49 +706,387 @@ nav {
   <section class="hero">
     <div class="section-inner">
       <span class="eyebrow">Relational Dynamics</span>
-      <h1>How does your wiring meet <em>theirs?</em></h1>
-      <p>This free tool gives you a practical cheat sheet for a co-worker, manager, direct report, or collaborator. Add a little about how each of you tends to operate, and it will surface where the working dynamic clicks, where friction is likely, and what to pay attention to.</p>
+      <h1 id="hero-headline">How does your wiring meet <em>theirs?</em></h1>
+      <p id="hero-copy">Use this tool when a work relationship feels important, tense, unclear, or politically charged. It is built to help you see the dynamic more clearly, surface what may be in play, and walk away with a more grounded next step.</p>
       <div class="meta-row">
         <span class="meta-pill">Free resource</span>
-        <span class="meta-pill">Coworkers</span>
-        <span class="meta-pill">Managers</span>
-        <span class="meta-pill">Direct reports</span>
+        <span class="meta-pill">Leading down</span>
+        <span class="meta-pill">Sideways</span>
+        <span class="meta-pill">Leading up</span>
       </div>
     </div>
   </section>
 
   <section class="tool-wrap">
     <div class="section-inner">
-      <div class="tool-frame-shell">
-        <iframe
-          id="orangery-dynamic-frame"
-          class="tool-frame"
-          src="https://lilbird.life/relationship-dynamic-orangery.html?embed=1"
-          title="Relational Dynamics tool"
-          loading="lazy"
-        ></iframe>
+      <div class="tool-shell">
+        <div class="tool-top">
+          <h2>A workplace coaching mirror, not an <em>advice engine.</em></h2>
+          <p>This tool uses the patterns you notice in yourself and the other person to reflect the likely dynamic back to you. The aim is not to tell you what to do with certainty. The aim is to help you think more clearly, notice power and politics, and prepare for a wiser conversation.</p>
+          <div class="coaching-note">
+            <strong>How to use it well</strong>
+            <p>Be honest, not polished. A rough read on each person is enough. The more specific you are about how each of you tends to show up at work, the more practical the reflection will be.</p>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <form id="dynamic-form" novalidate>
+            <div class="direction-group">
+              <label class="field-label">Which direction does this relationship move?</label>
+              <div class="direction-grid">
+                <label class="direction-option">
+                  <input type="radio" name="relationshipDirection" value="leadDown">
+                  <span class="direction-card">
+                    <strong>Leading down</strong>
+                    <span>Someone you lead or manage. Think clarity, support, accountability, and the weight of your role.</span>
+                  </span>
+                </label>
+                <label class="direction-option">
+                  <input type="radio" name="relationshipDirection" value="peer" checked>
+                  <span class="direction-card">
+                    <strong>Sideways</strong>
+                    <span>A colleague or peer. Think trust, alignment, influence, shared ownership, and cross-functional tension.</span>
+                  </span>
+                </label>
+                <label class="direction-option">
+                  <input type="radio" name="relationshipDirection" value="leadUp">
+                  <span class="direction-card">
+                    <strong>Leading up</strong>
+                    <span>Someone who leads or manages you. Think expectations, communication, power, timing, and political awareness.</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <section class="form-card">
+                <h3>Your wiring</h3>
+                <p>Share the frameworks you know and the way you typically show up in a working relationship.</p>
+
+                <div class="field">
+                  <label class="field-label" for="you-frameworks">Your frameworks and types</label>
+                  <input id="you-frameworks" name="youFrameworks" type="text" placeholder="e.g. 5 Voices Nurturer, Enneagram 3, ENTJ, tends to move fast">
+                  <p class="field-help">Include GiANT, 5 Voices, MBTI, Enneagram, or any shorthand that helps.</p>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="you-description">How you tend to show up at work</label>
+                  <textarea id="you-description" name="youDescription" placeholder="e.g. direct, quick to make decisions, likes autonomy, gets impatient when things stay fuzzy, sometimes pushes too hard when the stakes feel high"></textarea>
+                </div>
+              </section>
+
+              <section class="form-card">
+                <h3>Their wiring</h3>
+                <p>Give your best honest read on how the other person tends to move, decide, and communicate.</p>
+
+                <div class="field">
+                  <label class="field-label" for="them-frameworks">Their frameworks and types</label>
+                  <input id="them-frameworks" name="themFrameworks" type="text" placeholder="e.g. Guardian voice, Enneagram 9, thoughtful, slower processor">
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="them-description">How they tend to show up at work</label>
+                  <textarea id="them-description" name="themDescription" placeholder="e.g. careful, loyal, avoids public conflict, wants time to process, can feel hard to read when pressure rises"></textarea>
+                </div>
+              </section>
+            </div>
+
+            <section class="context-card">
+              <h3>Real-world context</h3>
+              <p>Optional, but helpful. Add the live situation that makes this relationship important right now.</p>
+
+              <div class="field">
+                <label class="field-label" for="friction-context">Current friction, politics, or pressure</label>
+                <textarea id="friction-context" name="frictionContext" placeholder="e.g. I need to give harder feedback, there is tension in meetings, they manage me but communication is inconsistent, I need to influence without overstepping, there are politics around ownership or visibility"></textarea>
+                <p class="field-help">This helps the output land in actual workplace reality rather than staying theoretical.</p>
+              </div>
+            </section>
+
+            <div class="submit-row">
+              <button id="submit-btn" class="btn-primary" type="submit">Read the dynamic -></button>
+              <button id="reset-btn" class="btn-secondary" type="button">Reset</button>
+              <div id="loading-copy" class="loading-copy" aria-live="polite">
+                <span class="loading-dot"></span>
+                <span class="loading-dot"></span>
+                <span class="loading-dot"></span>
+                <span>Building your reflection</span>
+              </div>
+            </div>
+
+            <div id="status-message" class="status-message" role="alert"></div>
+          </form>
+
+          <section id="result-shell" class="result-shell" aria-live="polite">
+            <div class="result-top">
+              <p class="result-kicker" id="result-direction">Relational read</p>
+              <h2 class="result-title" id="result-title">Your relational dynamic</h2>
+              <p class="result-summary" id="result-summary"></p>
+            </div>
+
+            <div class="result-grid">
+              <article class="result-card">
+                <h3>What they may need from you</h3>
+                <p id="result-they-need"></p>
+              </article>
+
+              <article class="result-card">
+                <h3>What you may need from them</h3>
+                <p id="result-you-need"></p>
+              </article>
+
+              <article class="result-card full">
+                <h3>Power and politics in play</h3>
+                <p id="result-power"></p>
+              </article>
+
+              <article class="result-card warning">
+                <h3>Likely points of friction</h3>
+                <ul id="result-friction"></ul>
+              </article>
+
+              <article class="result-card warning">
+                <h3>Political watchouts</h3>
+                <ul id="result-politics"></ul>
+              </article>
+
+              <article class="result-card">
+                <h3>Reflection questions</h3>
+                <ul id="result-questions"></ul>
+              </article>
+
+              <article class="result-card tip">
+                <h3>Do more of this</h3>
+                <ul id="result-do-more"></ul>
+              </article>
+
+              <article class="result-card warning">
+                <h3>Avoid doing this</h3>
+                <ul id="result-avoid"></ul>
+              </article>
+
+              <article class="result-card tip">
+                <h3>Next conversation moves</h3>
+                <ul id="result-next-steps"></ul>
+              </article>
+            </div>
+
+            <div class="result-footer">
+              <strong>Coaching reminder</strong>
+              <p id="result-reminder"></p>
+            </div>
+          </section>
+
+          <p class="tool-footer">This reflection is designed to help you prepare, not posture. Use it to think, to notice, and to choose your next move with more steadiness.</p>
+        </div>
       </div>
-      <p class="tool-note">This page wraps the existing Orangery relational dynamics engine as a free resource inside the `orangery.pro` stream. The underlying assessment experience is powered by Lil' Bird's engine. If you want, I can fully restyle and localize this tool into the Orangery design system next.</p>
     </div>
   </section>
 
 <script>
 (function () {
-  var frame = document.getElementById("orangery-dynamic-frame");
-  var params = new URLSearchParams(window.location.search);
-  var relationship = params.get("relationship");
-  var src = "https://lilbird.life/relationship-dynamic-orangery.html?embed=1";
+  const form = document.getElementById("dynamic-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const resetBtn = document.getElementById("reset-btn");
+  const loadingCopy = document.getElementById("loading-copy");
+  const statusMessage = document.getElementById("status-message");
+  const resultShell = document.getElementById("result-shell");
+  const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
+  const WORKER_URL = (window.ORANGERY_RELATIONAL_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
 
-  if (relationship === "manager") {
-    src += "&relationship=manager";
+  const relationshipCopy = {
+    leadDown: {
+      headline: 'How does your wiring meet <em>someone you lead?</em>',
+      intro: "Leading down carries responsibility, power, and signal. This version helps you think about how your style may land on someone who looks to you for clarity, support, and direction."
+    },
+    peer: {
+      headline: 'How does your wiring meet <em>a peer?</em>',
+      intro: "Sideways relationships shape a surprising amount of daily culture. This version helps you think about trust, alignment, tension, and influence when there is shared ownership without formal authority."
+    },
+    leadUp: {
+      headline: 'How does your wiring meet <em>the person who leads you?</em>',
+      intro: "Leading up requires judgment. This version helps you think through communication, timing, power, politics, and how to create more alignment without losing yourself."
+    }
+  };
+
+  function normalizeDirection(value) {
+    const raw = String(value || "").trim().toLowerCase();
+    if (["leadup", "lead-up", "up", "manager", "managerorleader"].includes(raw)) return "leadUp";
+    if (["leaddown", "lead-down", "down", "directreport", "direct-report", "report", "someoneyoulead"].includes(raw)) return "leadDown";
+    return "peer";
   }
 
-  frame.src = src;
+  function directionLabel(value) {
+    const normalized = normalizeDirection(value);
+    if (normalized === "leadDown") return "Leading down";
+    if (normalized === "leadUp") return "Leading up";
+    return "Sideways";
+  }
 
-  window.addEventListener("message", function (e) {
-    if (!e.data || e.data.type !== "lilbird-embed-resize") return;
-    frame.style.height = Math.max(560, e.data.height) + "px";
+  function setStatus(message, tone) {
+    if (!message) {
+      statusMessage.textContent = "";
+      statusMessage.className = "status-message";
+      return;
+    }
+    statusMessage.textContent = message;
+    statusMessage.className = "status-message visible " + tone;
+  }
+
+  function setLoading(isLoading) {
+    submitBtn.disabled = isLoading;
+    loadingCopy.classList.toggle("visible", isLoading);
+    submitBtn.textContent = isLoading ? "Building your reflection..." : "Read the dynamic ->";
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderList(targetId, items) {
+    const target = document.getElementById(targetId);
+    const safeItems = Array.isArray(items) ? items.filter(Boolean) : [];
+    target.innerHTML = safeItems.map((item) => "<li>" + escapeHtml(item) + "</li>").join("");
+  }
+
+  function applyDirectionCopy(direction) {
+    const normalized = normalizeDirection(direction);
+    const copy = relationshipCopy[normalized];
+    document.getElementById("hero-headline").innerHTML = copy.headline;
+    document.getElementById("hero-copy").textContent = copy.intro;
+
+    const option = form.querySelector('input[name="relationshipDirection"][value="' + normalized + '"]');
+    if (option) option.checked = true;
+  }
+
+  function getSelectedDirection() {
+    const checked = form.querySelector('input[name="relationshipDirection"]:checked');
+    return normalizeDirection(checked ? checked.value : "peer");
+  }
+
+  function resetForm() {
+    form.reset();
+    setStatus("", "info");
+    resultShell.classList.remove("visible");
+    applyDirectionCopy(normalizeDirection(new URLSearchParams(window.location.search).get("relationship")));
+  }
+
+  function validateFields(payload) {
+    if (!payload.you.frameworks && !payload.you.description) {
+      return "Start with at least a few honest details about your own wiring or work style.";
+    }
+
+    if (!payload.them.frameworks && !payload.them.description) {
+      return "Add at least a few honest details about the other person so the reflection has something real to work with.";
+    }
+
+    return "";
+  }
+
+  function normalizeResponse(data, fallbackDirection) {
+    return {
+      pairingTitle: data.pairingTitle || "Your relational dynamic",
+      snapshotSummary: data.snapshotSummary || "",
+      relationshipDirection: normalizeDirection(data.relationshipDirection || fallbackDirection),
+      powerDynamics: data.powerDynamics || "",
+      theyMayNeed: data.theyMayNeed || "",
+      youMayNeed: data.youMayNeed || "",
+      frictionPoints: Array.isArray(data.frictionPoints) ? data.frictionPoints : [],
+      politicalWatchouts: Array.isArray(data.politicalWatchouts) ? data.politicalWatchouts : [],
+      reflectionQuestions: Array.isArray(data.reflectionQuestions) ? data.reflectionQuestions : [],
+      doMoreOf: Array.isArray(data.doMoreOf) ? data.doMoreOf : [],
+      avoidDoing: Array.isArray(data.avoidDoing) ? data.avoidDoing : [],
+      nextConversationSteps: Array.isArray(data.nextConversationSteps) ? data.nextConversationSteps : [],
+      coachingReminder: data.coachingReminder || ""
+    };
+  }
+
+  function renderResponse(data) {
+    document.getElementById("result-direction").textContent = directionLabel(data.relationshipDirection) + " relational read";
+    document.getElementById("result-title").textContent = data.pairingTitle;
+    document.getElementById("result-summary").textContent = data.snapshotSummary;
+    document.getElementById("result-they-need").textContent = data.theyMayNeed;
+    document.getElementById("result-you-need").textContent = data.youMayNeed;
+    document.getElementById("result-power").textContent = data.powerDynamics;
+    document.getElementById("result-reminder").textContent = data.coachingReminder;
+
+    renderList("result-friction", data.frictionPoints);
+    renderList("result-politics", data.politicalWatchouts);
+    renderList("result-questions", data.reflectionQuestions);
+    renderList("result-do-more", data.doMoreOf);
+    renderList("result-avoid", data.avoidDoing);
+    renderList("result-next-steps", data.nextConversationSteps);
+
+    resultShell.classList.add("visible");
+    resultShell.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setStatus("", "info");
+
+    if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
+      setStatus("The tool page is ready, but the worker URL is still a placeholder. Deploy the Orangery worker and update the meta tag at the top of this file with the real worker URL before using the live tool.", "info");
+      return;
+    }
+
+    const payload = {
+      relationshipDirection: getSelectedDirection(),
+      you: {
+        frameworks: document.getElementById("you-frameworks").value.trim(),
+        description: document.getElementById("you-description").value.trim()
+      },
+      them: {
+        frameworks: document.getElementById("them-frameworks").value.trim(),
+        description: document.getElementById("them-description").value.trim()
+      },
+      context: document.getElementById("friction-context").value.trim()
+    };
+
+    const validationMessage = validateFields(payload);
+    if (validationMessage) {
+      setStatus(validationMessage, "error");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/relational-dynamics", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong while building the reflection.");
+      }
+
+      renderResponse(normalizeResponse(data, payload.relationshipDirection));
+    } catch (error) {
+      setStatus(error.message || "Something went wrong while building the reflection.", "error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  form.addEventListener("submit", handleSubmit);
+  resetBtn.addEventListener("click", resetForm);
+
+  form.querySelectorAll('input[name="relationshipDirection"]').forEach((input) => {
+    input.addEventListener("change", function () {
+      applyDirectionCopy(this.value);
+    });
   });
+
+  applyDirectionCopy(normalizeDirection(new URLSearchParams(window.location.search).get("relationship")));
 })();
 </script>
 </body>
