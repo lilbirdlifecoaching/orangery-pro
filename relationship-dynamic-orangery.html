@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Relational Dynamics - orangery.pro</title>
-<meta name="orangery-worker-url" content="orangery-relational-dynamics.cwwq46sn7m.workers.dev">
+<meta name="orangery-worker-url" content="https://orangery-relational-dynamics.cwwq46sn7m.workers.dev">
 <link rel="icon" href="ORANGE.png" type="image/png">
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -891,7 +891,10 @@ nav {
   const statusMessage = document.getElementById("status-message");
   const resultShell = document.getElementById("result-shell");
   const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
-  const WORKER_URL = (window.ORANGERY_RELATIONAL_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const RAW_WORKER_URL = (window.ORANGERY_RELATIONAL_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const WORKER_URL = RAW_WORKER_URL && !/^https?:\/\//i.test(RAW_WORKER_URL)
+    ? "https://" + RAW_WORKER_URL
+    : RAW_WORKER_URL;
 
   const relationshipCopy = {
     leadDown: {
