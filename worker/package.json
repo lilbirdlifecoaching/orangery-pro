@@ -1,0 +1,5 @@
+{
+  "name": "orangery-relational-dynamics-worker",
+  "private": true,
+  "type": "module"
+}

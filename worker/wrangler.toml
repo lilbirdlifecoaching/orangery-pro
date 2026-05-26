@@ -1,0 +1,7 @@
+name = "orangery-relational-dynamics"
+main = "src/index.js"
+compatibility_date = "2026-05-26"
+
+[vars]
+ALLOWED_ORIGINS = ""
+ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
