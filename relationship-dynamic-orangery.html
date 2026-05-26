@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relational Dynamics - orangery.pro</title>
+<link rel="icon" href="../ORANGE.png" type="image/png">
+<link rel="apple-touch-icon" href="../ORANGE.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #1e2020;
+  --char-mid: #2e3830;
+  --char-light: #3a4840;
+  --sage: #7a9980;
+  --rust: #c8543a;
+  --rust-light: #d97055;
+  --gold: #c9a052;
+  --off: #f3f0e8;
+  --stone: #e8e0d4;
+  --stone-deep: #d8cfc0;
+  --white: #fffdf8;
+  --muted: #6a6a60;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--off);
+  color: var(--char);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+nav {
+  background: rgba(30, 32, 32, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-inner,
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.nav-inner {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-brand img {
+  width: 38px;
+  height: 38px;
+}
+
+.nav-brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--off);
+}
+
+.nav-brand-sub {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.46);
+}
+
+.nav-back {
+  font-size: 13px;
+  color: rgba(243, 240, 232, 0.66);
+  text-decoration: none;
+}
+
+.nav-back:hover {
+  color: rgba(243, 240, 232, 0.95);
+}
+
+.hero {
+  padding: 72px 0 28px;
+  background:
+    radial-gradient(circle at top right, rgba(201, 160, 82, 0.16), transparent 32%),
+    linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--rust);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.hero p {
+  max-width: 720px;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.meta-row {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meta-pill {
+  border: 1px solid rgba(30, 32, 32, 0.16);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: var(--char-light);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.tool-wrap {
+  padding: 0 0 84px;
+}
+
+.tool-frame-shell {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.tool-frame {
+  width: 100%;
+  min-height: 760px;
+  border: none;
+  display: block;
+  background: #faf9f6;
+  border-radius: 12px;
+}
+
+.tool-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.tool-note a {
+  color: var(--rust);
+  text-decoration: none;
+}
+
+.tool-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding-top: 60px;
+  }
+
+  .tool-frame-shell {
+    padding: 12px;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="/orangery-pro/">
+        <img src="../ORANGE.png" alt="orangery.pro">
+        <span class="nav-brand-copy">
+          <span class="nav-brand-name">orangery.pro</span>
+          <span class="nav-brand-sub">Free leadership resource</span>
+        </span>
+      </a>
+      <a class="nav-back" href="/orangery-pro/">Back to orangery.pro</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="section-inner">
+      <span class="eyebrow">Relational Dynamics</span>
+      <h1>How does your wiring meet <em>theirs?</em></h1>
+      <p>This free tool gives you a practical cheat sheet for a co-worker, manager, direct report, or collaborator. Add a little about how each of you tends to operate, and it will surface where the working dynamic clicks, where friction is likely, and what to pay attention to.</p>
+      <div class="meta-row">
+        <span class="meta-pill">Free resource</span>
+        <span class="meta-pill">Coworkers</span>
+        <span class="meta-pill">Managers</span>
+        <span class="meta-pill">Direct reports</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-wrap">
+    <div class="section-inner">
+      <div class="tool-frame-shell">
+        <iframe
+          id="orangery-dynamic-frame"
+          class="tool-frame"
+          src="https://lilbird.life/relationship-dynamic-orangery.html?embed=1"
+          title="Relational Dynamics tool"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <p class="tool-note">This page wraps the existing Orangery relational dynamics engine as a free resource inside the `orangery.pro` stream. The underlying assessment experience is powered by Lil' Bird's engine. If you want, I can fully restyle and localize this tool into the Orangery design system next.</p>
+    </div>
+  </section>
+
+<script>
+(function () {
+  var frame = document.getElementById("orangery-dynamic-frame");
+  var params = new URLSearchParams(window.location.search);
+  var relationship = params.get("relationship");
+  var src = "https://lilbird.life/relationship-dynamic-orangery.html?embed=1";
+
+  if (relationship === "manager") {
+    src += "&relationship=manager";
+  }
+
+  frame.src = src;
+
+  window.addEventListener("message", function (e) {
+    if (!e.data || e.data.type !== "lilbird-embed-resize") return;
+    frame.style.height = Math.max(560, e.data.height) + "px";
+  });
+})();
+</script>
+</body>
+</html>

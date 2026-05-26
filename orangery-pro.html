@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>orangery.pro - Leadership Coaching for New and Growing People Leaders</title>
+<link rel="icon" href="ORANGE.png" type="image/png">
+<link rel="apple-touch-icon" href="ORANGE.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #1e2020;
+  --char-mid: #2e3830;
+  --char-light: #3a4840;
+  --sage: #7a9980;
+  --rust: #c8543a;
+  --rust-light: #d97055;
+  --gold: #c9a052;
+  --off: #f3f0e8;
+  --stone: #e8e0d4;
+  --stone-deep: #d8cfc0;
+  --white: #fffdf8;
+  --muted: #6a6a60;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--off);
+  color: var(--char);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.site-shell {
+  overflow: hidden;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 84px 48px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--rust);
+  flex-shrink: 0;
+}
+
+.section-headline {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.section-headline em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.section-sub {
+  max-width: 620px;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 3px;
+  padding: 13px 24px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: white;
+  border: 1px solid var(--rust);
+}
+
+.btn-primary:hover {
+  background: var(--rust-light);
+  border-color: var(--rust-light);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--char);
+  border: 1px solid rgba(30, 32, 32, 0.18);
+}
+
+.btn-secondary:hover {
+  border-color: var(--sage);
+  transform: translateY(-1px);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(30, 32, 32, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-brand img {
+  width: 38px;
+  height: 38px;
+}
+
+.nav-brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--off);
+}
+
+.nav-brand-sub {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.45);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 13px;
+  color: rgba(243, 240, 232, 0.6);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: rgba(243, 240, 232, 0.96);
+}
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(circle at top right, rgba(201, 160, 82, 0.18), transparent 34%),
+    linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
+}
+
+.hero-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 92px 48px 54px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+  gap: 38px;
+  align-items: center;
+}
+
+.hero-copy {
+  max-width: 640px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1.02;
+  margin-bottom: 22px;
+  letter-spacing: -0.02em;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  border: 1px solid rgba(30, 32, 32, 0.14);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.hero-panel {
+  background: rgba(30, 32, 32, 0.98);
+  color: var(--off);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(201, 160, 82, 0.14), transparent 38%);
+  pointer-events: none;
+}
+
+.panel-label {
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.46);
+  margin-bottom: 18px;
+}
+
+.shift-list {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.shift-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 16px 16px 16px 18px;
+}
+
+.shift-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.shift-card p {
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.68);
+  line-height: 1.6;
+}
+
+.panel-quote {
+  position: relative;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.5;
+  color: rgba(243, 240, 232, 0.78);
+}
+
+.hero-strip {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 48px 38px;
+}
+
+.hero-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--stone-deep);
+  box-shadow: var(--shadow-soft);
+}
+
+.strip-item {
+  background: var(--white);
+  padding: 22px 24px;
+  border-right: 1px solid var(--stone);
+}
+
+.strip-item:last-child {
+  border-right: none;
+}
+
+.strip-kicker {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.strip-value {
+  font-family: var(--font-display);
+  font-size: 27px;
+  line-height: 1;
+  color: var(--char);
+  margin-bottom: 6px;
+}
+
+.strip-copy {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.challenge-intro {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.challenge-intro p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.challenge-list {
+  display: grid;
+  gap: 14px;
+}
+
+.challenge-item {
+  background: transparent;
+  border: 1px solid var(--stone-deep);
+  border-left: 3px solid var(--rust);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 20px;
+}
+
+.challenge-item strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: var(--char);
+}
+
+.challenge-item p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.dark-section {
+  background: var(--char);
+  color: var(--off);
+}
+
+.dark-section .section-headline {
+  color: var(--off);
+}
+
+.dark-section .section-sub {
+  color: rgba(243, 240, 232, 0.62);
+}
+
+.offer-shell {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: 28px;
+}
+
+.offer-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.offer-card-main h3,
+.offer-card-side h3 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.offer-card-main h3 em,
+.offer-card-side h3 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.offer-card-main > p,
+.offer-card-side > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(243, 240, 232, 0.68);
+  margin-bottom: 22px;
+}
+
+.offer-points,
+.tool-points,
+.fit-points {
+  display: grid;
+  gap: 12px;
+}
+
+.offer-point,
+.tool-point,
+.fit-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.point-number,
+.point-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.point-number {
+  background: rgba(201, 160, 82, 0.16);
+  color: var(--gold);
+}
+
+.point-mark {
+  background: rgba(122, 153, 128, 0.16);
+  color: #b3d1b8;
+}
+
+.offer-point strong,
+.tool-point strong,
+.fit-point strong {
+  display: block;
+  font-size: 15px;
+  color: var(--off);
+  margin-bottom: 4px;
+}
+
+.offer-point p,
+.tool-point p,
+.fit-point p {
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.62);
+  line-height: 1.7;
+}
+
+.offer-note {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  color: rgba(243, 240, 232, 0.54);
+}
+
+.stone-section {
+  background: linear-gradient(180deg, rgba(232, 224, 212, 0.55) 0%, rgba(243, 240, 232, 1) 100%);
+}
+
+.topics-grid {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.topic-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+.topic-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 12px;
+}
+
+.topic-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.topic-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.tools-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.tool-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.tool-kicker {
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 10px;
+}
+
+.tool-card h3 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.tool-card > p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.tool-card .tool-point strong {
+  color: var(--char);
+}
+
+.tool-card .tool-point p {
+  color: var(--char-light);
+}
+
+.tool-card .point-mark {
+  background: rgba(122, 153, 128, 0.18);
+  color: var(--char-mid);
+}
+
+.resource-shell {
+  margin-top: 38px;
+}
+
+.resource-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: 1.15fr auto;
+  gap: 26px;
+  align-items: center;
+}
+
+.resource-card h3 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.resource-card h3 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.resource-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+.resource-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.resource-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--stone-deep);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: var(--char-light);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.resource-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.resource-note {
+  max-width: 260px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+  text-align: right;
+}
+
+.fit-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.fit-card {
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.fit-card.good {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+}
+
+.fit-card.not-fit {
+  background: rgba(30, 32, 32, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fit-card h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.fit-card.good h3 {
+  color: var(--char);
+}
+
+.fit-card.not-fit h3 {
+  color: var(--off);
+}
+
+.fit-card p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.fit-card.good p {
+  color: var(--muted);
+}
+
+.fit-card.not-fit p {
+  color: rgba(243, 240, 232, 0.62);
+}
+
+.fit-card.good .fit-point strong {
+  color: var(--char);
+}
+
+.fit-card.good .fit-point p {
+  color: var(--muted);
+}
+
+.process-grid {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.process-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.process-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(201, 160, 82, 0.14);
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.process-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.process-card p {
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.66);
+  line-height: 1.75;
+}
+
+.faq-shell {
+  margin-top: 36px;
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.cta-band {
+  background:
+    radial-gradient(circle at top left, rgba(201, 160, 82, 0.18), transparent 30%),
+    var(--char);
+}
+
+.cta-box {
+  display: grid;
+  grid-template-columns: 1.1fr auto;
+  gap: 24px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 32px;
+}
+
+.cta-box h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--off);
+  margin-bottom: 10px;
+}
+
+.cta-box h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cta-box p {
+  font-size: 16px;
+  color: rgba(243, 240, 232, 0.62);
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.cta-actions .btn-secondary {
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.cta-actions .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+footer {
+  background: #171919;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 48px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  width: 32px;
+  height: 32px;
+}
+
+.footer-brand-copy strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--off);
+}
+
+.footer-brand-copy span,
+.footer-links,
+.footer-links a {
+  font-size: 12px;
+  color: rgba(243, 240, 232, 0.46);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: rgba(243, 240, 232, 0.9);
+}
+
+@media (max-width: 1080px) {
+  .hero-grid,
+  .challenge-grid,
+  .offer-shell,
+  .resource-card,
+  .cta-box {
+    grid-template-columns: 1fr;
+  }
+
+  .topics-grid,
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-actions {
+    align-items: flex-start;
+  }
+
+  .resource-actions {
+    align-items: flex-start;
+  }
+
+  .resource-note {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (max-width: 840px) {
+  .nav-inner,
+  .section-inner,
+  .hero-grid,
+  .hero-strip,
+  .footer-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 12vw, 60px);
+  }
+
+  .hero-strip-grid,
+  .tools-grid,
+  .fit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .strip-item {
+    border-right: none;
+    border-bottom: 1px solid var(--stone);
+  }
+
+  .strip-item:last-child {
+    border-bottom: none;
+  }
+
+  .topics-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .section-inner {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .hero-grid {
+    padding-top: 72px;
+  }
+
+  .hero-sub,
+  .section-sub,
+  .cta-box p {
+    font-size: 16px;
+  }
+
+  .hero-panel,
+  .topic-card,
+  .tool-card,
+  .fit-card,
+  .offer-card,
+  .process-card,
+  .faq-item,
+  .cta-box {
+    padding: 22px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="site-shell">
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">
+        <img src="ORANGE.png" alt="orangery.pro">
+        <span class="nav-brand-copy">
+          <span class="nav-brand-name">orangery.pro</span>
+          <span class="nav-brand-sub">Leadership coaching</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#offer">The offer</a></li>
+        <li><a href="#topics">What we work on</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#resource">Free tool</a></li>
+        <li><a href="#fit">Who it's for</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://calendly.com/orangery/30min">Book a call</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-copy fade-up">
+        <span class="eyebrow">For new and growing people leaders</span>
+        <h1 class="hero-title">Leadership got bigger.<br>So did the <em>human complexity.</em></h1>
+        <p class="hero-sub">orangery.pro is coaching for professionals stepping into people leadership and realizing that great individual performance is not the same thing as leading a team. We help you lead people with more clarity, courage, and calm.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="https://calendly.com/orangery/30min">Book a chemistry call -></a>
+          <a class="btn-secondary" href="#offer">See the coaching offer</a>
+        </div>
+        <div class="hero-pills">
+          <span class="pill">IC -> manager</span>
+          <span class="pill">Bi-weekly coaching</span>
+          <span class="pill">GiANT tools</span>
+          <span class="pill">5 Voices</span>
+          <span class="pill">Communication</span>
+          <span class="pill">Difficult people</span>
+          <span class="pill">Leadership presence</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel fade-up">
+        <p class="panel-label">What changed when you became the leader?</p>
+        <div class="shift-list">
+          <div class="shift-card">
+            <strong>You are not just doing the work anymore.</strong>
+            <p>You are setting tone, managing energy, holding boundaries, and helping other people do their best work.</p>
+          </div>
+          <div class="shift-card">
+            <strong>Communication suddenly matters more.</strong>
+            <p>One unclear sentence can create churn. One avoided conversation can quietly shape a whole team.</p>
+          </div>
+          <div class="shift-card">
+            <strong>Politics gets real fast.</strong>
+            <p>You now feel competing agendas, uneven maturity, hidden tensions, and the pressure to navigate all of it well.</p>
+          </div>
+        </div>
+        <p class="panel-quote">You do not need to become a louder version of yourself. You need tools, perspective, and a better way to lead people.</p>
+      </aside>
+    </div>
+
+    <div class="hero-strip">
+      <div class="hero-strip-grid fade-up">
+        <div class="strip-item">
+          <span class="strip-kicker">Cadence</span>
+          <div class="strip-value">Bi-weekly</div>
+          <p class="strip-copy">A simple rhythm that creates traction without overloading your calendar.</p>
+        </div>
+        <div class="strip-item">
+          <span class="strip-kicker">Focus</span>
+          <div class="strip-value">People leadership</div>
+          <p class="strip-copy">Communication, feedback, conflict, team dynamics, and leadership maturity.</p>
+        </div>
+        <div class="strip-item">
+          <span class="strip-kicker">Frameworks</span>
+          <div class="strip-value">GiANT + 5 Voices</div>
+          <p class="strip-copy">Shared language that helps you understand yourself and lead others well.</p>
+        </div>
+        <div class="strip-item">
+          <span class="strip-kicker">Style</span>
+          <div class="strip-value">Practical and direct</div>
+          <p class="strip-copy">No fluff. No posturing. Just clearer thinking and better leadership conversations.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-inner">
+      <div class="challenge-grid">
+        <div class="challenge-intro fade-up">
+          <span class="eyebrow">Why this matters</span>
+          <h2 class="section-headline">The hardest part of leadership is rarely strategy. It is <em>people.</em></h2>
+          <p>Most newer leaders do not need more generic inspiration. They need space to think clearly, tools to read the room, and coaching that helps them respond with maturity when the job gets relationally messy.</p>
+        </div>
+
+        <div class="challenge-list fade-up">
+          <div class="challenge-item">
+            <strong>You inherited people, not just a title.</strong>
+            <p>Some are eager. Some are guarded. Some are highly capable but hard to manage. Leadership means learning how to meet each person with the right mix of challenge and support.</p>
+          </div>
+          <div class="challenge-item">
+            <strong>You are carrying conversations you never had to carry before.</strong>
+            <p>Feedback. Misalignment. Underperformance. Tension between peers. Managing up. Rebuilding trust after awkward moments. These are learnable skills, but only if someone helps you practice them.</p>
+          </div>
+          <div class="challenge-item">
+            <strong>You are also becoming someone new.</strong>
+            <p>Moving from individual contributor to people leader exposes your instincts under pressure. Coaching helps you grow your self-awareness so your leadership becomes intentional rather than reactive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section" id="offer">
+    <div class="section-inner">
+      <span class="eyebrow">The coaching offer</span>
+      <h2 class="section-headline">One clear offer for leaders who want to grow <em>without making it complicated.</em></h2>
+      <p class="section-sub">The core offer is intentionally simple: bi-weekly coaching centered on the GiANT leadership tools and 5 Voices. Enough structure to create movement, enough flexibility to meet the real challenges you are facing right now.</p>
+
+      <div class="offer-shell">
+        <article class="offer-card offer-card-main fade-up">
+          <h3>Bi-weekly leadership coaching with <em>real traction</em></h3>
+          <p>Every session gives you a space to process current leadership moments, sharpen your communication, and build a stronger internal operating system for leading people.</p>
+
+          <div class="offer-points">
+            <div class="offer-point">
+              <span class="point-number">01</span>
+              <div>
+                <strong>Two coaching conversations each month</strong>
+                <p>A steady cadence to work through live challenges, reflect on leadership moments, and prepare for the next one.</p>
+              </div>
+            </div>
+            <div class="offer-point">
+              <span class="point-number">02</span>
+              <div>
+                <strong>GiANT tools woven into real leadership scenarios</strong>
+                <p>Not theory in the abstract. We use practical frameworks where they actually matter: meetings, 1:1s, tension, influence, and feedback.</p>
+              </div>
+            </div>
+            <div class="offer-point">
+              <span class="point-number">03</span>
+              <div>
+                <strong>5 Voices for self-awareness and team insight</strong>
+                <p>Understand the patterns you bring under pressure and how to adapt your communication across different personalities and maturity levels.</p>
+              </div>
+            </div>
+            <div class="offer-point">
+              <span class="point-number">04</span>
+              <div>
+                <strong>Support for the leadership moments that matter most</strong>
+                <p>Difficult people. Ambiguity. Politics. Delegation. Boundaries. Executive presence. The things that shape your credibility as a leader.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="offer-note">Engagement details can stay intentionally simple at launch, then expand later if you decide to add assessments, team work, or a longer-term coaching path.</p>
+        </article>
+
+        <aside class="offer-card offer-card-side fade-up">
+          <h3>What a client gets</h3>
+          <p>The goal is not just to feel encouraged after a session. The goal is to lead differently between sessions.</p>
+
+          <div class="tool-points">
+            <div class="tool-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>A trusted outside perspective</strong>
+                <p>Someone who is not tangled in your company politics but can help you read them wisely.</p>
+              </div>
+            </div>
+            <div class="tool-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>A better leadership vocabulary</strong>
+                <p>Shared language for trust, influence, communication, conflict, and maturity.</p>
+              </div>
+            </div>
+            <div class="tool-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>A place to prepare for hard conversations</strong>
+                <p>So you can walk in grounded instead of rehearsing in your head at midnight.</p>
+              </div>
+            </div>
+            <div class="tool-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>A more durable leadership presence</strong>
+                <p>Less reactive. Less avoidant. More clear, steady, and useful to the people you lead.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="stone-section" id="topics">
+    <div class="section-inner">
+      <span class="eyebrow">What we work on</span>
+      <h2 class="section-headline">The work is deeply practical because leadership problems are usually <em>specific.</em></h2>
+      <p class="section-sub">This is not abstract development work. Coaching is built around the exact moments that are stretching you in your current role.</p>
+
+      <div class="topics-grid">
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Communication</span>
+          <h3>Say the thing better</h3>
+          <p>Clarify expectations, give feedback cleanly, run stronger 1:1s, and communicate in a way that reduces confusion instead of creating it.</p>
+        </article>
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Conflict</span>
+          <h3>Handle tension early</h3>
+          <p>Address difficult dynamics before they calcify. Learn how to enter hard conversations with courage, empathy, and a clear outcome in mind.</p>
+        </article>
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Influence</span>
+          <h3>Lead through politics</h3>
+          <p>Read the room, navigate stakeholders, manage up wisely, and build credibility without playing games or losing yourself.</p>
+        </article>
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Presence</span>
+          <h3>Show up with steadiness</h3>
+          <p>Develop the calm, grounded presence that helps people trust you when pressure rises and the stakes feel higher.</p>
+        </article>
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Delegation</span>
+          <h3>Stop carrying everything</h3>
+          <p>Move from doing to leading. Delegate with clarity, hold accountability well, and stop becoming the bottleneck your team works around.</p>
+        </article>
+        <article class="topic-card fade-up">
+          <span class="topic-tag">Maturity</span>
+          <h3>Grow your internal capacity</h3>
+          <p>Leadership exposes your patterns. Coaching helps you grow self-awareness, increase resilience, and lead from maturity instead of adrenaline.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="section-inner">
+      <span class="eyebrow">The tools</span>
+      <h2 class="section-headline">We keep the toolkit simple: <em>GiANT</em> and <em>5 Voices.</em></h2>
+      <p class="section-sub">These frameworks give leaders a shared language for understanding themselves, reading team dynamics, and taking action with more intentionality.</p>
+
+      <div class="tools-grid">
+        <article class="tool-card fade-up">
+          <p class="tool-kicker">GiANT leadership tools</p>
+          <h3>Simple frameworks. Strong leverage.</h3>
+          <p>GiANT tools are useful because they are memorable, visual, and deeply practical. They help leaders slow down, see what is really happening, and choose a wiser response.</p>
+          <div class="tool-points">
+            <div class="tool-point">
+              <span class="point-mark">G</span>
+              <div>
+                <strong>Applied to live situations</strong>
+                <p>We use the tools on the meetings, people, and decisions that are already on your plate.</p>
+              </div>
+            </div>
+            <div class="tool-point">
+              <span class="point-mark">G</span>
+              <div>
+                <strong>Designed to transfer into your week</strong>
+                <p>The aim is not to admire a framework. It is to use it the next time a difficult conversation lands in your lap.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tool-card fade-up">
+          <p class="tool-kicker">5 Voices</p>
+          <h3>Know your voice. Lead others better.</h3>
+          <p>5 Voices helps leaders understand the tendencies, strengths, and blind spots they bring into relationships. It also gives language for how others process, respond, and contribute.</p>
+          <div class="tool-points">
+            <div class="tool-point">
+              <span class="point-mark">5</span>
+              <div>
+                <strong>Build stronger self-awareness</strong>
+                <p>Understand your default patterns under pressure so your leadership becomes more deliberate and less reactive.</p>
+              </div>
+            </div>
+            <div class="tool-point">
+              <span class="point-mark">5</span>
+              <div>
+                <strong>Adapt how you communicate</strong>
+                <p>Learn how to lead people with different voices, needs, levels of confidence, and levels of maturity.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="stone-section" id="resource">
+    <div class="section-inner">
+      <span class="eyebrow">Free resource</span>
+      <h2 class="section-headline">Need a quick read on a tricky work relationship? Use the <em>Relational Dynamics</em> tool.</h2>
+      <p class="section-sub">This free resource helps you think through how your wiring meets a co-worker's, manager's, or collaborator's. Give it a few honest details and it returns a practical cheat sheet for where things click, where friction shows up, and what to watch for.</p>
+
+      <div class="resource-shell">
+        <div class="resource-card fade-up">
+          <div>
+            <h3>A practical read on <em>you + them</em></h3>
+            <p>Use it before a hard conversation, when a relationship feels unnecessarily tense, or when you want language for why a certain working dynamic feels easy with some people and draining with others.</p>
+            <div class="resource-meta">
+              <span class="resource-pill">Free to use</span>
+              <span class="resource-pill">Coworkers</span>
+              <span class="resource-pill">Managers</span>
+              <span class="resource-pill">Direct reports</span>
+            </div>
+          </div>
+          <div class="resource-actions">
+            <a class="btn-primary" href="/orangery-pro/relationship-dynamic-orangery.html">Try the free tool -></a>
+            <a class="btn-secondary" href="/orangery-pro/relationship-dynamic-orangery.html?relationship=manager">Use the manager version</a>
+            <p class="resource-note">Powered by the existing Orangery relational dynamics engine, surfaced here as a free resource for emerging leaders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stone-section" id="fit">
+    <div class="section-inner">
+      <span class="eyebrow">Who this is for</span>
+      <h2 class="section-headline">This is designed for leaders in the stretch zone between <em>potential</em> and <em>seasoned confidence.</em></h2>
+      <p class="section-sub">Especially useful for leaders who have the role, the responsibility, and the pressure, but want help growing into the next level of leadership maturity.</p>
+
+      <div class="fit-grid">
+        <article class="fit-card good fade-up">
+          <h3>A good fit</h3>
+          <p>This offer is likely a strong fit if you are capable, self-aware enough to know you are still growing, and serious about getting better at leading people.</p>
+          <div class="fit-points">
+            <div class="fit-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>New managers and team leads</strong>
+                <p>You have stepped into people leadership and want help navigating the transition well.</p>
+              </div>
+            </div>
+            <div class="fit-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>High performers moving out of IC mode</strong>
+                <p>You were trusted because you delivered. Now you need to grow the people side of leadership.</p>
+              </div>
+            </div>
+            <div class="fit-point">
+              <span class="point-mark">+</span>
+              <div>
+                <strong>Leaders carrying harder conversations</strong>
+                <p>You want to be more confident in feedback, alignment, conflict, delegation, and influence.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="fit-card not-fit fade-up">
+          <h3>Probably not the right fit</h3>
+          <p>This is not meant to be everything for everyone. Keeping the offer focused makes it stronger.</p>
+          <div class="fit-points">
+            <div class="fit-point">
+              <span class="point-mark">-</span>
+              <div>
+                <strong>If you want generic motivation only</strong>
+                <p>This coaching is reflective and practical, not just inspirational.</p>
+              </div>
+            </div>
+            <div class="fit-point">
+              <span class="point-mark">-</span>
+              <div>
+                <strong>If you need therapy, not coaching</strong>
+                <p>Leadership coaching can support growth, but it is not a substitute for mental health care.</p>
+              </div>
+            </div>
+            <div class="fit-point">
+              <span class="point-mark">-</span>
+              <div>
+                <strong>If you need team-wide coaching, workshops, or company-level development</strong>
+                <p>This offer is centered on the individual leader. Broader team work can live under <strong>orangery.team</strong> as that stream takes shape.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="section-inner">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-headline">A straightforward coaching rhythm that helps you <em>lead differently in real life.</em></h2>
+      <p class="section-sub">The process is light enough to fit a busy season and structured enough to keep momentum building.</p>
+
+      <div class="process-grid">
+        <article class="process-card fade-up">
+          <span class="process-step">01</span>
+          <h3>Start with a chemistry call</h3>
+          <p>We talk through your role, your current stretch points, and whether this feels like the right fit for both of us.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">02</span>
+          <h3>Clarify your leadership picture</h3>
+          <p>We identify the patterns, people dynamics, and pressure points shaping your experience right now.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">03</span>
+          <h3>Coach against real moments</h3>
+          <p>We use GiANT tools and 5 Voices around the actual meetings, conversations, and tensions you are carrying.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">04</span>
+          <h3>Build visible progress</h3>
+          <p>You leave with practical next moves so growth is not trapped in insight alone.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-inner">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-headline">A few questions people usually ask <em>before they book.</em></h2>
+      <p class="section-sub">A few quick answers to help people understand the shape of the offer before they reach out.</p>
+
+      <div class="faq-shell">
+        <details class="faq-item fade-up">
+          <summary>Is this for brand new managers only?</summary>
+          <p>No. It is ideal for newer people leaders, but it can also serve leaders who have been managing for a while and want to become more skillful in communication, trust-building, and team dynamics.</p>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>Do I need to know GiANT or 5 Voices already?</summary>
+          <p>Not at all. The coaching is designed to introduce and apply those tools in a way that makes sense for your current leadership reality.</p>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>Is this coaching or consulting?</summary>
+          <p>Primarily coaching. The center of gravity is your growth as a leader. That said, sessions are practical, so there will naturally be strategic thinking and tactical problem-solving along the way.</p>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>Can this be offered through my employer?</summary>
+          <p>Yes. This can be positioned as leadership development support sponsored by an organization, or as an individual investment made by the leader.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="section-inner">
+      <div class="cta-box fade-up">
+        <div>
+          <span class="eyebrow" style="color: var(--gold);">Ready when you are</span>
+          <h2>You do not need to figure out people leadership <em>by yourself.</em></h2>
+          <p>If you want a coaching relationship that is thoughtful, grounded, and practical, this is a strong place to start. We can begin with a simple conversation about where leadership feels clear and where it currently feels heavy.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn-primary" href="https://calendly.com/orangery/30min">Book a chemistry call -></a>
+          <a class="btn-secondary" href="mailto:lukehaythorpe@orangery.solutions?subject=Leadership%20Coaching%20Enquiry">Email Luke</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="ORANGE.png" alt="orangery.pro">
+        <div class="footer-brand-copy">
+          <strong>orangery.pro</strong>
+          <span>Leadership coaching inside the Orangery ecosystem</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#offer">Offer</a>
+        <a href="#topics">Topics</a>
+        <a href="#tools">Tools</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://orangery.solutions" target="_blank" rel="noreferrer">orangery.solutions</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const observers = document.querySelectorAll(".fade-up");
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+observers.forEach((node) => fadeObserver.observe(node));
+</script>
+</body>
+</html>
