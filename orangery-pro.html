@@ -721,6 +721,156 @@ nav {
   text-align: right;
 }
 
+.booking-section {
+  background:
+    radial-gradient(circle at top left, rgba(201, 160, 82, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(243, 240, 232, 1) 0%, rgba(232, 224, 212, 0.62) 100%);
+}
+
+.booking-shell {
+  margin-top: 34px;
+}
+
+.booking-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 34px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.booking-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.08;
+  margin-bottom: 12px;
+}
+
+.booking-card h3 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.booking-card > div > p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.booking-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.booking-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(30, 32, 32, 0.14);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: var(--char-light);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.booking-panel {
+  background: rgba(30, 32, 32, 0.97);
+  border-radius: 16px;
+  padding: 26px;
+  color: var(--off);
+}
+
+.booking-panel-kicker {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.46);
+  margin-bottom: 10px;
+}
+
+.booking-price {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.booking-price-sub {
+  font-size: 13px;
+  color: rgba(243, 240, 232, 0.62);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.booking-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.booking-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.74);
+  line-height: 1.7;
+}
+
+.booking-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.booking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.booking-main-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.booking-actions .btn-primary {
+  justify-content: center;
+}
+
+.booking-actions .btn-secondary {
+  justify-content: center;
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.booking-actions .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.44);
+}
+
+.booking-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(243, 240, 232, 0.52);
+  line-height: 1.65;
+}
+
 .fit-grid {
   margin-top: 36px;
   display: grid;
@@ -969,6 +1119,7 @@ footer {
   .hero-grid,
   .challenge-grid,
   .offer-shell,
+  .booking-card,
   .resource-card,
   .cta-box {
     grid-template-columns: 1fr;
@@ -1088,9 +1239,10 @@ footer {
         <li><a href="#topics">What we work on</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#resource">Free tool</a></li>
+        <li><a href="#booking">Ways to start</a></li>
         <li><a href="#fit">Who it's for</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://calendly.com/orangery/30min">Book a call</a></li>
+        <li><a href="https://calendly.com/orangery/30min">Book a chemistry call</a></li>
       </ul>
     </div>
   </nav>
@@ -1102,8 +1254,8 @@ footer {
         <h1 class="hero-title">Leadership got bigger.<br>So did the <em>human complexity.</em></h1>
         <p class="hero-sub">orangery.pro is coaching for professionals stepping into people leadership and realizing that great individual performance is not the same thing as leading a team. We help you lead people with more clarity, courage, and calm.</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="https://calendly.com/orangery/30min">Book a chemistry call -></a>
-          <a class="btn-secondary" href="#offer">See the coaching offer</a>
+          <a class="btn-primary" href="https://calendly.com/orangery/30min">Start the leadership conversation -></a>
+          <a class="btn-secondary" href="https://calendly.com/orangery/leader-coaching">Go straight to a paid strategy session</a>
         </div>
         <div class="hero-pills">
           <span class="pill">IC -> manager</span>
@@ -1396,6 +1548,50 @@ footer {
     </div>
   </section>
 
+  <section class="booking-section" id="booking">
+    <div class="section-inner">
+      <span class="eyebrow">Ways to start</span>
+      <h2 class="section-headline">Most people begin with a chemistry call. You can also skip straight to a paid <em>strategy session.</em></h2>
+      <p class="section-sub">Both paths are clear. The difference is simply whether you want an initial conversation first, or whether you already know you want focused help on a live leadership issue right now.</p>
+
+      <div class="booking-shell">
+        <div class="booking-card fade-up">
+          <div>
+            <h3>Start with a <em>chemistry call</em></h3>
+            <p>For most leaders, this is the best first step. We talk through your role, the people complexity you are carrying, and whether coaching together feels like the right fit. It is warm, practical, and clear, without pressure.</p>
+            <div class="booking-meta">
+              <span class="booking-pill">30 minutes</span>
+              <span class="booking-pill">Best first step for most people</span>
+              <span class="booking-pill">Warm, clear, and practical</span>
+              <span class="booking-pill">Direct booking through Calendly</span>
+            </div>
+            <div class="booking-main-actions">
+              <a class="btn-primary" href="https://calendly.com/orangery/30min">Start the leadership conversation -></a>
+            </div>
+          </div>
+
+          <aside class="booking-panel">
+            <span class="booking-panel-kicker">Want to skip ahead?</span>
+            <div class="booking-price">Paid strategy session</div>
+            <p class="booking-price-sub">If you already know you want focused help on a real issue, you can bypass the chemistry call and book a premium 45-minute working session.</p>
+            <ul class="booking-list">
+              <li>One live 45-minute strategy session</li>
+              <li>Reflection on your current leadership challenge</li>
+              <li>Practical direction on communication, tension, or politics</li>
+              <li>GiANT and 5 Voices lens where useful</li>
+              <li>Clear next-step thinking, not generic motivation</li>
+            </ul>
+            <div class="booking-actions">
+              <a class="btn-primary" href="https://calendly.com/orangery/leader-coaching">Go straight to the paid session -></a>
+              <a class="btn-secondary" href="https://calendly.com/orangery/30min">Start with a chemistry call instead</a>
+            </div>
+            <p class="booking-note">Ideal when the issue is current, sensitive, or politically expensive and you do not want to lose momentum.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="stone-section" id="fit">
     <div class="section-inner">
       <span class="eyebrow">Who this is for</span>
@@ -1466,13 +1662,13 @@ footer {
     <div class="section-inner">
       <span class="eyebrow">How it works</span>
       <h2 class="section-headline">A straightforward coaching rhythm that helps you <em>lead differently in real life.</em></h2>
-      <p class="section-sub">The process is light enough to fit a busy season and structured enough to keep momentum building.</p>
+      <p class="section-sub">The usual flow starts with a chemistry call, but if you already know you want focused help on a live issue, you can skip ahead to the paid strategy session.</p>
 
       <div class="process-grid">
         <article class="process-card fade-up">
           <span class="process-step">01</span>
           <h3>Start with a chemistry call</h3>
-          <p>We talk through your role, your current stretch points, and whether this feels like the right fit for both of us.</p>
+          <p>We talk through your role, your current stretch points, and whether this feels like the right fit. If you already want focused help fast, you can skip ahead to the paid session.</p>
         </article>
         <article class="process-card fade-up">
           <span class="process-step">02</span>
@@ -1526,11 +1722,11 @@ footer {
         <div>
           <span class="eyebrow" style="color: var(--gold);">Ready when you are</span>
           <h2>You do not need to figure out people leadership <em>by yourself.</em></h2>
-          <p>If you want a coaching relationship that is thoughtful, grounded, and practical, this is a strong place to start. We can begin with a simple conversation about where leadership feels clear and where it currently feels heavy.</p>
+          <p>If you want to talk through your role, your pressure points, and whether this is the right fit, start with a chemistry call. If you already know you want focused help now, you can also go straight to the paid strategy session.</p>
         </div>
         <div class="cta-actions">
           <a class="btn-primary" href="https://calendly.com/orangery/30min">Book a chemistry call -></a>
-          <a class="btn-secondary" href="mailto:lukehaythorpe@orangery.solutions?subject=Leadership%20Coaching%20Enquiry">Email Luke</a>
+          <a class="btn-secondary" href="https://calendly.com/orangery/leader-coaching">Go straight to the paid session</a>
         </div>
       </div>
     </div>
