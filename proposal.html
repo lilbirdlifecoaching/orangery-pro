@@ -94,6 +94,22 @@ h1 {
 }
 .total-due span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .total-due strong { font-family: var(--font-display); font-size: 36px; font-weight: 500; letter-spacing: -0.03em; }
+.currency-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin-bottom: 14px; font-size: 13px; color: var(--muted);
+}
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  appearance: none; border: 1px solid var(--line); background: var(--white); border-radius: 4px;
+  padding: 8px 12px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--muted);
+}
+.pill.active { background: var(--char); border-color: var(--char); color: white; }
+.fx-note { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.55; }
+.field textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 11px 12px; font: inherit;
+  min-height: 100px; resize: vertical;
+}
+.feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .contract p { margin-bottom: 10px; }
 .sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field label {
@@ -173,12 +189,44 @@ h1 {
 
     <section class="section">
       <h2>Investment</h2>
+      <div class="currency-bar no-print" id="currency-bar">
+        <span>Show amounts in</span>
+        <div class="pills" id="display-currency">
+          <button type="button" class="pill active" data-display-currency="pay">Pay currency</button>
+          <button type="button" class="pill" data-display-currency="other">Approx. other</button>
+        </div>
+      </div>
+      <p class="fx-note" id="fx-note" hidden></p>
       <ul class="lines" id="line-items"></ul>
       <div class="totals">
         <div class="total-row"><span>Subtotal</span><strong id="subtotal">$0</strong></div>
         <div class="total-row discount" id="discount-row" hidden><span id="discount-label">Discount</span><strong id="discount">-$0</strong></div>
       </div>
-      <div class="total-due"><span>Total due</span><strong id="total">$0</strong></div>
+      <div class="total-due"><span id="total-label">Total due</span><strong id="total">$0</strong></div>
+    </section>
+
+    <section class="section no-print" id="feedback-section">
+      <h2>Questions or changes?</h2>
+      <p style="margin-bottom:14px;">Before you sign, send a quick note. It comes straight through so nothing gets lost in email threads.</p>
+      <div class="sign-grid">
+        <div class="field">
+          <label for="feedback-name">Your name</label>
+          <input id="feedback-name" type="text" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="feedback-email">Your email</label>
+          <input id="feedback-email" type="email" autocomplete="email" placeholder="you@company.com">
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px;">
+        <label for="feedback-message">Message</label>
+        <textarea id="feedback-message" placeholder="Ask a question, or suggest a change to scope, timing, or investment..."></textarea>
+      </div>
+      <div class="feedback-actions">
+        <button type="button" class="btn btn-secondary" id="send-question">Send question</button>
+        <button type="button" class="btn btn-secondary" id="send-change">Suggest a change</button>
+      </div>
+      <div class="status info" id="feedback-status"></div>
     </section>
 
     <section class="section">
@@ -232,18 +280,62 @@ h1 {
   const WORKER_URL = RAW_WORKER_URL && !/^https?:\/\//i.test(RAW_WORKER_URL)
     ? "https://" + RAW_WORKER_URL
     : RAW_WORKER_URL;
+  const PUBLIC_PROPOSAL_URL = "https://orangery.pro/proposal.html";
+
+  // Stripe only accepts http(s) return URLs. Local file previews use orangery.pro for return.
+  function checkoutReturnUrls() {
+    const hash = window.location.hash || "";
+    let base = PUBLIC_PROPOSAL_URL;
+    try {
+      const current = new URL(window.location.href);
+      const isHttp = current.protocol === "http:" || current.protocol === "https:";
+      const isPublicHost = /(^|\.)orangery\.pro$/i.test(current.hostname);
+      if (isHttp && isPublicHost) base = current.origin + current.pathname;
+    } catch (_) {
+      // keep public fallback
+    }
+    return {
+      successUrl: base + "?paid=1",
+      cancelUrl: base + "?cancelled=1" + hash
+    };
+  }
 
   const emptyState = document.getElementById("empty-state");
   const page = document.getElementById("proposal-page");
   const statusEl = document.getElementById("status");
+  const feedbackStatusEl = document.getElementById("feedback-status");
   const canvas = document.getElementById("signature-pad");
   const ctx = canvas.getContext("2d");
   let drawing = false;
   let hasStroke = false;
   let proposal = null;
+  let displayMode = "pay"; // pay | other
+  let fxRate = null; // other / pay
+  let fxLabel = "";
 
-  function money(n) {
-    return "$" + Math.round(n).toLocaleString("en-AU");
+  function payCurrency() {
+    return String((proposal && proposal.currency) || "USD").toUpperCase() === "AUD" ? "AUD" : "USD";
+  }
+
+  function otherCurrency() {
+    return payCurrency() === "AUD" ? "USD" : "AUD";
+  }
+
+  function money(n, currencyCode) {
+    const code = currencyCode || payCurrency();
+    const locale = code === "AUD" ? "en-AU" : "en-US";
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: code,
+      maximumFractionDigits: 0
+    }).format(Math.round(Number(n) || 0));
+  }
+
+  function displayAmount(n) {
+    if (displayMode === "other" && fxRate) {
+      return money(Number(n) * fxRate, otherCurrency());
+    }
+    return money(n, payCurrency());
   }
 
   function setStatus(message, tone) {
@@ -254,6 +346,16 @@ h1 {
     }
     statusEl.className = "status visible " + tone;
     statusEl.textContent = message;
+  }
+
+  function setFeedbackStatus(message, tone) {
+    if (!message) {
+      feedbackStatusEl.className = "status";
+      feedbackStatusEl.textContent = "";
+      return;
+    }
+    feedbackStatusEl.className = "status visible " + tone;
+    feedbackStatusEl.textContent = message;
   }
 
   function decodeProposal(encoded) {
@@ -272,6 +374,52 @@ h1 {
     }
   }
 
+  async function loadFxRate() {
+    const from = payCurrency();
+    const to = otherCurrency();
+    try {
+      const res = await fetch("https://api.frankfurter.app/latest?from=" + from + "&to=" + to);
+      const data = await res.json();
+      if (data && data.rates && data.rates[to]) {
+        fxRate = Number(data.rates[to]);
+        fxLabel = "Approx. " + to + " using today's rate (1 " + from + " ≈ " + fxRate.toFixed(4) + " " + to + "). Payment stays in " + from + ".";
+        return;
+      }
+    } catch (_) {
+      // fall through
+    }
+    // Sensible fallback if FX API is blocked
+    fxRate = from === "USD" ? 1.5 : 0.67;
+    fxLabel = "Approx. " + to + " using a fallback rate. Payment stays in " + from + ".";
+  }
+
+  function renderAmounts() {
+    if (!proposal) return;
+    const pay = payCurrency();
+    document.getElementById("line-items").innerHTML = (proposal.lines || []).map((line) =>
+      "<li><span>" + escapeHtml(line.label) + "</span><strong>" + displayAmount(line.amount) + "</strong></li>"
+    ).join("") || "<li><span>No line items</span><strong>" + money(0, pay) + "</strong></li>";
+
+    document.getElementById("subtotal").textContent = displayAmount(proposal.subtotal || 0);
+    if (proposal.discount && proposal.discount.amount > 0) {
+      document.getElementById("discount-row").hidden = false;
+      document.getElementById("discount-label").textContent = proposal.discount.label || "Discount";
+      document.getElementById("discount").textContent = "-" + displayAmount(proposal.discount.amount);
+    }
+    document.getElementById("total").textContent = displayAmount(proposal.total || 0);
+    document.getElementById("total-label").textContent =
+      displayMode === "other" ? "Approx. total (" + otherCurrency() + ")" : "Total due (" + pay + ")";
+
+    const note = document.getElementById("fx-note");
+    if (displayMode === "other") {
+      note.hidden = false;
+      note.textContent = fxLabel;
+    } else {
+      note.hidden = true;
+      note.textContent = "";
+    }
+  }
+
   function renderProposal(data) {
     proposal = data;
     document.getElementById("proposal-title").textContent = data.title || "Proposal";
@@ -287,6 +435,7 @@ h1 {
 
     document.getElementById("proposal-meta").textContent =
       "Prepared by " + ((data.provider && data.provider.name) || "Luke Haythorpe") +
+      " · " + payCurrency() +
       " · Created " + formatDate(data.createdAt) +
       " · Valid until " + formatDate(data.validUntil);
 
@@ -295,23 +444,30 @@ h1 {
       document.getElementById("scope-notes").textContent = data.scopeNotes;
     }
 
-    document.getElementById("line-items").innerHTML = (data.lines || []).map((line) =>
-      "<li><span>" + escapeHtml(line.label) + "</span><strong>" + money(line.amount) + "</strong></li>"
-    ).join("") || "<li><span>No line items</span><strong>$0</strong></li>";
-
-    document.getElementById("subtotal").textContent = money(data.subtotal || 0);
-    if (data.discount && data.discount.amount > 0) {
-      document.getElementById("discount-row").hidden = false;
-      document.getElementById("discount-label").textContent = data.discount.label || "Discount";
-      document.getElementById("discount").textContent = "-" + money(data.discount.amount);
-    }
-    document.getElementById("total").textContent = money(data.total || 0);
     document.getElementById("payment-notes").textContent = data.paymentNotes ||
-      "Payment is made securely through Stripe after you review and sign this proposal.";
+      ("Payment is made securely through Stripe in " + payCurrency() + " after you review and sign this proposal.");
 
     if (data.client && data.client.name) {
       document.getElementById("signer-name").value = data.client.name;
     }
+    if (data.client && data.client.email) {
+      document.getElementById("feedback-email").value = data.client.email;
+    }
+    if (data.client && data.client.name) {
+      document.getElementById("feedback-name").value = data.client.name;
+    }
+
+    document.querySelectorAll("#display-currency .pill").forEach((btn) => {
+      const mode = btn.getAttribute("data-display-currency");
+      if (mode === "other") btn.textContent = "Approx. " + otherCurrency();
+      if (mode === "pay") btn.textContent = payCurrency() + " (pay)";
+      btn.classList.toggle("active", mode === displayMode);
+    });
+
+    renderAmounts();
+    loadFxRate().then(function () {
+      if (displayMode === "other") renderAmounts();
+    });
   }
 
   function escapeHtml(value) {
@@ -393,6 +549,7 @@ h1 {
     setStatus("Creating a secure Stripe checkout for this proposal...", "info");
 
     try {
+      const returns = checkoutReturnUrls();
       const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/proposals/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -404,8 +561,8 @@ h1 {
             signedAt: new Date().toISOString(),
             imageDataUrl: canvas.toDataURL("image/png")
           },
-          successUrl: window.location.href.split("#")[0] + "?paid=1",
-          cancelUrl: window.location.href.split("#")[0] + "?cancelled=1" + window.location.hash
+          successUrl: returns.successUrl,
+          cancelUrl: returns.cancelUrl
         })
       });
       const data = await response.json().catch(() => ({}));
@@ -413,8 +570,83 @@ h1 {
       if (!data.url) throw new Error("Checkout URL missing from worker response.");
       window.location.href = data.url;
     } catch (error) {
-      setStatus(error.message || "Something went wrong starting payment.", "error");
+      const message = String(error && error.message ? error.message : error);
+      if (/failed to fetch/i.test(message)) {
+        setStatus("Browser blocked the payment request (CORS). Redeploy the latest worker/src/index.js to Cloudflare so local file:// proposals are allowed, then try again.", "error");
+      } else {
+        setStatus(message || "Something went wrong starting payment.", "error");
+      }
       acceptBtn.disabled = false;
+    }
+  }
+
+  async function sendFeedback(type) {
+    if (!proposal) return;
+    const name = document.getElementById("feedback-name").value.trim();
+    const email = document.getElementById("feedback-email").value.trim();
+    const message = document.getElementById("feedback-message").value.trim();
+    if (!name) {
+      setFeedbackStatus("Add your name so Luke knows who to reply to.", "error");
+      return;
+    }
+    if (!message) {
+      setFeedbackStatus("Write a short question or suggested change first.", "error");
+      return;
+    }
+
+    setFeedbackStatus("Sending...", "info");
+    const payload = {
+      type: type,
+      name: name,
+      email: email,
+      message: message,
+      proposalTitle: proposal.title || "Proposal",
+      clientName: (proposal.client && proposal.client.name) || "",
+      proposalTotal: proposal.total,
+      currency: payCurrency(),
+      pageUrl: window.location.href
+    };
+
+    if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
+      const subject = (type === "change" ? "Proposal change request" : "Proposal question") + ": " + name;
+      window.location.href =
+        "mailto:lukehaythorpe@orangery.solutions?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(message + "\n\n---\n" + (proposal.title || "") + "\n" + payCurrency() + " " + proposal.total);
+      setFeedbackStatus("Opening your email app...", "info");
+      return;
+    }
+
+    try {
+      const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/proposals/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Could not send message.");
+
+      if (data.delivered === "mailto" && data.mailto) {
+        window.location.href = data.mailto;
+        setFeedbackStatus("Opening your email app with a prefilled note to Luke.", "success");
+        return;
+      }
+
+      setFeedbackStatus(
+        type === "change"
+          ? "Change request sent. Luke will follow up by email."
+          : "Question sent. Luke will follow up by email.",
+        "success"
+      );
+      document.getElementById("feedback-message").value = "";
+    } catch (error) {
+      const msg = String(error && error.message ? error.message : error);
+      if (/failed to fetch/i.test(msg)) {
+        setFeedbackStatus("Could not reach the notification worker. Redeploy the latest worker, or email lukehaythorpe@orangery.solutions directly.", "error");
+      } else {
+        setFeedbackStatus(msg || "Could not send message.", "error");
+      }
     }
   }
 
@@ -455,6 +687,21 @@ h1 {
   document.getElementById("accept-pay").addEventListener("click", acceptAndPay);
   document.getElementById("print-btn").addEventListener("click", () => window.print());
   document.getElementById("print-btn-2").addEventListener("click", () => window.print());
+  document.getElementById("send-question").addEventListener("click", () => sendFeedback("question"));
+  document.getElementById("send-change").addEventListener("click", () => sendFeedback("change"));
+  document.getElementById("display-currency").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-display-currency]");
+    if (!btn || !proposal) return;
+    displayMode = btn.getAttribute("data-display-currency") === "other" ? "other" : "pay";
+    document.querySelectorAll("#display-currency .pill").forEach((pill) => {
+      pill.classList.toggle("active", pill.getAttribute("data-display-currency") === displayMode);
+    });
+    if (displayMode === "other" && !fxRate) {
+      loadFxRate().then(renderAmounts);
+    } else {
+      renderAmounts();
+    }
+  });
 })();
 </script>
 </body>

@@ -39,6 +39,24 @@ Or in the Cloudflare dashboard: Worker → Settings → Variables → Encrypt `S
 - Proposal links encode the proposal data in the URL hash (no database required).
 - Signature + payment: client must sign before Stripe Checkout starts.
 - Checkout amount is the exact proposal total (custom Stripe amount via Checkout Session `price_data`).
+- Stripe shows each proposal line as its own Checkout item; discounts become a one-time Stripe coupon.
+- Builder currency (USD/AUD) locks the payment currency. Quote-tool AUD/USD toggle is display-only with live FX.
+- Clients can send a question or change request from the proposal page (`POST /proposals/message`).
 - Duration coaching discounts default in the builder and can be overridden.
 - Workshop packages follow engagement length defaults and can be price-overridden.
 - The agreement section is a practical services summary, not formal legal counsel. Swap in stronger legal wording if needed.
+
+## Optional notification setup
+
+By default, question/change requests open a prefilled email to you (`mailto:`).
+
+For inbox delivery without relying on the client’s email app, add Cloudflare Worker secrets:
+
+- `NOTIFY_EMAIL` — where messages should go (defaults to `lukehaythorpe@orangery.solutions`)
+- `RESEND_API_KEY` — sends email via [Resend](https://resend.com)
+- `NOTIFY_FROM` — optional verified from-address (otherwise Resend’s onboarding address)
+
+Or use a Slack/Discord-style webhook instead:
+
+- `NOTIFY_WEBHOOK_URL` — JSON POST of the message payload
+

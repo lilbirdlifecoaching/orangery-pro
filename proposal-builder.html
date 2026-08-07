@@ -179,6 +179,14 @@ h1 {
           </div>
         </div>
         <div class="field">
+          <span class="label">Currency (payment currency)</span>
+          <div class="pills" id="currency-grid">
+            <button type="button" class="pill active" data-currency="USD">USD</button>
+            <button type="button" class="pill" data-currency="AUD">AUD</button>
+          </div>
+          <p class="note" style="margin-top:10px;margin-bottom:0;">This locks Stripe Checkout to the selected currency. Amounts you enter are in that currency (no auto-conversion).</p>
+        </div>
+        <div class="field">
           <label for="scope-notes">Scope / context notes</label>
           <textarea id="scope-notes" placeholder="What this engagement is for, who is involved, and any important context..."></textarea>
         </div>
@@ -337,6 +345,7 @@ h1 {
     months: 6,
     groups: 1,
     leaders: 1,
+    currency: "USD",
     customItems: [],
     autoDiscount: true
   };
@@ -375,7 +384,15 @@ h1 {
     linkBox: document.getElementById("link-box")
   };
 
-  function money(n) { return "$" + Math.round(n).toLocaleString("en-AU"); }
+  function money(n) {
+    const code = state.currency === "AUD" ? "AUD" : "USD";
+    const locale = code === "AUD" ? "en-AU" : "en-US";
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: code,
+      maximumFractionDigits: 0
+    }).format(Math.round(n));
+  }
   function num(el) { return Math.max(0, Number(el.value || 0)); }
 
   function setActive(container, attr, value) {
@@ -488,7 +505,7 @@ h1 {
       },
       subtotal: subtotal,
       total: total,
-      currency: "AUD",
+      currency: state.currency,
       createdAt: createdAt,
       validUntil: validUntil,
       provider: {
@@ -547,9 +564,23 @@ h1 {
     return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
   }
 
-  function proposalUrl(proposal) {
-    return new URL("proposal.html#p=" + encodeProposal(proposal), window.location.href).toString();
+  function proposalUrl(proposal, opts) {
+    const hash = "#p=" + encodeProposal(proposal);
+    // Local open/preview: same folder as the builder (works with file:// + CORS-fixed worker).
+    if (!opts || !opts.publicShare) {
+      return new URL("proposal.html" + hash, window.location.href).toString();
+    }
+    // Client share link: always public HTTPS so recipients don't need local files.
+    return "https://orangery.pro/proposal.html" + hash;
   }
+
+  document.getElementById("currency-grid").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-currency]");
+    if (!btn) return;
+    state.currency = btn.getAttribute("data-currency") === "AUD" ? "AUD" : "USD";
+    setActive(document.getElementById("currency-grid"), "data-currency", state.currency);
+    render();
+  });
 
   document.getElementById("duration-grid").addEventListener("click", (event) => {
     const btn = event.target.closest("[data-months]");
@@ -638,7 +669,7 @@ h1 {
 
   document.getElementById("copy-link").addEventListener("click", async () => {
     const proposal = buildProposal();
-    const url = proposalUrl(proposal);
+    const url = proposalUrl(proposal, { publicShare: true });
     els.linkBox.textContent = url;
     els.linkBox.classList.add("visible");
     try {

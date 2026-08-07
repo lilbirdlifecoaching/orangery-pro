@@ -1160,6 +1160,14 @@ footer {
 
         <aside class="quote-summary">
           <h3>Your estimate</h3>
+          <div class="quote-field" style="margin-bottom: 14px;">
+            <span class="quote-label">Display currency</span>
+            <div class="choice-pills" id="currency-grid">
+              <button type="button" class="choice-pill active" data-currency="USD">USD</button>
+              <button type="button" class="choice-pill" data-currency="AUD">AUD</button>
+            </div>
+            <p class="quote-lead" id="currency-note" style="margin: 10px 0 0;">List prices are in USD. AUD uses today's exchange rate for planning only.</p>
+          </div>
           <p class="quote-lead" id="summary-context">2 workshops · 1 coaching group · 6 months</p>
           <ul class="quote-lines" id="quote-lines">
             <li class="empty">Select a module to begin.</li>
@@ -1323,13 +1331,17 @@ observers.forEach((node) => fadeObserver.observe(node));
     months: 6,
     leaders: 1,
     groups: 1,
-    package: "team-reset"
+    package: "team-reset",
+    currency: "USD",
+    usdToAud: 1.5
   };
 
   const els = {
     durationGrid: document.getElementById("duration-grid"),
     leaderGrid: document.getElementById("leader-grid"),
     groupGrid: document.getElementById("group-grid"),
+    currencyGrid: document.getElementById("currency-grid"),
+    currencyNote: document.getElementById("currency-note"),
     leaderControls: document.getElementById("leader-controls"),
     groupControls: document.getElementById("group-controls"),
     workshop: document.getElementById("mod-workshop"),
@@ -1352,8 +1364,15 @@ observers.forEach((node) => fadeObserver.observe(node));
     packages: document.querySelectorAll("[data-package]")
   };
 
-  function money(value) {
-    return "$" + value.toLocaleString("en-AU");
+  function money(valueUsd) {
+    const amount = state.currency === "AUD" ? valueUsd * state.usdToAud : valueUsd;
+    const code = state.currency === "AUD" ? "AUD" : "USD";
+    const locale = code === "AUD" ? "en-AU" : "en-US";
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: code,
+      maximumFractionDigits: 0
+    }).format(Math.round(amount));
   }
 
   function setActive(container, attr, value) {
@@ -1494,9 +1513,15 @@ observers.forEach((node) => fadeObserver.observe(node));
     }
 
     els.summaryContext.textContent = contextParts.join(" · ");
+    if (els.currencyNote) {
+      els.currencyNote.textContent = state.currency === "AUD"
+        ? "AUD shown using today's rate (1 USD ≈ " + state.usdToAud.toFixed(4) + " AUD). Final proposals lock a pay currency."
+        : "List prices are in USD. Switch to AUD for an approximate conversion using today's rate.";
+    }
 
     const summaryParts = [
       "Duration: " + durationLabel,
+      "Display currency: " + state.currency,
       "Workshop package: " + (els.workshop.checked ? workshopPackage.count + " workshops (" + money(workshopPackage.price) + ")" : "no"),
       "Coaching groups: " + (els.group.checked ? state.groups : "0"),
       "Leadership seats: " + (els.leadership.checked ? state.leaders : "0"),
@@ -1514,6 +1539,14 @@ observers.forEach((node) => fadeObserver.observe(node));
       encodeURIComponent("orangery.team quote estimate") +
       "&body=" + body;
   }
+
+  els.currencyGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-currency]");
+    if (!btn) return;
+    state.currency = btn.getAttribute("data-currency") === "AUD" ? "AUD" : "USD";
+    setActive(els.currencyGrid, "data-currency", state.currency);
+    render();
+  });
 
   els.durationGrid.addEventListener("click", function (event) {
     const btn = event.target.closest("[data-months]");
@@ -1556,6 +1589,19 @@ observers.forEach((node) => fadeObserver.observe(node));
   });
 
   applyPackage("team-reset");
+
+  fetch("https://api.frankfurter.app/latest?from=USD&to=AUD")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && data.rates && data.rates.AUD) {
+        state.usdToAud = Number(data.rates.AUD);
+        if (state.currency === "AUD") render();
+        else if (els.currencyNote) {
+          els.currencyNote.textContent = "List prices are in USD. Switch to AUD for an approximate conversion using today's rate.";
+        }
+      }
+    })
+    .catch(function () { /* keep fallback rate */ });
 })();
 </script>
 </body>
