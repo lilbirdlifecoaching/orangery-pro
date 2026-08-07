@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>orangery.team - Team Coaching, Workshops, and Leadership Development</title>
+<link rel="icon" href="ORANGE.png" type="image/png">
+<link rel="apple-touch-icon" href="ORANGE.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #1e2020;
+  --char-mid: #2e3830;
+  --char-light: #3a4840;
+  --sage: #7a9980;
+  --rust: #c8543a;
+  --rust-light: #d97055;
+  --gold: #c9a052;
+  --off: #f3f0e8;
+  --stone: #e8e0d4;
+  --stone-deep: #d8cfc0;
+  --white: #fffdf8;
+  --muted: #6a6a60;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at top right, rgba(201, 160, 82, 0.12), transparent 32%),
+    radial-gradient(circle at 12% 28%, rgba(122, 153, 128, 0.1), transparent 26%),
+    linear-gradient(180deg, #f7f3ea 0%, var(--off) 42%, #efe8dc 100%);
+  color: var(--char);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 84px 48px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--rust);
+  flex-shrink: 0;
+}
+
+.section-headline {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.section-headline em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.section-sub {
+  max-width: 640px;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+  background: rgba(247, 243, 234, 0.84);
+  border-bottom: 1px solid rgba(216, 207, 192, 0.8);
+}
+
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.nav-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.nav-brand-sub {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  list-style: none;
+  font-size: 14px;
+  color: var(--char-light);
+}
+
+.nav-links a:hover {
+  color: var(--rust);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: white;
+  border: 1px solid var(--rust);
+}
+
+.btn-primary:hover {
+  background: var(--rust-light);
+  border-color: var(--rust-light);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--char);
+  border: 1px solid rgba(30, 32, 32, 0.18);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(30, 32, 32, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero {
+  padding: 72px 0 24px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 36px;
+  align-items: end;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1.02;
+  margin-bottom: 18px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.hero-sub {
+  max-width: 560px;
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-panel {
+  background: rgba(30, 32, 32, 0.96);
+  color: var(--off);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-panel-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.48);
+  margin-bottom: 14px;
+}
+
+.hero-panel h2 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-panel p {
+  font-size: 15px;
+  color: rgba(243, 240, 232, 0.72);
+  line-height: 1.75;
+}
+
+.hero-panel ul {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-panel li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.78);
+  line-height: 1.6;
+}
+
+.hero-panel li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.stone-section {
+  background: rgba(232, 224, 212, 0.45);
+}
+
+.dark-section {
+  background: var(--char);
+  color: var(--off);
+}
+
+.dark-section .section-headline {
+  color: var(--off);
+}
+
+.dark-section .section-sub {
+  color: rgba(243, 240, 232, 0.62);
+}
+
+.offerings-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.offer-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.offer-card .offer-tag {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 32, 32, 0.12);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--char-light);
+}
+
+.offer-card h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.offer-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.offer-card ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.offer-card li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.65;
+}
+
+.offer-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.fit-grid,
+.process-grid {
+  margin-top: 36px;
+  display: grid;
+  gap: 16px;
+}
+
+.fit-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.process-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fit-card,
+.process-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.fit-card h3,
+.process-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.fit-card p,
+.process-card p {
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.7);
+  line-height: 1.7;
+}
+
+.process-step {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.light-fit-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.light-fit-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.light-fit-card h3 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.light-fit-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.light-fit-card ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.light-fit-card li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.65;
+}
+
+.light-fit-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.cta-band {
+  background:
+    radial-gradient(circle at top left, rgba(201, 160, 82, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(243, 240, 232, 1), rgba(232, 224, 212, 0.7));
+}
+
+.cta-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  gap: 24px;
+  align-items: center;
+  background: var(--char);
+  color: var(--off);
+  border-radius: 18px;
+  padding: 34px;
+  box-shadow: var(--shadow-soft);
+}
+
+.cta-box h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.cta-box h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cta-box p {
+  font-size: 15px;
+  color: rgba(243, 240, 232, 0.72);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cta-actions .btn-secondary {
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cta-actions .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+footer {
+  border-top: 1px solid rgba(216, 207, 192, 0.8);
+}
+
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 48px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  width: 32px;
+  height: 32px;
+}
+
+.footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-brand-copy strong {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.footer-brand-copy span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-links a:hover {
+  color: var(--rust);
+}
+
+@media (max-width: 920px) {
+  .hero-grid,
+  .offerings-grid,
+  .fit-grid,
+  .process-grid,
+  .light-fit-grid,
+  .cta-box {
+    grid-template-columns: 1fr;
+  }
+
+  .section-inner,
+  .nav-inner,
+  .footer-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-inner,
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">
+        <img src="ORANGE.png" alt="orangery.team">
+        <span class="nav-brand-copy">
+          <span class="nav-brand-name">orangery.team</span>
+          <span class="nav-brand-sub">Team development</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#fit">Who it's for</a></li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="orangery-pro.html">orangery.pro</a></li>
+        <li><a href="https://cal.com/lukehaythorpe/30min">Talk with us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="section-inner">
+      <div class="hero-grid">
+        <div class="fade-up">
+          <span class="eyebrow">For teams, exec groups, and organisations</span>
+          <h1 class="hero-title">When leadership gets bigger than <em>one person.</em></h1>
+          <p class="hero-sub">orangery.team is for leaders who need support beyond individual coaching. We help teams communicate more clearly, navigate tension with maturity, and build healthier dynamics across the rooms that actually shape the culture.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://cal.com/lukehaythorpe/30min">Start a conversation -></a>
+            <a class="btn-secondary" href="#offerings">See the offerings</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel fade-up">
+          <span class="hero-panel-label">What this stream is for</span>
+          <h2>Team health, not just individual growth</h2>
+          <p>Useful when the challenge sits between people, not only inside one leader.</p>
+          <ul>
+            <li>Intact team coaching</li>
+            <li>Workshops on communication and dynamics</li>
+            <li>Exec and board facilitation</li>
+            <li>Company-wide development pathways</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section class="stone-section" id="offerings">
+    <div class="section-inner">
+      <span class="eyebrow">The offerings</span>
+      <h2 class="section-headline">A simple set of options for leaders who need help with the <em>whole room.</em></h2>
+      <p class="section-sub">These can stand alone or combine. The aim is practical movement in communication, trust, conflict, and shared leadership maturity.</p>
+
+      <div class="offerings-grid">
+        <article class="offer-card fade-up">
+          <span class="offer-tag">01 · Team coaching</span>
+          <h3>Intact team coaching</h3>
+          <p>For leadership teams or working groups who need a steadier rhythm of reflection, clarity, and follow-through together.</p>
+          <ul>
+            <li>Shared language for how the team currently operates</li>
+            <li>Live work on trust, ownership, and hard conversations</li>
+            <li>A coaching cadence that builds maturity between meetings</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">02 · Workshops</span>
+          <h3>Communication and dynamics workshops</h3>
+          <p>Focused sessions that help people understand wiring, reduce friction, and communicate with more intention under pressure.</p>
+          <ul>
+            <li>5 Voices and GiANT tools applied to real team dynamics</li>
+            <li>Practical work on feedback, conflict, and influence</li>
+            <li>Useful for offsites, leadership days, or reset moments</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">03 · Exec / board</span>
+          <h3>Exec and board support</h3>
+          <p>For senior rooms where alignment, politics, and communication quality shape everything underneath them.</p>
+          <ul>
+            <li>Facilitation for alignment and decision-making conversations</li>
+            <li>Support around tension, trust, and leadership presence</li>
+            <li>A clearer read on how the top of the house is landing</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">04 · Company-wide</span>
+          <h3>Broader organisational development</h3>
+          <p>When the need is bigger than one team and you want a more coherent pathway across leaders and departments.</p>
+          <ul>
+            <li>Shared frameworks across multiple groups</li>
+            <li>Leadership development that stays relationally grounded</li>
+            <li>Designed around your actual culture and pressure points</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="section-inner">
+      <span class="eyebrow">Who this is for</span>
+      <h2 class="section-headline">Built for organisations that feel the cost of unclear communication and messy <em>people dynamics.</em></h2>
+      <p class="section-sub">If individual coaching is helping one leader, but the system around them is still creating friction, this is usually the better door.</p>
+
+      <div class="light-fit-grid">
+        <article class="light-fit-card fade-up">
+          <h3>A strong fit</h3>
+          <p>orangery.team tends to land well when:</p>
+          <ul>
+            <li>A leadership team needs clearer ownership and healthier challenge</li>
+            <li>Communication has become either too careful or too blunt</li>
+            <li>An exec group or board wants better alignment without theatrics</li>
+            <li>You want practical development, not generic culture slogans</li>
+          </ul>
+        </article>
+
+        <article class="light-fit-card fade-up">
+          <h3>Probably better elsewhere</h3>
+          <p>This may not be the right stream if:</p>
+          <ul>
+            <li>You primarily need one-to-one coaching for a single leader — start with <a href="orangery-pro.html"><strong>orangery.pro</strong></a></li>
+            <li>You are looking for pure consulting strategy with no relational work</li>
+            <li>You want a one-off motivational talk with no follow-through</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section" id="process">
+    <div class="section-inner">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-headline">We keep the process light enough to start, and clear enough to <em>build on.</em></h2>
+      <p class="section-sub">Most engagements begin with a conversation about the people, the politics, and the outcome that would actually make a difference.</p>
+
+      <div class="process-grid">
+        <article class="process-card fade-up">
+          <span class="process-step">01</span>
+          <h3>Talk it through</h3>
+          <p>We clarify the team, the pressure points, and whether this is a coaching, workshop, or broader development need.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">02</span>
+          <h3>Shape the right offer</h3>
+          <p>We choose a focused path rather than forcing a package that does not match the real problem.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">03</span>
+          <h3>Work the live dynamics</h3>
+          <p>Sessions stay practical: communication, trust, conflict, influence, and the maturity of the people in the room.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">04</span>
+          <h3>Leave with traction</h3>
+          <p>The goal is not another workshop high. It is clearer language, better conversations, and stronger follow-through.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="section-inner">
+      <div class="cta-box fade-up">
+        <div>
+          <span class="eyebrow" style="color: var(--gold);">Ready to explore</span>
+          <h2>If the need is bigger than one leader, let's talk about the <em>right room.</em></h2>
+          <p>Book a conversation and we can sort out whether team coaching, a workshop, exec support, or a broader pathway is the better next step.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn-primary" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
+          <a class="btn-secondary" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20enquiry">Email Luke</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="ORANGE.png" alt="orangery.team">
+        <div class="footer-brand-copy">
+          <strong>orangery.team</strong>
+          <span>Team development inside the Orangery ecosystem</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#offerings">Offerings</a>
+        <a href="orangery-pro.html">orangery.pro</a>
+        <a href="https://orangery.solutions" target="_blank" rel="noreferrer">orangery.solutions</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const observers = document.querySelectorAll(".fade-up");
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+observers.forEach((node) => fadeObserver.observe(node));
+</script>
+</body>
+</html>
