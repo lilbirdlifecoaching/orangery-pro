@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proposal Builder · orangery.team</title>
+<meta name="orangery-worker-url" content="https://orangery-relational-dynamics.cwwq46sn7m.workers.dev">
 <link rel="icon" href="ORANGE.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -315,8 +316,10 @@ h1 {
         <p class="note" id="summary-note">Defaults follow the public quote rates. Edit any field to customise this proposal.</p>
         <div class="btn-row">
           <button type="button" class="btn btn-primary" id="open-proposal">Open client proposal -></button>
-          <button type="button" class="btn btn-secondary" id="copy-link">Copy share link</button>
+          <button type="button" class="btn btn-secondary" id="copy-link">Copy short link</button>
+          <button type="button" class="btn btn-secondary" id="send-client">Send to client email</button>
         </div>
+        <p class="note" id="share-status" style="margin-top:10px;margin-bottom:0;"></p>
         <div class="link-box" id="link-box"></div>
       </div>
 
@@ -334,6 +337,13 @@ h1 {
 
 <script>
 (function () {
+  const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
+  const RAW_WORKER_URL = (window.ORANGERY_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const WORKER_URL = RAW_WORKER_URL && !/^https?:\/\//i.test(RAW_WORKER_URL)
+    ? "https://" + RAW_WORKER_URL
+    : RAW_WORKER_URL;
+  const PUBLIC_PROPOSAL_URL = "https://orangery.pro/proposal.html";
+
   const WORKSHOP_PACKAGES = {
     6: { count: 2, price: 4500, help: "Includes 2 × 90-minute workshops across 6 months." },
     12: { count: 3, price: 6000, help: "Includes 3 × 90-minute workshops across 12 months." },
@@ -381,8 +391,13 @@ h1 {
     customLines: document.getElementById("custom-lines"),
     customLabel: document.getElementById("custom-label"),
     customAmount: document.getElementById("custom-amount"),
-    linkBox: document.getElementById("link-box")
+    linkBox: document.getElementById("link-box"),
+    shareStatus: document.getElementById("share-status")
   };
+
+  function setShareStatus(message) {
+    if (els.shareStatus) els.shareStatus.textContent = message || "";
+  }
 
   function money(n) {
     const code = state.currency === "AUD" ? "AUD" : "USD";
@@ -566,12 +581,34 @@ h1 {
 
   function proposalUrl(proposal, opts) {
     const hash = "#p=" + encodeProposal(proposal);
-    // Local open/preview: same folder as the builder (works with file:// + CORS-fixed worker).
+    // Local open/preview: same folder as the builder (works offline without KV).
     if (!opts || !opts.publicShare) {
       return new URL("proposal.html" + hash, window.location.href).toString();
     }
-    // Client share link: always public HTTPS so recipients don't need local files.
-    return "https://orangery.pro/proposal.html" + hash;
+    // Legacy long link fallback if short-link storage is unavailable.
+    return PUBLIC_PROPOSAL_URL + hash;
+  }
+
+  async function createShortLink(proposal, options) {
+    if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
+      throw new Error("Worker URL is not configured on the proposal builder.");
+    }
+    const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/proposals", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        proposal: proposal,
+        sendEmail: Boolean(options && options.sendEmail),
+        toEmail: (options && options.toEmail) || (proposal.client && proposal.client.email) || ""
+      })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const err = new Error(data.error || "Could not create short proposal link.");
+      err.data = data;
+      throw err;
+    }
+    return data;
   }
 
   document.getElementById("currency-grid").addEventListener("click", (event) => {
@@ -669,15 +706,72 @@ h1 {
 
   document.getElementById("copy-link").addEventListener("click", async () => {
     const proposal = buildProposal();
-    const url = proposalUrl(proposal, { publicShare: true });
-    els.linkBox.textContent = url;
-    els.linkBox.classList.add("visible");
+    const btn = document.getElementById("copy-link");
+    btn.disabled = true;
+    setShareStatus("Creating short link...");
     try {
+      const data = await createShortLink(proposal, { sendEmail: false });
+      const url = data.url || proposalUrl(proposal, { publicShare: true });
+      els.linkBox.textContent = url;
+      els.linkBox.classList.add("visible");
       await navigator.clipboard.writeText(url);
-      document.getElementById("copy-link").textContent = "Link copied";
-      setTimeout(() => { document.getElementById("copy-link").textContent = "Copy share link"; }, 1600);
-    } catch (_) {
-      document.getElementById("copy-link").textContent = "Copy from box below";
+      btn.textContent = "Short link copied";
+      setShareStatus("Short link ready. Expires in about 180 days.");
+      setTimeout(() => { btn.textContent = "Copy short link"; }, 1600);
+    } catch (error) {
+      const fallback = proposalUrl(proposal, { publicShare: true });
+      els.linkBox.textContent = fallback;
+      els.linkBox.classList.add("visible");
+      try { await navigator.clipboard.writeText(fallback); } catch (_) {}
+      setShareStatus((error && error.message ? error.message : "Short link unavailable") + " Copied the long link instead.");
+      btn.textContent = "Long link copied";
+      setTimeout(() => { btn.textContent = "Copy short link"; }, 1800);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById("send-client").addEventListener("click", async () => {
+    const proposal = buildProposal();
+    const email = (proposal.client && proposal.client.email) || "";
+    if (!email) {
+      setShareStatus("Add the client email in Client details first.");
+      els.clientEmail.focus();
+      return;
+    }
+    if (!proposal.lines.length || !proposal.total) {
+      setShareStatus("Add at least one service before sending.");
+      return;
+    }
+
+    const btn = document.getElementById("send-client");
+    btn.disabled = true;
+    setShareStatus("Saving proposal and preparing email...");
+    try {
+      const data = await createShortLink(proposal, { sendEmail: true, toEmail: email });
+      els.linkBox.textContent = data.url || "";
+      els.linkBox.classList.add("visible");
+
+      if (data.delivered === "email") {
+        setShareStatus("Sent to " + email + ". Short link: " + data.url);
+      } else if (data.delivered === "mailto" && data.mailto) {
+        window.location.href = data.mailto;
+        setShareStatus("Opening your email app with the short link ready to send to " + email + ".");
+      } else {
+        setShareStatus("Short link created: " + data.url);
+      }
+    } catch (error) {
+      const msg = error && error.message ? error.message : "Could not send proposal.";
+      const url = error && error.data && error.data.url;
+      if (url) {
+        els.linkBox.textContent = url;
+        els.linkBox.classList.add("visible");
+        setShareStatus(msg + " Short link is still available below.");
+      } else {
+        setShareStatus(msg);
+      }
+    } finally {
+      btn.disabled = false;
     }
   });
 

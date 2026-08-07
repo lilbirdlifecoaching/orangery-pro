@@ -284,7 +284,9 @@ h1 {
 
   // Stripe only accepts http(s) return URLs. Local file previews use orangery.pro for return.
   function checkoutReturnUrls() {
-    const hash = window.location.hash || "";
+    const params = new URLSearchParams(window.location.search);
+    const shortId = (params.get("id") || "").trim();
+    const hash = shortId ? "" : (window.location.hash || "");
     let base = PUBLIC_PROPOSAL_URL;
     try {
       const current = new URL(window.location.href);
@@ -294,9 +296,10 @@ h1 {
     } catch (_) {
       // keep public fallback
     }
+    const idQuery = shortId ? "id=" + encodeURIComponent(shortId) + "&" : "";
     return {
-      successUrl: base + "?paid=1",
-      cancelUrl: base + "?cancelled=1" + hash
+      successUrl: base + "?" + idQuery + "paid=1",
+      cancelUrl: base + "?" + idQuery + "cancelled=1" + hash
     };
   }
 
@@ -651,7 +654,7 @@ h1 {
   }
 
   // Load proposal
-  try {
+  async function boot() {
     const params = new URLSearchParams(window.location.search);
     if (params.get("paid") === "1") {
       setStatus("Payment received. Thank you — Luke will follow up to schedule next steps.", "success");
@@ -659,48 +662,83 @@ h1 {
       setStatus("Checkout was cancelled. You can review the proposal and try payment again when ready.", "info");
     }
 
-    const hash = window.location.hash || "";
-    const match = hash.match(/(?:^#|&|[?#])p=([^&]+)/) || hash.match(/^#p=(.+)$/);
-    const encoded = match ? match[1] : (hash.startsWith("#p=") ? hash.slice(3) : "");
-    if (!encoded) {
-      emptyState.hidden = false;
-      return;
+    const shortId = cleanText(params.get("id") || "");
+    if (shortId) {
+      if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
+        emptyState.hidden = false;
+        emptyState.querySelector("p").textContent = "This short proposal link needs the payment worker configured.";
+        return false;
+      }
+      try {
+        const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/proposals/" + encodeURIComponent(shortId));
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.proposal) {
+          throw new Error(data.error || "Proposal not found.");
+        }
+        renderProposal(data.proposal);
+        page.hidden = false;
+        return true;
+      } catch (error) {
+        emptyState.hidden = false;
+        emptyState.querySelector("p").textContent =
+          (error && error.message ? error.message : "Proposal not found.") +
+          " Ask Luke for a fresh link.";
+        return false;
+      }
     }
-    const data = decodeProposal(encoded);
-    renderProposal(data);
-    page.hidden = false;
-  } catch (error) {
-    emptyState.hidden = false;
-    emptyState.querySelector("p").textContent = "This proposal link could not be read. Generate a fresh link from the proposal builder.";
-    return;
+
+    try {
+      const hash = window.location.hash || "";
+      const match = hash.match(/(?:^#|&|[?#])p=([^&]+)/) || hash.match(/^#p=(.+)$/);
+      const encoded = match ? match[1] : (hash.startsWith("#p=") ? hash.slice(3) : "");
+      if (!encoded) {
+        emptyState.hidden = false;
+        return false;
+      }
+      const data = decodeProposal(encoded);
+      renderProposal(data);
+      page.hidden = false;
+      return true;
+    } catch (error) {
+      emptyState.hidden = false;
+      emptyState.querySelector("p").textContent = "This proposal link could not be read. Generate a fresh link from the proposal builder.";
+      return false;
+    }
   }
 
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
-  canvas.addEventListener("mousedown", startDraw);
-  canvas.addEventListener("mousemove", moveDraw);
-  window.addEventListener("mouseup", endDraw);
-  canvas.addEventListener("touchstart", startDraw, { passive: false });
-  canvas.addEventListener("touchmove", moveDraw, { passive: false });
-  canvas.addEventListener("touchend", endDraw);
-  document.getElementById("clear-signature").addEventListener("click", clearSignature);
-  document.getElementById("accept-pay").addEventListener("click", acceptAndPay);
-  document.getElementById("print-btn").addEventListener("click", () => window.print());
-  document.getElementById("print-btn-2").addEventListener("click", () => window.print());
-  document.getElementById("send-question").addEventListener("click", () => sendFeedback("question"));
-  document.getElementById("send-change").addEventListener("click", () => sendFeedback("change"));
-  document.getElementById("display-currency").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-display-currency]");
-    if (!btn || !proposal) return;
-    displayMode = btn.getAttribute("data-display-currency") === "other" ? "other" : "pay";
-    document.querySelectorAll("#display-currency .pill").forEach((pill) => {
-      pill.classList.toggle("active", pill.getAttribute("data-display-currency") === displayMode);
+  function cleanText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  boot().then(function (ok) {
+    if (!ok) return;
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", moveDraw);
+    window.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("touchstart", startDraw, { passive: false });
+    canvas.addEventListener("touchmove", moveDraw, { passive: false });
+    canvas.addEventListener("touchend", endDraw);
+    document.getElementById("clear-signature").addEventListener("click", clearSignature);
+    document.getElementById("accept-pay").addEventListener("click", acceptAndPay);
+    document.getElementById("print-btn").addEventListener("click", () => window.print());
+    document.getElementById("print-btn-2").addEventListener("click", () => window.print());
+    document.getElementById("send-question").addEventListener("click", () => sendFeedback("question"));
+    document.getElementById("send-change").addEventListener("click", () => sendFeedback("change"));
+    document.getElementById("display-currency").addEventListener("click", (event) => {
+      const btn = event.target.closest("[data-display-currency]");
+      if (!btn || !proposal) return;
+      displayMode = btn.getAttribute("data-display-currency") === "other" ? "other" : "pay";
+      document.querySelectorAll("#display-currency .pill").forEach((pill) => {
+        pill.classList.toggle("active", pill.getAttribute("data-display-currency") === displayMode);
+      });
+      if (displayMode === "other" && !fxRate) {
+        loadFxRate().then(renderAmounts);
+      } else {
+        renderAmounts();
+      }
     });
-    if (displayMode === "other" && !fxRate) {
-      loadFxRate().then(renderAmounts);
-    } else {
-      renderAmounts();
-    }
   });
 })();
 </script>
