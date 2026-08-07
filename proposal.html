@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal · orangery.team</title>
+<meta name="orangery-worker-url" content="https://orangery-relational-dynamics.cwwq46sn7m.workers.dev">
+<link rel="icon" href="ORANGE.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #121417;
+  --muted: #5c6570;
+  --line: #e6e8eb;
+  --orange: #f07828;
+  --orange-light: #f48c42;
+  --green: #2f9e4f;
+  --panel: #f7f8fa;
+  --white: #ffffff;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--char);
+  line-height: 1.6;
+}
+a { color: inherit; }
+.topbar {
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,0.96);
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar-inner {
+  max-width: 920px; margin: 0 auto; padding: 16px 24px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; }
+.brand img { width: 28px; height: 28px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 11px 16px; border-radius: 4px; font-size: 14px; font-weight: 600;
+  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+}
+.btn-primary { background: var(--orange); color: white; border-color: var(--orange); }
+.btn-primary:hover { background: var(--orange-light); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { background: white; color: var(--char); border-color: var(--line); }
+.page { max-width: 920px; margin: 0 auto; padding: 40px 24px 80px; }
+.eyebrow {
+  display: inline-flex; gap: 8px; align-items: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
+}
+.eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--orange); }
+h1 {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 5vw, 48px);
+  letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 10px;
+}
+.meta { color: var(--muted); margin-bottom: 28px; }
+.section {
+  border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin-bottom: 16px; background: var(--white);
+}
+.section h2 {
+  font-size: 15px; font-weight: 600; margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.section p, .section li { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.section ul { padding-left: 18px; display: grid; gap: 6px; }
+.process {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+.process-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px;
+}
+.process-card strong { display: block; margin-bottom: 6px; color: var(--char); font-size: 14px; }
+.process-card span { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.lines { list-style: none; display: grid; gap: 10px; }
+.lines li {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted);
+}
+.lines li:last-child { border-bottom: none; }
+.lines strong { color: var(--char); }
+.totals { margin-top: 12px; display: grid; gap: 8px; }
+.total-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.total-row.discount { color: var(--green); }
+.total-due {
+  margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: end;
+}
+.total-due span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.total-due strong { font-family: var(--font-display); font-size: 36px; font-weight: 500; letter-spacing: -0.03em; }
+.contract p { margin-bottom: 10px; }
+.sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.field input {
+  width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 11px 12px; font: inherit;
+}
+.signature-pad {
+  border: 1px solid var(--line); border-radius: 4px; background: var(--panel); width: 100%; height: 160px; touch-action: none; cursor: crosshair;
+}
+.sign-actions { display: flex; gap: 8px; margin-top: 8px; }
+.status {
+  display: none; margin-top: 12px; padding: 12px 14px; border-radius: 4px; font-size: 13px; line-height: 1.6;
+}
+.status.visible { display: block; }
+.status.info { background: var(--panel); border: 1px solid var(--line); color: var(--muted); }
+.status.error { background: #fff1ee; border: 1px solid #f0c2b7; color: #8a3a2a; }
+.status.success { background: #eef8f0; border: 1px solid #b7e0c0; color: #245c34; }
+.empty {
+  max-width: 640px; margin: 80px auto; padding: 24px; border: 1px solid var(--line); border-radius: 8px; text-align: center;
+}
+.empty h1 { font-size: 32px; margin-bottom: 10px; }
+@media (max-width: 800px) {
+  .process, .sign-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .topbar, .no-print, .status { display: none !important; }
+  body { background: white; }
+  .page { padding: 0; max-width: none; }
+  .section { break-inside: avoid; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar no-print">
+    <div class="topbar-inner">
+      <a class="brand" href="orangery-team.html"><img src="ORANGE.png" alt=""> orangery.team</a>
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" id="print-btn">Download / print PDF</button>
+        <a class="btn btn-secondary" href="#sign">Review & sign</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="empty-state" class="empty" hidden>
+    <h1>No proposal loaded</h1>
+    <p style="color:var(--muted);margin:12px 0 20px;">Open this page from the Proposal Builder share link, or go back and generate one.</p>
+    <a class="btn btn-primary" href="proposal-builder.html">Open proposal builder</a>
+  </div>
+
+  <main class="page" id="proposal-page" hidden>
+    <span class="eyebrow">Client proposal</span>
+    <h1 id="proposal-title">Leadership & team development proposal</h1>
+    <p class="meta" id="proposal-meta"></p>
+
+    <section class="section">
+      <h2>Prepared for</h2>
+      <p id="client-block"></p>
+    </section>
+
+    <section class="section">
+      <h2>How this engagement works</h2>
+      <div class="process">
+        <div class="process-card"><strong>1. Align</strong><span>We confirm scope, people involved, and the outcomes that matter.</span></div>
+        <div class="process-card"><strong>2. Deliver</strong><span>Workshops, group coaching, and leadership support run to the agreed rhythm.</span></div>
+        <div class="process-card"><strong>3. Embed</strong><span>Where included, in-team coach training builds capacity between sessions.</span></div>
+        <div class="process-card"><strong>4. Review</strong><span>We stay practical: clearer communication, healthier dynamics, stronger follow-through.</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="scope-section" hidden>
+      <h2>Scope notes</h2>
+      <p id="scope-notes"></p>
+    </section>
+
+    <section class="section">
+      <h2>Investment</h2>
+      <ul class="lines" id="line-items"></ul>
+      <div class="totals">
+        <div class="total-row"><span>Subtotal</span><strong id="subtotal">$0</strong></div>
+        <div class="total-row discount" id="discount-row" hidden><span id="discount-label">Discount</span><strong id="discount">-$0</strong></div>
+      </div>
+      <div class="total-due"><span>Total due</span><strong id="total">$0</strong></div>
+    </section>
+
+    <section class="section">
+      <h2>Payment</h2>
+      <p id="payment-notes"></p>
+      <p style="margin-top:10px;">Payment is processed securely by Stripe for the exact proposal total. Paying after signature confirms the engagement start.</p>
+    </section>
+
+    <section class="section contract">
+      <h2>Agreement summary</h2>
+      <p>This proposal is an offer by Orangery / Luke Haythorpe (“Provider”) to the client named above (“Client”) for leadership and team development services described in the Investment section.</p>
+      <p><strong>Services.</strong> Provider will deliver the selected services in good faith and to a professional standard. Session scheduling will be arranged mutually. Unused leadership coaching sessions do not roll over beyond the engagement month unless otherwise agreed in writing.</p>
+      <p><strong>Fees & payment.</strong> Client agrees to pay the Total Due via Stripe (or invoice by arrangement). Work begins after payment unless otherwise agreed. Early cancellation may be possible; refunds are limited once the engagement has begun, and unused months are not fully refundable.</p>
+      <p><strong>Confidentiality.</strong> Both parties will treat organisational and personal information shared in coaching as confidential, except where disclosure is required by law or agreed in writing.</p>
+      <p><strong>Nature of coaching.</strong> Coaching and facilitation are developmental and practical in nature. They are not therapy, legal advice, or HR decision-making on the Client’s behalf.</p>
+      <p><strong>Acceptance.</strong> By signing below and completing payment, Client accepts this proposal and the terms summarised here for the stated engagement period.</p>
+      <p style="font-size:12px;">This is a practical services agreement summary, not formal legal advice. A fuller contract can be used if your organisation requires it.</p>
+    </section>
+
+    <section class="section" id="sign">
+      <h2>Sign to accept</h2>
+      <div class="sign-grid">
+        <div class="field">
+          <label for="signer-name">Full name</label>
+          <input id="signer-name" type="text" autocomplete="name" placeholder="Type your full name">
+        </div>
+        <div class="field">
+          <label for="signer-title">Role / title</label>
+          <input id="signer-title" type="text" placeholder="e.g. Head of People">
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px;">
+        <label>Signature</label>
+        <canvas id="signature-pad" class="signature-pad" width="800" height="160"></canvas>
+        <div class="sign-actions no-print">
+          <button type="button" class="btn btn-secondary" id="clear-signature">Clear signature</button>
+        </div>
+      </div>
+      <div class="no-print" style="margin-top:16px; display:flex; flex-wrap:wrap; gap:10px;">
+        <button type="button" class="btn btn-primary" id="accept-pay">Accept & pay securely -></button>
+        <button type="button" class="btn btn-secondary" id="print-btn-2">Save as PDF</button>
+      </div>
+      <div class="status info" id="status"></div>
+    </section>
+  </main>
+
+<script>
+(function () {
+  const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
+  const RAW_WORKER_URL = (window.ORANGERY_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const WORKER_URL = RAW_WORKER_URL && !/^https?:\/\//i.test(RAW_WORKER_URL)
+    ? "https://" + RAW_WORKER_URL
+    : RAW_WORKER_URL;
+
+  const emptyState = document.getElementById("empty-state");
+  const page = document.getElementById("proposal-page");
+  const statusEl = document.getElementById("status");
+  const canvas = document.getElementById("signature-pad");
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
+  let hasStroke = false;
+  let proposal = null;
+
+  function money(n) {
+    return "$" + Math.round(n).toLocaleString("en-AU");
+  }
+
+  function setStatus(message, tone) {
+    if (!message) {
+      statusEl.className = "status";
+      statusEl.textContent = "";
+      return;
+    }
+    statusEl.className = "status visible " + tone;
+    statusEl.textContent = message;
+  }
+
+  function decodeProposal(encoded) {
+    const normalized = encoded.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+    const binary = atob(padded);
+    const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+
+  function formatDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+    } catch (_) {
+      return iso;
+    }
+  }
+
+  function renderProposal(data) {
+    proposal = data;
+    document.getElementById("proposal-title").textContent = data.title || "Proposal";
+    document.title = (data.title || "Proposal") + " · orangery.team";
+
+    const clientBits = [];
+    if (data.client && data.client.name) clientBits.push(data.client.name);
+    if (data.client && data.client.company) clientBits.push(data.client.company);
+    if (data.client && data.client.email) clientBits.push(data.client.email);
+    document.getElementById("client-block").textContent = clientBits.length
+      ? clientBits.join(" · ")
+      : "Client details to be confirmed.";
+
+    document.getElementById("proposal-meta").textContent =
+      "Prepared by " + ((data.provider && data.provider.name) || "Luke Haythorpe") +
+      " · Created " + formatDate(data.createdAt) +
+      " · Valid until " + formatDate(data.validUntil);
+
+    if (data.scopeNotes) {
+      document.getElementById("scope-section").hidden = false;
+      document.getElementById("scope-notes").textContent = data.scopeNotes;
+    }
+
+    document.getElementById("line-items").innerHTML = (data.lines || []).map((line) =>
+      "<li><span>" + escapeHtml(line.label) + "</span><strong>" + money(line.amount) + "</strong></li>"
+    ).join("") || "<li><span>No line items</span><strong>$0</strong></li>";
+
+    document.getElementById("subtotal").textContent = money(data.subtotal || 0);
+    if (data.discount && data.discount.amount > 0) {
+      document.getElementById("discount-row").hidden = false;
+      document.getElementById("discount-label").textContent = data.discount.label || "Discount";
+      document.getElementById("discount").textContent = "-" + money(data.discount.amount);
+    }
+    document.getElementById("total").textContent = money(data.total || 0);
+    document.getElementById("payment-notes").textContent = data.paymentNotes ||
+      "Payment is made securely through Stripe after you review and sign this proposal.";
+
+    if (data.client && data.client.name) {
+      document.getElementById("signer-name").value = data.client.name;
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function resizeCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const rect = canvas.getBoundingClientRect();
+    const snapshot = hasStroke ? canvas.toDataURL() : null;
+    canvas.width = Math.floor(rect.width * ratio);
+    canvas.height = Math.floor(160 * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#121417";
+    if (snapshot) {
+      const img = new Image();
+      img.onload = function () { ctx.drawImage(img, 0, 0, rect.width, 160); };
+      img.src = snapshot;
+    }
+  }
+
+  function pointerPos(event) {
+    const rect = canvas.getBoundingClientRect();
+    const point = event.touches ? event.touches[0] : event;
+    return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+  }
+
+  function startDraw(event) {
+    drawing = true;
+    hasStroke = true;
+    const pos = pointerPos(event);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+    event.preventDefault();
+  }
+
+  function moveDraw(event) {
+    if (!drawing) return;
+    const pos = pointerPos(event);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+    event.preventDefault();
+  }
+
+  function endDraw() { drawing = false; }
+
+  function clearSignature() {
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, 160);
+    hasStroke = false;
+  }
+
+  async function acceptAndPay() {
+    if (!proposal) return;
+    const signerName = document.getElementById("signer-name").value.trim();
+    const signerTitle = document.getElementById("signer-title").value.trim();
+    if (!signerName) {
+      setStatus("Please type your full name before accepting.", "error");
+      return;
+    }
+    if (!hasStroke) {
+      setStatus("Please add your signature before accepting.", "error");
+      return;
+    }
+    if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
+      setStatus("Signature captured. Stripe payment is not connected yet on this page’s worker. You can still save/print the signed PDF, and payment can be completed once Stripe is configured.", "info");
+      window.print();
+      return;
+    }
+
+    const acceptBtn = document.getElementById("accept-pay");
+    acceptBtn.disabled = true;
+    setStatus("Creating a secure Stripe checkout for this proposal...", "info");
+
+    try {
+      const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/proposals/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          proposal: proposal,
+          signature: {
+            name: signerName,
+            title: signerTitle,
+            signedAt: new Date().toISOString(),
+            imageDataUrl: canvas.toDataURL("image/png")
+          },
+          successUrl: window.location.href.split("#")[0] + "?paid=1",
+          cancelUrl: window.location.href.split("#")[0] + "?cancelled=1" + window.location.hash
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Could not start checkout.");
+      if (!data.url) throw new Error("Checkout URL missing from worker response.");
+      window.location.href = data.url;
+    } catch (error) {
+      setStatus(error.message || "Something went wrong starting payment.", "error");
+      acceptBtn.disabled = false;
+    }
+  }
+
+  // Load proposal
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("paid") === "1") {
+      setStatus("Payment received. Thank you — Luke will follow up to schedule next steps.", "success");
+    } else if (params.get("cancelled") === "1") {
+      setStatus("Checkout was cancelled. You can review the proposal and try payment again when ready.", "info");
+    }
+
+    const hash = window.location.hash || "";
+    const match = hash.match(/(?:^#|&|[?#])p=([^&]+)/) || hash.match(/^#p=(.+)$/);
+    const encoded = match ? match[1] : (hash.startsWith("#p=") ? hash.slice(3) : "");
+    if (!encoded) {
+      emptyState.hidden = false;
+      return;
+    }
+    const data = decodeProposal(encoded);
+    renderProposal(data);
+    page.hidden = false;
+  } catch (error) {
+    emptyState.hidden = false;
+    emptyState.querySelector("p").textContent = "This proposal link could not be read. Generate a fresh link from the proposal builder.";
+    return;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", moveDraw);
+  window.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("touchstart", startDraw, { passive: false });
+  canvas.addEventListener("touchmove", moveDraw, { passive: false });
+  canvas.addEventListener("touchend", endDraw);
+  document.getElementById("clear-signature").addEventListener("click", clearSignature);
+  document.getElementById("accept-pay").addEventListener("click", acceptAndPay);
+  document.getElementById("print-btn").addEventListener("click", () => window.print());
+  document.getElementById("print-btn-2").addEventListener("click", () => window.print());
+})();
+</script>
+</body>
+</html>
