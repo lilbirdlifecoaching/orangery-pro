@@ -613,7 +613,7 @@ h1 {
         "mailto:lukehaythorpe@orangery.solutions?subject=" +
         encodeURIComponent(subject) +
         "&body=" +
-        encodeURIComponent(message + "\n\n---\n" + (proposal.title || "") + "\n" + payCurrency() + " " + proposal.total);
+        encodeURIComponent(message);
       setFeedbackStatus("Opening your email app...", "info");
       return;
     }
