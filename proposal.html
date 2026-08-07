@@ -205,6 +205,21 @@ h1 {
       <div class="total-due"><span id="total-label">Total due</span><strong id="total">$0</strong></div>
     </section>
 
+    <section class="section no-print" id="paid-section" hidden>
+      <h2>Payment confirmed</h2>
+      <p style="margin-bottom:12px;">Thank you — your engagement is locked in. A confirmation email with your invoice/receipt and next steps is on its way (check spam if you do not see it within a few minutes).</p>
+      <ul style="margin-bottom:16px;">
+        <li>Book an implementation call so we can align calendars, participants, and first delivery dates.</li>
+        <li>Bring any constraints, key stakeholders, and questions to that call.</li>
+        <li>Keep this proposal page or PDF for your records.</li>
+      </ul>
+      <div class="feedback-actions">
+        <a class="btn btn-primary" id="book-implementation" href="https://cal.com/lukehaythorpe/30min" target="_blank" rel="noreferrer">Book implementation call -></a>
+        <button type="button" class="btn btn-secondary" id="print-btn-paid">Save proposal PDF</button>
+      </div>
+      <div class="status success visible" style="margin-top:14px;">If you need anything before we meet, reply to the confirmation email or use the note form below.</div>
+    </section>
+
     <section class="section no-print" id="feedback-section">
       <h2>Questions or changes?</h2>
       <p style="margin-bottom:14px;">Before you sign, send a quick note. It comes straight through so nothing gets lost in email threads.</p>
@@ -298,7 +313,7 @@ h1 {
     }
     const idQuery = shortId ? "id=" + encodeURIComponent(shortId) + "&" : "";
     return {
-      successUrl: base + "?" + idQuery + "paid=1",
+      successUrl: base + "?" + idQuery + "paid=1&session_id={CHECKOUT_SESSION_ID}",
       cancelUrl: base + "?" + idQuery + "cancelled=1" + hash
     };
   }
@@ -558,6 +573,7 @@ h1 {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           proposal: proposal,
+          proposalId: (new URLSearchParams(window.location.search).get("id") || "").trim(),
           signature: {
             name: signerName,
             title: signerTitle,
@@ -656,13 +672,15 @@ h1 {
   // Load proposal
   async function boot() {
     const params = new URLSearchParams(window.location.search);
-    if (params.get("paid") === "1") {
-      setStatus("Payment received. Thank you — Luke will follow up to schedule next steps.", "success");
+    const isPaid = params.get("paid") === "1";
+    if (isPaid) {
+      setStatus("Payment received. Scroll up for next steps, including your implementation call booking link.", "success");
     } else if (params.get("cancelled") === "1") {
       setStatus("Checkout was cancelled. You can review the proposal and try payment again when ready.", "info");
     }
 
     const shortId = cleanText(params.get("id") || "");
+    let loaded = false;
     if (shortId) {
       if (!WORKER_URL || WORKER_URL.indexOf("YOUR-SUBDOMAIN") !== -1) {
         emptyState.hidden = false;
@@ -677,7 +695,7 @@ h1 {
         }
         renderProposal(data.proposal);
         page.hidden = false;
-        return true;
+        loaded = true;
       } catch (error) {
         emptyState.hidden = false;
         emptyState.querySelector("p").textContent =
@@ -685,25 +703,43 @@ h1 {
           " Ask Luke for a fresh link.";
         return false;
       }
-    }
-
-    try {
-      const hash = window.location.hash || "";
-      const match = hash.match(/(?:^#|&|[?#])p=([^&]+)/) || hash.match(/^#p=(.+)$/);
-      const encoded = match ? match[1] : (hash.startsWith("#p=") ? hash.slice(3) : "");
-      if (!encoded) {
+    } else {
+      try {
+        const hash = window.location.hash || "";
+        const match = hash.match(/(?:^#|&|[?#])p=([^&]+)/) || hash.match(/^#p=(.+)$/);
+        const encoded = match ? match[1] : (hash.startsWith("#p=") ? hash.slice(3) : "");
+        if (!encoded) {
+          emptyState.hidden = false;
+          return false;
+        }
+        const data = decodeProposal(encoded);
+        renderProposal(data);
+        page.hidden = false;
+        loaded = true;
+      } catch (error) {
         emptyState.hidden = false;
+        emptyState.querySelector("p").textContent = "This proposal link could not be read. Generate a fresh link from the proposal builder.";
         return false;
       }
-      const data = decodeProposal(encoded);
-      renderProposal(data);
-      page.hidden = false;
-      return true;
-    } catch (error) {
-      emptyState.hidden = false;
-      emptyState.querySelector("p").textContent = "This proposal link could not be read. Generate a fresh link from the proposal builder.";
-      return false;
     }
+
+    if (isPaid) {
+      const paidSection = document.getElementById("paid-section");
+      const signSection = document.getElementById("sign");
+      const feedbackIntro = document.querySelector("#feedback-section > p");
+      if (paidSection) paidSection.hidden = false;
+      if (signSection) signSection.hidden = true;
+      if (feedbackIntro) {
+        feedbackIntro.textContent = "Need a tweak after payment? Send a note and Luke will pick it up.";
+      }
+      const topSign = document.querySelector('.actions a[href="#sign"]');
+      if (topSign) {
+        topSign.setAttribute("href", "#paid-section");
+        topSign.textContent = "Next steps";
+      }
+    }
+
+    return loaded;
   }
 
   function cleanText(value) {
@@ -724,6 +760,8 @@ h1 {
     document.getElementById("accept-pay").addEventListener("click", acceptAndPay);
     document.getElementById("print-btn").addEventListener("click", () => window.print());
     document.getElementById("print-btn-2").addEventListener("click", () => window.print());
+    const printPaid = document.getElementById("print-btn-paid");
+    if (printPaid) printPaid.addEventListener("click", () => window.print());
     document.getElementById("send-question").addEventListener("click", () => sendFeedback("question"));
     document.getElementById("send-change").addEventListener("click", () => sendFeedback("change"));
     document.getElementById("display-currency").addEventListener("click", (event) => {
