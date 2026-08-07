@@ -1061,7 +1061,7 @@ footer {
     <div class="section-inner">
       <span class="eyebrow">Transparent pricing</span>
       <h2 class="section-headline">Build a self-guided quote around the support your team <em>actually needs.</em></h2>
-      <p class="section-sub">Start with a suggested package, or mix the modules yourself. Workshop pricing follows audience size. Group coaching is priced by how many coaching groups you need. Exec, board, and company-wide work still begins with a conversation.</p>
+      <p class="section-sub">Start with a suggested package, or mix the modules yourself. Workshop packages follow the engagement length. Group coaching is priced by how many coaching groups you need. Exec, board, and company-wide work still begins with a conversation.</p>
 
       <div class="package-grid">
         <button type="button" class="package-card fade-up" data-package="team-reset">
@@ -1084,17 +1084,7 @@ footer {
       <div class="quote-shell fade-up">
         <div class="quote-builder">
           <h3>Build your mix</h3>
-          <p class="quote-lead">Workshop pricing follows audience size. Group coaching is priced per coaching group (up to 6 people each), because a large organisation may only need one key-leader group while a smaller team may need several. Leadership coaching is priced per leader. In-team coach training is a flat program with light as-needed support.</p>
-
-          <div class="quote-field">
-            <span class="quote-label">Workshop audience size</span>
-            <div class="band-grid" id="band-grid">
-              <button type="button" class="choice-pill active" data-band="small">1–6 people</button>
-              <button type="button" class="choice-pill" data-band="medium">7–12 people</button>
-              <button type="button" class="choice-pill" data-band="large">13–20 people</button>
-              <button type="button" class="choice-pill" data-band="xl">21+ custom</button>
-            </div>
-          </div>
+          <p class="quote-lead">Workshop packages are tied to engagement length. Group coaching is priced per coaching group (up to 6 people each). Leadership coaching is priced per leader. In-team coach training is a flat program with light as-needed support.</p>
 
           <div class="quote-field">
             <span class="quote-label">Coaching duration</span>
@@ -1111,10 +1101,10 @@ footer {
               <label class="module-option">
                 <input type="checkbox" id="mod-workshop" checked>
                 <span>
-                  <strong>90-minute workshop</strong>
-                  <span>Communication and dynamics session. Priced by audience size.</span>
+                  <strong>Workshop package</strong>
+                  <span id="workshop-help">Includes 2 × 90-minute workshops across a 6-month engagement.</span>
                 </span>
-                <span class="module-price" id="price-workshop">$3,000</span>
+                <span class="module-price" id="price-workshop">$4,500</span>
               </label>
 
               <label class="module-option">
@@ -1166,15 +1156,11 @@ footer {
               </div>
             </div>
           </div>
-
-          <div class="custom-note hidden" id="custom-note">
-            Workshop audiences of 21+ usually need a tailored format. Use the quote as a starting point, then book a conversation so we can scope it properly.
-          </div>
         </div>
 
         <aside class="quote-summary">
           <h3>Your estimate</h3>
-          <p class="quote-lead" id="summary-context">Workshop 1–6 · 1 coaching group · 6 months</p>
+          <p class="quote-lead" id="summary-context">2 workshops · 1 coaching group · 6 months</p>
           <ul class="quote-lines" id="quote-lines">
             <li class="empty">Select a module to begin.</li>
           </ul>
@@ -1193,13 +1179,13 @@ footer {
             <div class="quote-total" id="quote-total">$0</div>
           </div>
           <p class="quote-total-note" id="quote-total-note">Estimates are guidance for planning. Final scope can be confirmed on a call.</p>
-          <p class="quote-disclaimer">Longer engagements include a duration discount. Early cancellation is available, but refunds are limited once the engagement has begun. Unused months are not fully refundable.</p>
+          <p class="quote-disclaimer">Longer engagements include a duration discount on coaching. Early cancellation is available, but refunds are limited once the engagement has begun. Unused months are not fully refundable.</p>
           <div class="quote-actions">
             <a class="btn-primary" id="quote-book" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
             <a class="btn-secondary" id="quote-email" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20quote">Email this estimate</a>
           </div>
           <div class="rate-card">
-            <p>Base rates: workshop from $3,000 / 90 min · group coaching $500 / month per group (up to 6) · leadership coaching $1,200 / month · in-team coach training $4,500. 12-month coaching gets 10% off; 2-year coaching gets 20% off. Exec, board, and company-wide work is scoped by conversation.</p>
+            <p>Workshop packages: 6 months = 2 workshops ($4,500) · 12 months = 3 workshops ($6,000) · 2 years = 6 workshops ($12,000). Group coaching $500 / month per group · leadership coaching $1,200 / month · in-team coach training $4,500. Coaching discounts: 10% at 12 months, 20% at 2 years. Exec, board, and company-wide work is scoped by conversation.</p>
           </div>
         </aside>
       </div>
@@ -1317,11 +1303,10 @@ const fadeObserver = new IntersectionObserver((entries) => {
 observers.forEach((node) => fadeObserver.observe(node));
 
 (function () {
-  const BANDS = {
-    small: { label: "1–6 people", workshop: 3000 },
-    medium: { label: "7–12 people", workshop: 4500 },
-    large: { label: "13–20 people", workshop: 6000 },
-    xl: { label: "21+ people", workshop: null }
+  const WORKSHOP_PACKAGES = {
+    6: { count: 2, price: 4500, help: "Includes 2 × 90-minute workshops across a 6-month engagement." },
+    12: { count: 3, price: 6000, help: "Includes 3 × 90-minute workshops across a 12-month engagement." },
+    24: { count: 6, price: 12000, help: "Includes 6 × 90-minute workshops across a 2-year engagement." }
   };
 
   const COACH_TRAINING = 4500;
@@ -1334,7 +1319,6 @@ observers.forEach((node) => fadeObserver.observe(node));
   };
 
   const state = {
-    band: "small",
     months: 6,
     leaders: 1,
     groups: 1,
@@ -1342,19 +1326,18 @@ observers.forEach((node) => fadeObserver.observe(node));
   };
 
   const els = {
-    bandGrid: document.getElementById("band-grid"),
     durationGrid: document.getElementById("duration-grid"),
     leaderGrid: document.getElementById("leader-grid"),
     groupGrid: document.getElementById("group-grid"),
     leaderControls: document.getElementById("leader-controls"),
     groupControls: document.getElementById("group-controls"),
-    customNote: document.getElementById("custom-note"),
     workshop: document.getElementById("mod-workshop"),
     group: document.getElementById("mod-group"),
     leadership: document.getElementById("mod-leadership"),
     coachTraining: document.getElementById("mod-coach-training"),
     priceWorkshop: document.getElementById("price-workshop"),
     priceGroup: document.getElementById("price-group"),
+    workshopHelp: document.getElementById("workshop-help"),
     quoteLines: document.getElementById("quote-lines"),
     quoteTotal: document.getElementById("quote-total"),
     quoteNote: document.getElementById("quote-total-note"),
@@ -1422,34 +1405,34 @@ observers.forEach((node) => fadeObserver.observe(node));
   }
 
   function render() {
-    const band = BANDS[state.band];
-    const isCustomWorkshop = state.band === "xl";
+    const workshopPackage = WORKSHOP_PACKAGES[state.months];
+    const durationLabel = state.months === 24 ? "2 years" : state.months + " months";
 
-    els.priceWorkshop.textContent = band.workshop == null ? "Custom" : money(band.workshop);
+    els.priceWorkshop.textContent = money(workshopPackage.price);
+    els.workshopHelp.textContent = workshopPackage.help;
     els.priceGroup.textContent = money(GROUP_MONTHLY) + " / mo per group";
     els.leaderControls.classList.toggle("visible", els.leadership.checked);
     els.groupControls.classList.toggle("visible", els.group.checked);
-    els.customNote.classList.toggle("hidden", !(isCustomWorkshop && els.workshop.checked));
 
     const contextParts = [];
-    if (els.workshop.checked) contextParts.push("Workshop " + band.label.replace(" people", ""));
+    if (els.workshop.checked) {
+      contextParts.push(workshopPackage.count + " workshop" + (workshopPackage.count > 1 ? "s" : ""));
+    }
     if (els.group.checked) {
       contextParts.push(state.groups + " coaching group" + (state.groups > 1 ? "s" : ""));
     }
+    contextParts.push(durationLabel);
 
     const lines = [];
     let oneOffTotal = 0;
     let recurringTotal = 0;
-    let hasCustom = false;
 
     if (els.workshop.checked) {
-      if (band.workshop == null) {
-        lines.push({ label: "90-minute workshop", value: "Custom" });
-        hasCustom = true;
-      } else {
-        lines.push({ label: "90-minute workshop · " + band.label, value: money(band.workshop) });
-        oneOffTotal += band.workshop;
-      }
+      lines.push({
+        label: "Workshop package · " + workshopPackage.count + " × 90-min · " + durationLabel,
+        value: money(workshopPackage.price)
+      });
+      oneOffTotal += workshopPackage.price;
     }
 
     if (els.group.checked) {
@@ -1483,7 +1466,6 @@ observers.forEach((node) => fadeObserver.observe(node));
     const discountAmount = Math.round(recurringTotal * discountRate);
     const subtotal = oneOffTotal + recurringTotal;
     const total = subtotal - discountAmount;
-    const durationLabel = state.months === 24 ? "2 years" : state.months + " months";
 
     if (!lines.length) {
       els.quoteLines.innerHTML = '<li class="empty">Select a module to begin.</li>';
@@ -1504,37 +1486,24 @@ observers.forEach((node) => fadeObserver.observe(node));
         ? "12-month commitment · 10% off coaching"
         : "2-year commitment · 20% off coaching";
       els.quoteDiscount.textContent = "-" + money(discountAmount);
-
-      if (hasCustom && total === 0) {
-        els.quoteTotal.textContent = "Custom";
-      } else if (hasCustom) {
-        els.quoteTotal.textContent = money(total) + "+";
-      } else {
-        els.quoteTotal.textContent = money(total);
-      }
-
-      els.quoteNote.textContent = hasCustom
-        ? "Part of this estimate needs a conversation because of workshop audience size."
-        : showDiscountMath
-          ? "Duration discount applies to group and leadership coaching only. Workshops and in-team coach training stay at full rate."
-          : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
+      els.quoteTotal.textContent = money(total);
+      els.quoteNote.textContent = showDiscountMath
+        ? "Duration discount applies to group and leadership coaching only. Workshop packages and in-team coach training stay at the package rate."
+        : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
     }
 
+    els.summaryContext.textContent = contextParts.join(" · ");
+
     const summaryParts = [
-      "Workshop audience: " + (els.workshop.checked ? band.label : "n/a"),
-      "Coaching groups: " + (els.group.checked ? state.groups : "0"),
       "Duration: " + durationLabel,
-      "Workshop: " + (els.workshop.checked ? "yes" : "no"),
-      "Group coaching: " + (els.group.checked ? "yes" : "no"),
+      "Workshop package: " + (els.workshop.checked ? workshopPackage.count + " workshops (" + money(workshopPackage.price) + ")" : "no"),
+      "Coaching groups: " + (els.group.checked ? state.groups : "0"),
       "Leadership seats: " + (els.leadership.checked ? state.leaders : "0"),
       "In-team coach training: " + (els.coachTraining.checked ? "yes" : "no"),
       "Subtotal: " + money(subtotal),
       "Duration discount: " + (discountAmount > 0 ? "-" + money(discountAmount) : "none"),
-      "Estimated total: " + (hasCustom && total === 0 ? "custom" : money(total) + (hasCustom ? "+" : ""))
+      "Estimated total: " + money(total)
     ];
-
-    contextParts.push(durationLabel);
-    els.summaryContext.textContent = contextParts.join(" · ");
 
     const body = "Hi Luke,%0D%0A%0D%0AI put together an orangery.team estimate:%0D%0A%0D%0A" +
       summaryParts.join("%0D%0A") +
@@ -1544,15 +1513,6 @@ observers.forEach((node) => fadeObserver.observe(node));
       encodeURIComponent("orangery.team quote estimate") +
       "&body=" + body;
   }
-
-  els.bandGrid.addEventListener("click", function (event) {
-    const btn = event.target.closest("[data-band]");
-    if (!btn) return;
-    state.band = btn.getAttribute("data-band");
-    setActive(els.bandGrid, "data-band", state.band);
-    clearPackageSelection();
-    render();
-  });
 
   els.durationGrid.addEventListener("click", function (event) {
     const btn = event.target.closest("[data-months]");
