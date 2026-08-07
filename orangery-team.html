@@ -8,24 +8,24 @@
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --char: #1e2020;
-  --char-mid: #2e3830;
-  --char-light: #3a4840;
-  --sage: #7a9980;
-  --rust: #c8543a;
-  --rust-light: #d97055;
-  --gold: #c9a052;
-  --off: #f3f0e8;
-  --stone: #e8e0d4;
-  --stone-deep: #d8cfc0;
-  --white: #fffdf8;
-  --muted: #6a6a60;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
-  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+  --char: #121417;
+  --char-mid: #1a1d21;
+  --char-light: #3a424c;
+  --sage: #2f9e4f;
+  --rust: #f07828;
+  --rust-light: #f48c42;
+  --gold: #2f9e4f;
+  --off: #ffffff;
+  --stone: #f7f8fa;
+  --stone-deep: #e6e8eb;
+  --white: #ffffff;
+  --muted: #5c6570;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --shadow-soft: 0 1px 0 rgba(18, 20, 23, 0.04);
 }
 
 *,
@@ -42,10 +42,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background:
-    radial-gradient(circle at top right, rgba(201, 160, 82, 0.12), transparent 32%),
-    radial-gradient(circle at 12% 28%, rgba(122, 153, 128, 0.1), transparent 26%),
-    linear-gradient(180deg, #f7f3ea 0%, var(--off) 42%, #efe8dc 100%);
+  background: var(--off);
   color: var(--char);
   font-size: 16px;
   line-height: 1.6;
@@ -83,8 +80,8 @@ img {
   align-items: center;
   gap: 10px;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--rust);
   margin-bottom: 14px;
@@ -101,8 +98,9 @@ img {
 .section-headline {
   font-family: var(--font-display);
   font-size: clamp(30px, 4vw, 50px);
-  font-weight: 400;
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   margin-bottom: 16px;
 }
 
@@ -122,9 +120,8 @@ nav {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(14px);
-  background: rgba(247, 243, 234, 0.84);
-  border-bottom: 1px solid rgba(216, 207, 192, 0.8);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .nav-inner {
@@ -156,8 +153,10 @@ nav {
 }
 
 .nav-brand-name {
-  font-family: var(--font-display);
-  font-size: 22px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -186,10 +185,10 @@ nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 20px;
-  border-radius: 999px;
+  padding: 12px 18px;
+  border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -229,9 +228,10 @@ nav {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(42px, 6vw, 72px);
-  font-weight: 400;
-  line-height: 1.02;
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   margin-bottom: 18px;
 }
 
@@ -255,11 +255,11 @@ nav {
 }
 
 .hero-panel {
-  background: rgba(30, 32, 32, 0.96);
+  background: var(--char);
   color: var(--off);
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 28px;
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 
 .hero-panel-label {
@@ -312,7 +312,9 @@ nav {
 }
 
 .stone-section {
-  background: rgba(232, 224, 212, 0.45);
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .dark-section {
@@ -338,7 +340,7 @@ nav {
 .offer-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -347,7 +349,7 @@ nav {
   display: inline-flex;
   margin-bottom: 14px;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 4px;
   border: 1px solid rgba(30, 32, 32, 0.12);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -414,7 +416,7 @@ nav {
 .process-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 24px;
 }
 
@@ -452,7 +454,7 @@ nav {
 .light-fit-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 26px;
   box-shadow: var(--shadow-soft);
 }
@@ -497,9 +499,8 @@ nav {
 }
 
 .cta-band {
-  background:
-    radial-gradient(circle at top left, rgba(201, 160, 82, 0.16), transparent 30%),
-    linear-gradient(180deg, rgba(243, 240, 232, 1), rgba(232, 224, 212, 0.7));
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
 }
 
 .cta-box {
@@ -509,7 +510,7 @@ nav {
   align-items: center;
   background: var(--char);
   color: var(--off);
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 34px;
   box-shadow: var(--shadow-soft);
 }
@@ -517,14 +518,15 @@ nav {
 .cta-box h2 {
   font-family: var(--font-display);
   font-size: clamp(30px, 4vw, 42px);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.1;
   margin-bottom: 10px;
 }
 
 .cta-box h2 em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--rust);
 }
 
 .cta-box p {
@@ -581,9 +583,10 @@ footer {
 }
 
 .footer-brand-copy strong {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .footer-brand-copy span {
@@ -604,9 +607,9 @@ footer {
 }
 
 .quote-section {
-  background:
-    radial-gradient(circle at top left, rgba(201, 160, 82, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(243, 240, 232, 1) 0%, rgba(232, 224, 212, 0.55) 100%);
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .package-grid {
@@ -620,7 +623,7 @@ footer {
   text-align: left;
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   cursor: pointer;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -673,7 +676,7 @@ footer {
 .quote-summary {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 26px;
   box-shadow: var(--shadow-soft);
 }
@@ -717,11 +720,12 @@ footer {
 
 .choice-pill {
   appearance: none;
-  border: 1px solid rgba(30, 32, 32, 0.14);
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 999px;
+  border: 1px solid var(--stone-deep);
+  background: var(--white);
+  border-radius: 4px;
   padding: 9px 14px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   color: var(--char-light);
 }
@@ -744,7 +748,7 @@ footer {
   align-items: start;
   padding: 14px 16px;
   border: 1px solid var(--stone-deep);
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(247, 243, 234, 0.55);
   cursor: pointer;
 }
@@ -776,7 +780,7 @@ footer {
 .group-controls {
   margin-top: 14px;
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px dashed rgba(30, 32, 32, 0.18);
   display: none;
 }
@@ -789,9 +793,9 @@ footer {
 .custom-note {
   margin-top: 14px;
   padding: 14px 16px;
-  border-radius: 14px;
-  background: rgba(201, 160, 82, 0.12);
-  border: 1px solid rgba(201, 160, 82, 0.28);
+  border-radius: 8px;
+  background: rgba(240, 120, 40, 0.10);
+  border: 1px solid rgba(240, 120, 40, 0.24);
   font-size: 13px;
   color: #5d5220;
   line-height: 1.7;
@@ -843,6 +847,29 @@ footer {
   color: var(--muted);
 }
 
+.quote-math {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.quote-math-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--char-light);
+}
+
+.quote-math-row.discount {
+  color: #2f6b3a;
+}
+
+.quote-math-row.discount.hidden,
+.quote-math-row.subtotal.hidden {
+  display: none;
+}
+
 .quote-total {
   font-family: var(--font-display);
   font-size: 42px;
@@ -854,7 +881,18 @@ footer {
   font-size: 13px;
   color: var(--muted);
   line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.quote-disclaimer {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
   margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(30, 32, 32, 0.04);
+  border: 1px solid rgba(30, 32, 32, 0.08);
 }
 
 .quote-actions {
@@ -1029,17 +1067,17 @@ footer {
         <button type="button" class="package-card fade-up" data-package="team-reset">
           <span class="package-kicker">Suggested · Team Reset</span>
           <h3>Workshop + group rhythm</h3>
-          <p>One 90-minute workshop plus 3 months of group coaching. A strong starting point for intact teams.</p>
+          <p>One 90-minute workshop plus 6 months of group coaching. A strong starting point for intact teams.</p>
         </button>
         <button type="button" class="package-card fade-up" data-package="leadership-core">
           <span class="package-kicker">Suggested · Leadership Core</span>
           <h3>Individual leadership seats</h3>
-          <p>3 months of leadership coaching for key leaders who need sharper personal support alongside the team.</p>
+          <p>6 months of leadership coaching for key leaders who need sharper personal support alongside the team.</p>
         </button>
         <button type="button" class="package-card fade-up" data-package="team-leaders">
           <span class="package-kicker">Suggested · Team + Leaders</span>
           <h3>Workshop, group, and seats</h3>
-          <p>Workshop + 3 months group coaching + one leadership coaching seat. Useful when both the room and a key leader need help.</p>
+          <p>Workshop + 6 months group coaching + one leadership coaching seat. Useful when both the room and a key leader need help.</p>
         </button>
       </div>
 
@@ -1061,8 +1099,9 @@ footer {
           <div class="quote-field">
             <span class="quote-label">Coaching duration</span>
             <div class="duration-grid" id="duration-grid">
-              <button type="button" class="choice-pill active" data-months="3">3 months</button>
-              <button type="button" class="choice-pill" data-months="6">6 months</button>
+              <button type="button" class="choice-pill active" data-months="6">6 months</button>
+              <button type="button" class="choice-pill" data-months="12">12 months · 10% off</button>
+              <button type="button" class="choice-pill" data-months="24">2 years · 20% off</button>
             </div>
           </div>
 
@@ -1135,21 +1174,32 @@ footer {
 
         <aside class="quote-summary">
           <h3>Your estimate</h3>
-          <p class="quote-lead" id="summary-context">Workshop 1–6 · 1 coaching group · 3 months</p>
+          <p class="quote-lead" id="summary-context">Workshop 1–6 · 1 coaching group · 6 months</p>
           <ul class="quote-lines" id="quote-lines">
             <li class="empty">Select a module to begin.</li>
           </ul>
+          <div class="quote-math">
+            <div class="quote-math-row subtotal hidden" id="quote-subtotal-row">
+              <span>Subtotal</span>
+              <strong id="quote-subtotal">$0</strong>
+            </div>
+            <div class="quote-math-row discount hidden" id="quote-discount-row">
+              <span id="quote-discount-label">Duration discount</span>
+              <strong id="quote-discount">-$0</strong>
+            </div>
+          </div>
           <div class="quote-total-row">
             <span>Estimated total</span>
             <div class="quote-total" id="quote-total">$0</div>
           </div>
           <p class="quote-total-note" id="quote-total-note">Estimates are guidance for planning. Final scope can be confirmed on a call.</p>
+          <p class="quote-disclaimer">Longer engagements include a duration discount. Early cancellation is available, but refunds are limited once the engagement has begun. Unused months are not fully refundable.</p>
           <div class="quote-actions">
             <a class="btn-primary" id="quote-book" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
             <a class="btn-secondary" id="quote-email" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20quote">Email this estimate</a>
           </div>
           <div class="rate-card">
-            <p>Base rates: workshop from $3,000 / 90 min · group coaching $500 / month per group (up to 6) · leadership coaching $1,200 / month · in-team coach training $4,500. Exec, board, and company-wide work is scoped by conversation.</p>
+            <p>Base rates: workshop from $3,000 / 90 min · group coaching $500 / month per group (up to 6) · leadership coaching $1,200 / month · in-team coach training $4,500. 12-month coaching gets 10% off; 2-year coaching gets 20% off. Exec, board, and company-wide work is scoped by conversation.</p>
           </div>
         </aside>
       </div>
@@ -1222,7 +1272,7 @@ footer {
     <div class="section-inner">
       <div class="cta-box fade-up">
         <div>
-          <span class="eyebrow" style="color: var(--gold);">Ready to explore</span>
+          <span class="eyebrow" style="color: var(--rust);">Ready to explore</span>
           <h2>If the need is bigger than one leader, let's talk about the <em>right room.</em></h2>
           <p>Book a conversation and we can sort out whether team coaching, a workshop, exec support, or a broader pathway is the better next step.</p>
         </div>
@@ -1277,10 +1327,15 @@ observers.forEach((node) => fadeObserver.observe(node));
   const COACH_TRAINING = 4500;
   const LEADERSHIP_MONTHLY = 1200;
   const GROUP_MONTHLY = 500;
+  const DURATION_DISCOUNTS = {
+    6: 0,
+    12: 0.1,
+    24: 0.2
+  };
 
   const state = {
     band: "small",
-    months: 3,
+    months: 6,
     leaders: 1,
     groups: 1,
     package: "team-reset"
@@ -1305,6 +1360,11 @@ observers.forEach((node) => fadeObserver.observe(node));
     quoteNote: document.getElementById("quote-total-note"),
     summaryContext: document.getElementById("summary-context"),
     quoteEmail: document.getElementById("quote-email"),
+    quoteSubtotalRow: document.getElementById("quote-subtotal-row"),
+    quoteDiscountRow: document.getElementById("quote-discount-row"),
+    quoteSubtotal: document.getElementById("quote-subtotal"),
+    quoteDiscount: document.getElementById("quote-discount"),
+    quoteDiscountLabel: document.getElementById("quote-discount-label"),
     packages: document.querySelectorAll("[data-package]")
   };
 
@@ -1329,7 +1389,7 @@ observers.forEach((node) => fadeObserver.observe(node));
       els.group.checked = true;
       els.leadership.checked = false;
       els.coachTraining.checked = false;
-      state.months = 3;
+      state.months = 6;
       state.leaders = 1;
       state.groups = 1;
     } else if (name === "leadership-core") {
@@ -1337,7 +1397,7 @@ observers.forEach((node) => fadeObserver.observe(node));
       els.group.checked = false;
       els.leadership.checked = true;
       els.coachTraining.checked = false;
-      state.months = 3;
+      state.months = 6;
       state.leaders = 1;
       state.groups = 1;
     } else if (name === "team-leaders") {
@@ -1345,7 +1405,7 @@ observers.forEach((node) => fadeObserver.observe(node));
       els.group.checked = true;
       els.leadership.checked = true;
       els.coachTraining.checked = false;
-      state.months = 3;
+      state.months = 6;
       state.leaders = 1;
       state.groups = 1;
     }
@@ -1376,11 +1436,10 @@ observers.forEach((node) => fadeObserver.observe(node));
     if (els.group.checked) {
       contextParts.push(state.groups + " coaching group" + (state.groups > 1 ? "s" : ""));
     }
-    contextParts.push(state.months + " months");
-    els.summaryContext.textContent = contextParts.join(" · ");
 
     const lines = [];
-    let total = 0;
+    let oneOffTotal = 0;
+    let recurringTotal = 0;
     let hasCustom = false;
 
     if (els.workshop.checked) {
@@ -1389,7 +1448,7 @@ observers.forEach((node) => fadeObserver.observe(node));
         hasCustom = true;
       } else {
         lines.push({ label: "90-minute workshop · " + band.label, value: money(band.workshop) });
-        total += band.workshop;
+        oneOffTotal += band.workshop;
       }
     }
 
@@ -1400,7 +1459,7 @@ observers.forEach((node) => fadeObserver.observe(node));
         label: "Group coaching · " + state.groups + " group" + (state.groups > 1 ? "s" : "") + " × " + money(GROUP_MONTHLY) + "/mo × " + state.months,
         value: money(groupTotal)
       });
-      total += groupTotal;
+      recurringTotal += groupTotal;
     }
 
     if (els.leadership.checked) {
@@ -1409,7 +1468,7 @@ observers.forEach((node) => fadeObserver.observe(node));
         label: "Leadership coaching · " + state.leaders + " seat" + (state.leaders > 1 ? "s" : "") + " × " + state.months + " mo",
         value: money(leadershipTotal)
       });
-      total += leadershipTotal;
+      recurringTotal += leadershipTotal;
     }
 
     if (els.coachTraining.checked) {
@@ -1417,33 +1476,65 @@ observers.forEach((node) => fadeObserver.observe(node));
         label: "In-team coach training + light support",
         value: money(COACH_TRAINING)
       });
-      total += COACH_TRAINING;
+      oneOffTotal += COACH_TRAINING;
     }
+
+    const discountRate = DURATION_DISCOUNTS[state.months] || 0;
+    const discountAmount = Math.round(recurringTotal * discountRate);
+    const subtotal = oneOffTotal + recurringTotal;
+    const total = subtotal - discountAmount;
+    const durationLabel = state.months === 24 ? "2 years" : state.months + " months";
 
     if (!lines.length) {
       els.quoteLines.innerHTML = '<li class="empty">Select a module to begin.</li>';
       els.quoteTotal.textContent = "$0";
+      els.quoteSubtotalRow.classList.add("hidden");
+      els.quoteDiscountRow.classList.add("hidden");
       els.quoteNote.textContent = "Estimates are guidance for planning. Final scope can be confirmed on a call.";
     } else {
       els.quoteLines.innerHTML = lines.map(function (line) {
         return "<li><span>" + line.label + "</span><strong>" + line.value + "</strong></li>";
       }).join("");
-      els.quoteTotal.textContent = hasCustom && total === 0 ? "Custom" : money(total) + (hasCustom ? "+" : "");
+
+      const showDiscountMath = discountRate > 0 && recurringTotal > 0;
+      els.quoteSubtotalRow.classList.toggle("hidden", !showDiscountMath);
+      els.quoteDiscountRow.classList.toggle("hidden", !showDiscountMath);
+      els.quoteSubtotal.textContent = money(subtotal);
+      els.quoteDiscountLabel.textContent = state.months === 12
+        ? "12-month commitment · 10% off coaching"
+        : "2-year commitment · 20% off coaching";
+      els.quoteDiscount.textContent = "-" + money(discountAmount);
+
+      if (hasCustom && total === 0) {
+        els.quoteTotal.textContent = "Custom";
+      } else if (hasCustom) {
+        els.quoteTotal.textContent = money(total) + "+";
+      } else {
+        els.quoteTotal.textContent = money(total);
+      }
+
       els.quoteNote.textContent = hasCustom
         ? "Part of this estimate needs a conversation because of workshop audience size."
-        : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
+        : showDiscountMath
+          ? "Duration discount applies to group and leadership coaching only. Workshops and in-team coach training stay at full rate."
+          : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
     }
 
     const summaryParts = [
       "Workshop audience: " + (els.workshop.checked ? band.label : "n/a"),
       "Coaching groups: " + (els.group.checked ? state.groups : "0"),
-      "Duration: " + state.months + " months",
+      "Duration: " + durationLabel,
       "Workshop: " + (els.workshop.checked ? "yes" : "no"),
       "Group coaching: " + (els.group.checked ? "yes" : "no"),
       "Leadership seats: " + (els.leadership.checked ? state.leaders : "0"),
       "In-team coach training: " + (els.coachTraining.checked ? "yes" : "no"),
+      "Subtotal: " + money(subtotal),
+      "Duration discount: " + (discountAmount > 0 ? "-" + money(discountAmount) : "none"),
       "Estimated total: " + (hasCustom && total === 0 ? "custom" : money(total) + (hasCustom ? "+" : ""))
     ];
+
+    contextParts.push(durationLabel);
+    els.summaryContext.textContent = contextParts.join(" · ");
 
     const body = "Hi Luke,%0D%0A%0D%0AI put together an orangery.team estimate:%0D%0A%0D%0A" +
       summaryParts.join("%0D%0A") +

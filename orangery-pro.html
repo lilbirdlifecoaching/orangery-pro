@@ -8,24 +8,24 @@
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --char: #1e2020;
-  --char-mid: #2e3830;
-  --char-light: #3a4840;
-  --sage: #7a9980;
-  --rust: #c8543a;
-  --rust-light: #d97055;
-  --gold: #c9a052;
-  --off: #f3f0e8;
-  --stone: #e8e0d4;
-  --stone-deep: #d8cfc0;
-  --white: #fffdf8;
-  --muted: #6a6a60;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
-  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+  --char: #121417;
+  --char-mid: #1a1d21;
+  --char-light: #3a424c;
+  --sage: #2f9e4f;
+  --rust: #f07828;
+  --rust-light: #f48c42;
+  --gold: #2f9e4f;
+  --off: #ffffff;
+  --stone: #f7f8fa;
+  --stone-deep: #e6e8eb;
+  --white: #ffffff;
+  --muted: #5c6570;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --shadow-soft: 0 1px 0 rgba(18, 20, 23, 0.04);
 }
 
 *,
@@ -83,8 +83,8 @@ img {
   align-items: center;
   gap: 10px;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--rust);
   margin-bottom: 14px;
@@ -101,8 +101,9 @@ img {
 .section-headline {
   font-family: var(--font-display);
   font-size: clamp(30px, 4vw, 50px);
-  font-weight: 400;
-  line-height: 1.15;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   margin-bottom: 16px;
 }
 
@@ -123,11 +124,11 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  border-radius: 3px;
-  padding: 13px 24px;
+  border-radius: 4px;
+  padding: 12px 18px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -158,9 +159,8 @@ nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(30, 32, 32, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .nav-inner {
@@ -181,8 +181,8 @@ nav {
 }
 
 .nav-brand img {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
 }
 
 .nav-brand-copy {
@@ -192,16 +192,18 @@ nav {
 }
 
 .nav-brand-name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--off);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--char);
 }
 
 .nav-brand-sub {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(243, 240, 232, 0.45);
+  color: var(--muted);
 }
 
 .nav-links {
@@ -214,19 +216,17 @@ nav {
 .nav-links a {
   text-decoration: none;
   font-size: 13px;
-  color: rgba(243, 240, 232, 0.6);
+  color: var(--muted);
   transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: rgba(243, 240, 232, 0.96);
+  color: var(--rust);
 }
 
 .hero {
   position: relative;
-  background:
-    radial-gradient(circle at top right, rgba(201, 160, 82, 0.18), transparent 34%),
-    linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
+  background: var(--stone);
 }
 
 .hero-grid {
@@ -245,11 +245,11 @@ nav {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(44px, 6vw, 72px);
-  font-weight: 400;
-  line-height: 1.02;
+  font-size: clamp(44px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.05;
   margin-bottom: 22px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .hero-title em {
@@ -280,7 +280,7 @@ nav {
 
 .pill {
   border: 1px solid rgba(30, 32, 32, 0.14);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 7px 14px;
   font-size: 12px;
   color: var(--muted);
@@ -288,29 +288,23 @@ nav {
 }
 
 .hero-panel {
-  background: rgba(30, 32, 32, 0.98);
-  color: var(--off);
-  border-radius: 14px;
+  background: var(--white);
+  color: var(--char);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
   padding: 28px;
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
-}
-
-.hero-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(201, 160, 82, 0.14), transparent 38%);
-  pointer-events: none;
 }
 
 .panel-label {
   position: relative;
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(243, 240, 232, 0.46);
+  color: var(--rust);
   margin-bottom: 18px;
 }
 
@@ -321,9 +315,9 @@ nav {
 }
 
 .shift-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  background: var(--stone);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
   padding: 16px 16px 16px 18px;
 }
 
@@ -332,13 +326,13 @@ nav {
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 500;
-  color: var(--gold);
+  color: var(--char);
   margin-bottom: 4px;
 }
 
 .shift-card p {
   font-size: 14px;
-  color: rgba(243, 240, 232, 0.68);
+  color: var(--muted);
   line-height: 1.6;
 }
 
@@ -346,11 +340,11 @@ nav {
   position: relative;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--stone-deep);
   font-family: var(--font-display);
   font-size: 21px;
   line-height: 1.5;
-  color: rgba(243, 240, 232, 0.78);
+  color: var(--char);
 }
 
 .hero-strip {
@@ -362,7 +356,7 @@ nav {
 .hero-strip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--stone-deep);
   box-shadow: var(--shadow-soft);
@@ -411,7 +405,7 @@ nav {
 .challenge-intro {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -471,7 +465,7 @@ nav {
 .offer-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 30px;
 }
 
@@ -527,7 +521,7 @@ nav {
 }
 
 .point-number {
-  background: rgba(201, 160, 82, 0.16);
+  background: rgba(240, 120, 40, 0.12);
   color: var(--gold);
 }
 
@@ -562,7 +556,9 @@ nav {
 }
 
 .stone-section {
-  background: linear-gradient(180deg, rgba(232, 224, 212, 0.55) 0%, rgba(243, 240, 232, 1) 100%);
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .topics-grid {
@@ -575,7 +571,7 @@ nav {
 .topic-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   box-shadow: var(--shadow-soft);
 }
@@ -613,7 +609,7 @@ nav {
 .tool-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -660,7 +656,7 @@ nav {
 .resource-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 30px;
   box-shadow: var(--shadow-soft);
   display: grid;
@@ -699,7 +695,7 @@ nav {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--stone-deep);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 7px 14px;
   font-size: 12px;
   color: var(--char-light);
@@ -722,9 +718,9 @@ nav {
 }
 
 .booking-section {
-  background:
-    radial-gradient(circle at top left, rgba(201, 160, 82, 0.14), transparent 28%),
-    linear-gradient(180deg, rgba(243, 240, 232, 1) 0%, rgba(232, 224, 212, 0.62) 100%);
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .booking-shell {
@@ -734,7 +730,7 @@ nav {
 .booking-card {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 34px;
   box-shadow: var(--shadow-soft);
   display: grid;
@@ -773,7 +769,7 @@ nav {
   display: inline-flex;
   align-items: center;
   border: 1px solid rgba(30, 32, 32, 0.14);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 7px 14px;
   font-size: 12px;
   color: var(--char-light);
@@ -782,7 +778,7 @@ nav {
 
 .booking-panel {
   background: rgba(30, 32, 32, 0.97);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 26px;
   color: var(--off);
 }
@@ -800,7 +796,7 @@ nav {
   font-family: var(--font-display);
   font-size: 36px;
   line-height: 1;
-  color: var(--gold);
+  color: var(--rust);
   margin-bottom: 6px;
 }
 
@@ -879,7 +875,7 @@ nav {
 }
 
 .fit-card {
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -941,7 +937,7 @@ nav {
 .process-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
 }
 
@@ -952,7 +948,7 @@ nav {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(201, 160, 82, 0.14);
+  background: rgba(240, 120, 40, 0.12);
   color: var(--gold);
   font-size: 13px;
   font-weight: 600;
@@ -981,7 +977,7 @@ nav {
 .faq-item {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 18px 20px;
   box-shadow: var(--shadow-soft);
 }
@@ -1006,9 +1002,8 @@ nav {
 }
 
 .cta-band {
-  background:
-    radial-gradient(circle at top left, rgba(201, 160, 82, 0.18), transparent 30%),
-    var(--char);
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
 }
 
 .cta-box {
@@ -1016,24 +1011,25 @@ nav {
   grid-template-columns: 1.1fr auto;
   gap: 24px;
   align-items: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  background: var(--char);
+  border: 1px solid var(--char);
+  border-radius: 8px;
   padding: 32px;
 }
 
 .cta-box h2 {
   font-family: var(--font-display);
   font-size: clamp(32px, 4vw, 48px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.12;
+  letter-spacing: -0.03em;
   color: var(--off);
   margin-bottom: 10px;
 }
 
 .cta-box h2 em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--rust);
 }
 
 .cta-box p {
@@ -1087,9 +1083,10 @@ footer {
 
 .footer-brand-copy strong {
   display: block;
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--off);
 }
 
@@ -1720,7 +1717,7 @@ footer {
     <div class="section-inner">
       <div class="cta-box fade-up">
         <div>
-          <span class="eyebrow" style="color: var(--gold);">Ready when you are</span>
+          <span class="eyebrow" style="color: var(--rust);">Ready when you are</span>
           <h2>You do not need to figure out people leadership <em>by yourself.</em></h2>
           <p>If you want to talk through your role, your pressure points, and whether this is the right fit, start with a chemistry call. If you already know you want focused help now, you can also go straight to the paid strategy session.</p>
         </div>

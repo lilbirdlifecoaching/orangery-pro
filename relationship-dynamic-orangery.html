@@ -9,27 +9,27 @@
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --char: #1e2020;
-  --char-mid: #2e3830;
-  --char-light: #3a4840;
-  --sage: #7a9980;
-  --rust: #c8543a;
-  --rust-light: #d97055;
-  --gold: #c9a052;
-  --off: #f3f0e8;
-  --stone: #e8e0d4;
-  --stone-deep: #d8cfc0;
-  --white: #fffdf8;
-  --muted: #6a6a60;
+  --char: #121417;
+  --char-mid: #1a1d21;
+  --char-light: #3a424c;
+  --sage: #2f9e4f;
+  --rust: #f07828;
+  --rust-light: #f48c42;
+  --gold: #2f9e4f;
+  --off: #ffffff;
+  --stone: #f7f8fa;
+  --stone-deep: #e6e8eb;
+  --white: #ffffff;
+  --muted: #5c6570;
   --warning: #7a6020;
   --warning-bg: #f5eccf;
   --danger-bg: #fceae4;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
-  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --shadow-soft: 0 1px 0 rgba(18, 20, 23, 0.04);
 }
 
 *,
@@ -62,8 +62,8 @@ textarea {
 }
 
 nav {
-  background: rgba(30, 32, 32, 0.96);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .nav-inner,
@@ -102,33 +102,34 @@ nav {
 }
 
 .nav-brand-name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--off);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--char);
 }
 
 .nav-brand-sub {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(243, 240, 232, 0.46);
+  color: var(--muted);
 }
 
 .nav-back {
   font-size: 13px;
-  color: rgba(243, 240, 232, 0.66);
+  color: var(--muted);
   text-decoration: none;
 }
 
 .nav-back:hover {
-  color: rgba(243, 240, 232, 0.95);
+  color: var(--rust);
 }
 
 .hero {
   padding: 72px 0 30px;
-  background:
-    radial-gradient(circle at top right, rgba(201, 160, 82, 0.16), transparent 32%),
-    linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
+  background: var(--stone);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .eyebrow {
@@ -179,7 +180,7 @@ nav {
 
 .meta-pill {
   border: 1px solid rgba(30, 32, 32, 0.16);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 7px 14px;
   font-size: 12px;
   color: var(--char-light);
@@ -193,7 +194,7 @@ nav {
 .tool-shell {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 18px;
+  border-radius: 8px;
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
@@ -201,13 +202,14 @@ nav {
 .tool-top {
   padding: 28px 28px 24px;
   border-bottom: 1px solid var(--stone-deep);
-  background: linear-gradient(180deg, rgba(243, 240, 232, 0.68) 0%, rgba(255, 253, 248, 1) 100%);
+  background: var(--stone);
 }
 
 .tool-top h2 {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 40px);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 10px;
 }
@@ -227,8 +229,8 @@ nav {
 .coaching-note {
   margin-top: 18px;
   padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(201, 160, 82, 0.36);
+  border-radius: 8px;
+  border: 1px solid rgba(240, 120, 40, 0.28);
   background: var(--warning-bg);
 }
 
@@ -277,7 +279,7 @@ nav {
   display: block;
   height: 100%;
   padding: 16px 16px 18px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1.5px solid var(--stone-deep);
   background: var(--off);
   cursor: pointer;
@@ -318,7 +320,7 @@ nav {
 
 .form-card {
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   background: #fff;
 }
@@ -349,7 +351,7 @@ nav {
 .field input,
 .field textarea {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1.5px solid var(--stone-deep);
   background: var(--off);
   color: var(--char);
@@ -381,7 +383,7 @@ nav {
 .context-card {
   margin-top: 18px;
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   background: rgba(232, 224, 212, 0.36);
 }
@@ -418,7 +420,7 @@ nav {
   padding: 13px 22px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -496,7 +498,7 @@ nav {
   margin-top: 14px;
   display: none;
   padding: 14px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -580,7 +582,7 @@ nav {
 .result-card {
   background: #fff;
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   box-shadow: var(--shadow-soft);
 }
@@ -639,8 +641,8 @@ nav {
 .result-footer {
   margin-top: 8px;
   padding: 18px 20px;
-  border-radius: 16px;
-  border: 1px solid rgba(201, 160, 82, 0.34);
+  border-radius: 8px;
+  border: 1px solid rgba(240, 120, 40, 0.28);
   background: var(--warning-bg);
 }
 
@@ -667,37 +669,39 @@ nav {
 .session-prompt {
   margin-top: 24px;
   padding: 24px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(30, 32, 32, 0.98), rgba(44, 53, 43, 0.96));
+  border-radius: 8px;
+  background: var(--char);
   color: var(--off);
-  border: 1px solid rgba(201, 160, 82, 0.18);
-  box-shadow: 0 18px 36px rgba(30, 32, 32, 0.18);
+  border: 1px solid var(--char);
+  box-shadow: none;
 }
 
 .session-prompt-label {
   display: inline-flex;
   align-items: center;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(201, 160, 82, 0.18);
-  color: var(--gold);
+  border-radius: 4px;
+  background: rgba(240, 120, 40, 0.16);
+  color: var(--rust);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
 .session-prompt h3 {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 38px);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.08;
   margin-bottom: 10px;
 }
 
 .session-prompt h3 em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--rust);
 }
 
 .session-prompt p {
