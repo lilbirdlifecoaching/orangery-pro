@@ -603,14 +603,297 @@ footer {
   color: var(--rust);
 }
 
+.quote-section {
+  background:
+    radial-gradient(circle at top left, rgba(201, 160, 82, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(243, 240, 232, 1) 0%, rgba(232, 224, 212, 0.55) 100%);
+}
+
+.package-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.package-card {
+  text-align: left;
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 16px;
+  padding: 22px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-soft);
+  font: inherit;
+  color: inherit;
+}
+
+.package-card:hover,
+.package-card.active {
+  border-color: rgba(200, 84, 58, 0.45);
+  transform: translateY(-2px);
+}
+
+.package-card.active {
+  box-shadow: 0 18px 40px rgba(200, 84, 58, 0.12);
+}
+
+.package-card .package-kicker {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.package-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.package-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.quote-shell {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.quote-builder,
+.quote-summary {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.quote-builder h3,
+.quote-summary h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.quote-lead {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.quote-field {
+  margin-bottom: 18px;
+}
+
+.quote-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--char-light);
+  margin-bottom: 10px;
+}
+
+.band-grid,
+.duration-grid,
+.leader-grid,
+.group-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice-pill {
+  appearance: none;
+  border: 1px solid rgba(30, 32, 32, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--char-light);
+}
+
+.choice-pill.active {
+  background: var(--char);
+  border-color: var(--char);
+  color: var(--off);
+}
+
+.module-list {
+  display: grid;
+  gap: 10px;
+}
+
+.module-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border: 1px solid var(--stone-deep);
+  border-radius: 14px;
+  background: rgba(247, 243, 234, 0.55);
+  cursor: pointer;
+}
+
+.module-option input {
+  margin-top: 4px;
+}
+
+.module-option strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.module-option span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.module-price {
+  font-size: 13px;
+  color: var(--char-light);
+  white-space: nowrap;
+}
+
+.leader-controls,
+.group-controls {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px dashed rgba(30, 32, 32, 0.18);
+  display: none;
+}
+
+.leader-controls.visible,
+.group-controls.visible {
+  display: block;
+}
+
+.custom-note {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(201, 160, 82, 0.12);
+  border: 1px solid rgba(201, 160, 82, 0.28);
+  font-size: 13px;
+  color: #5d5220;
+  line-height: 1.7;
+}
+
+.custom-note.hidden {
+  display: none;
+}
+
+.quote-summary {
+  position: sticky;
+  top: 92px;
+}
+
+.quote-lines {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--stone-deep);
+}
+
+.quote-lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.5;
+}
+
+.quote-lines .empty {
+  color: var(--muted);
+}
+
+.quote-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.quote-total-row span {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.quote-total {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--char);
+}
+
+.quote-total-note {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.quote-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quote-actions .btn-primary,
+.quote-actions .btn-secondary {
+  justify-content: center;
+}
+
+.rate-card {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--stone-deep);
+}
+
+.rate-card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 @media (max-width: 920px) {
   .hero-grid,
   .offerings-grid,
   .fit-grid,
   .process-grid,
   .light-fit-grid,
-  .cta-box {
+  .cta-box,
+  .package-grid,
+  .quote-shell {
     grid-template-columns: 1fr;
+  }
+
+  .quote-summary {
+    position: static;
   }
 
   .section-inner,
@@ -646,8 +929,8 @@ footer {
       </a>
       <ul class="nav-links">
         <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#quote">Build a quote</a></li>
         <li><a href="#fit">Who it's for</a></li>
-        <li><a href="#process">How it works</a></li>
         <li><a href="orangery-pro.html">orangery.pro</a></li>
         <li><a href="https://cal.com/lukehaythorpe/30min">Talk with us</a></li>
       </ul>
@@ -662,7 +945,7 @@ footer {
           <h1 class="hero-title">When leadership gets bigger than <em>one person.</em></h1>
           <p class="hero-sub">orangery.team is for leaders who need support beyond individual coaching. We help teams communicate more clearly, navigate tension with maturity, and build healthier dynamics across the rooms that actually shape the culture.</p>
           <div class="hero-actions">
-            <a class="btn-primary" href="https://cal.com/lukehaythorpe/30min">Start a conversation -></a>
+            <a class="btn-primary" href="#quote">Build a self-guided quote -></a>
             <a class="btn-secondary" href="#offerings">See the offerings</a>
           </div>
         </div>
@@ -674,8 +957,8 @@ footer {
           <ul>
             <li>Intact team coaching</li>
             <li>Workshops on communication and dynamics</li>
-            <li>Exec and board facilitation</li>
-            <li>Company-wide development pathways</li>
+            <li>In-team coach training</li>
+            <li>Exec, board, and company-wide pathways</li>
           </ul>
         </aside>
       </div>
@@ -712,26 +995,163 @@ footer {
         </article>
 
         <article class="offer-card fade-up">
-          <span class="offer-tag">03 · Exec / board</span>
-          <h3>Exec and board support</h3>
-          <p>For senior rooms where alignment, politics, and communication quality shape everything underneath them.</p>
+          <span class="offer-tag">03 · In-team coach</span>
+          <h3>Train an in-team coach</h3>
+          <p>Build capacity inside the organisation so someone can hold lighter coaching and facilitation between formal sessions.</p>
           <ul>
-            <li>Facilitation for alignment and decision-making conversations</li>
-            <li>Support around tension, trust, and leadership presence</li>
-            <li>A clearer read on how the top of the house is landing</li>
+            <li>A defined training block using GiANT and 5 Voices language</li>
+            <li>Light as-needed support via Slack, messages, and a monthly call</li>
+            <li>Stronger continuity without needing outside support for every moment</li>
           </ul>
         </article>
 
         <article class="offer-card fade-up">
-          <span class="offer-tag">04 · Company-wide</span>
-          <h3>Broader organisational development</h3>
-          <p>When the need is bigger than one team and you want a more coherent pathway across leaders and departments.</p>
+          <span class="offer-tag">04 · Exec / board / org</span>
+          <h3>Exec, board, and company-wide support</h3>
+          <p>For senior rooms or broader organisational pathways where the need is larger than a single team package.</p>
           <ul>
-            <li>Shared frameworks across multiple groups</li>
-            <li>Leadership development that stays relationally grounded</li>
-            <li>Designed around your actual culture and pressure points</li>
+            <li>Facilitation for alignment and decision-making conversations</li>
+            <li>Support around tension, trust, and leadership presence</li>
+            <li>Custom scoping through conversation rather than self-quote</li>
           </ul>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section" id="quote">
+    <div class="section-inner">
+      <span class="eyebrow">Transparent pricing</span>
+      <h2 class="section-headline">Build a self-guided quote around the support your team <em>actually needs.</em></h2>
+      <p class="section-sub">Start with a suggested package, or mix the modules yourself. Workshop pricing follows audience size. Group coaching is priced by how many coaching groups you need. Exec, board, and company-wide work still begins with a conversation.</p>
+
+      <div class="package-grid">
+        <button type="button" class="package-card fade-up" data-package="team-reset">
+          <span class="package-kicker">Suggested · Team Reset</span>
+          <h3>Workshop + group rhythm</h3>
+          <p>One 90-minute workshop plus 3 months of group coaching. A strong starting point for intact teams.</p>
+        </button>
+        <button type="button" class="package-card fade-up" data-package="leadership-core">
+          <span class="package-kicker">Suggested · Leadership Core</span>
+          <h3>Individual leadership seats</h3>
+          <p>3 months of leadership coaching for key leaders who need sharper personal support alongside the team.</p>
+        </button>
+        <button type="button" class="package-card fade-up" data-package="team-leaders">
+          <span class="package-kicker">Suggested · Team + Leaders</span>
+          <h3>Workshop, group, and seats</h3>
+          <p>Workshop + 3 months group coaching + one leadership coaching seat. Useful when both the room and a key leader need help.</p>
+        </button>
+      </div>
+
+      <div class="quote-shell fade-up">
+        <div class="quote-builder">
+          <h3>Build your mix</h3>
+          <p class="quote-lead">Workshop pricing follows audience size. Group coaching is priced per coaching group (up to 6 people each), because a large organisation may only need one key-leader group while a smaller team may need several. Leadership coaching is priced per leader. In-team coach training is a flat program with light as-needed support.</p>
+
+          <div class="quote-field">
+            <span class="quote-label">Workshop audience size</span>
+            <div class="band-grid" id="band-grid">
+              <button type="button" class="choice-pill active" data-band="small">1–6 people</button>
+              <button type="button" class="choice-pill" data-band="medium">7–12 people</button>
+              <button type="button" class="choice-pill" data-band="large">13–20 people</button>
+              <button type="button" class="choice-pill" data-band="xl">21+ custom</button>
+            </div>
+          </div>
+
+          <div class="quote-field">
+            <span class="quote-label">Coaching duration</span>
+            <div class="duration-grid" id="duration-grid">
+              <button type="button" class="choice-pill active" data-months="3">3 months</button>
+              <button type="button" class="choice-pill" data-months="6">6 months</button>
+            </div>
+          </div>
+
+          <div class="quote-field">
+            <span class="quote-label">Modules</span>
+            <div class="module-list">
+              <label class="module-option">
+                <input type="checkbox" id="mod-workshop" checked>
+                <span>
+                  <strong>90-minute workshop</strong>
+                  <span>Communication and dynamics session. Priced by audience size.</span>
+                </span>
+                <span class="module-price" id="price-workshop">$3,000</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-group" checked>
+                <span>
+                  <strong>Group coaching</strong>
+                  <span>$500 / month per coaching group. 2 sessions per month. Up to 6 people per group.</span>
+                </span>
+                <span class="module-price" id="price-group">$500 / mo per group</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-leadership">
+                <span>
+                  <strong>Leadership coaching</strong>
+                  <span>$1,200 / month per leader. Up to 4 sessions per month. No rollover.</span>
+                </span>
+                <span class="module-price">$1,200 / mo</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-coach-training">
+                <span>
+                  <strong>In-team coach training</strong>
+                  <span>Defined training block plus light as-needed support (Slack, messages, monthly call).</span>
+                </span>
+                <span class="module-price">$4,500</span>
+              </label>
+            </div>
+
+            <div class="group-controls" id="group-controls">
+              <span class="quote-label">Number of coaching groups</span>
+              <div class="group-grid" id="group-grid">
+                <button type="button" class="choice-pill active" data-groups="1">1 group</button>
+                <button type="button" class="choice-pill" data-groups="2">2 groups</button>
+                <button type="button" class="choice-pill" data-groups="3">3 groups</button>
+                <button type="button" class="choice-pill" data-groups="4">4 groups</button>
+              </div>
+              <p class="quote-lead" style="margin: 12px 0 0;">A group is usually formed around shared leadership responsibility, not overall company size. Larger organisations may only need one key-leader group.</p>
+            </div>
+
+            <div class="leader-controls" id="leader-controls">
+              <span class="quote-label">Number of leadership coaching seats</span>
+              <div class="leader-grid" id="leader-grid">
+                <button type="button" class="choice-pill active" data-leaders="1">1 leader</button>
+                <button type="button" class="choice-pill" data-leaders="2">2 leaders</button>
+                <button type="button" class="choice-pill" data-leaders="3">3 leaders</button>
+                <button type="button" class="choice-pill" data-leaders="4">4 leaders</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="custom-note hidden" id="custom-note">
+            Workshop audiences of 21+ usually need a tailored format. Use the quote as a starting point, then book a conversation so we can scope it properly.
+          </div>
+        </div>
+
+        <aside class="quote-summary">
+          <h3>Your estimate</h3>
+          <p class="quote-lead" id="summary-context">Workshop 1–6 · 1 coaching group · 3 months</p>
+          <ul class="quote-lines" id="quote-lines">
+            <li class="empty">Select a module to begin.</li>
+          </ul>
+          <div class="quote-total-row">
+            <span>Estimated total</span>
+            <div class="quote-total" id="quote-total">$0</div>
+          </div>
+          <p class="quote-total-note" id="quote-total-note">Estimates are guidance for planning. Final scope can be confirmed on a call.</p>
+          <div class="quote-actions">
+            <a class="btn-primary" id="quote-book" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
+            <a class="btn-secondary" id="quote-email" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20quote">Email this estimate</a>
+          </div>
+          <div class="rate-card">
+            <p>Base rates: workshop from $3,000 / 90 min · group coaching $500 / month per group (up to 6) · leadership coaching $1,200 / month · in-team coach training $4,500. Exec, board, and company-wide work is scoped by conversation.</p>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -825,6 +1245,7 @@ footer {
       </div>
       <div class="footer-links">
         <a href="#offerings">Offerings</a>
+        <a href="#quote">Build a quote</a>
         <a href="orangery-pro.html">orangery.pro</a>
         <a href="https://orangery.solutions" target="_blank" rel="noreferrer">orangery.solutions</a>
       </div>
@@ -844,6 +1265,246 @@ const fadeObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 observers.forEach((node) => fadeObserver.observe(node));
+
+(function () {
+  const BANDS = {
+    small: { label: "1–6 people", workshop: 3000 },
+    medium: { label: "7–12 people", workshop: 4500 },
+    large: { label: "13–20 people", workshop: 6000 },
+    xl: { label: "21+ people", workshop: null }
+  };
+
+  const COACH_TRAINING = 4500;
+  const LEADERSHIP_MONTHLY = 1200;
+  const GROUP_MONTHLY = 500;
+
+  const state = {
+    band: "small",
+    months: 3,
+    leaders: 1,
+    groups: 1,
+    package: "team-reset"
+  };
+
+  const els = {
+    bandGrid: document.getElementById("band-grid"),
+    durationGrid: document.getElementById("duration-grid"),
+    leaderGrid: document.getElementById("leader-grid"),
+    groupGrid: document.getElementById("group-grid"),
+    leaderControls: document.getElementById("leader-controls"),
+    groupControls: document.getElementById("group-controls"),
+    customNote: document.getElementById("custom-note"),
+    workshop: document.getElementById("mod-workshop"),
+    group: document.getElementById("mod-group"),
+    leadership: document.getElementById("mod-leadership"),
+    coachTraining: document.getElementById("mod-coach-training"),
+    priceWorkshop: document.getElementById("price-workshop"),
+    priceGroup: document.getElementById("price-group"),
+    quoteLines: document.getElementById("quote-lines"),
+    quoteTotal: document.getElementById("quote-total"),
+    quoteNote: document.getElementById("quote-total-note"),
+    summaryContext: document.getElementById("summary-context"),
+    quoteEmail: document.getElementById("quote-email"),
+    packages: document.querySelectorAll("[data-package]")
+  };
+
+  function money(value) {
+    return "$" + value.toLocaleString("en-AU");
+  }
+
+  function setActive(container, attr, value) {
+    container.querySelectorAll(".choice-pill").forEach((btn) => {
+      btn.classList.toggle("active", btn.getAttribute(attr) === String(value));
+    });
+  }
+
+  function applyPackage(name) {
+    state.package = name;
+    els.packages.forEach((card) => {
+      card.classList.toggle("active", card.getAttribute("data-package") === name);
+    });
+
+    if (name === "team-reset") {
+      els.workshop.checked = true;
+      els.group.checked = true;
+      els.leadership.checked = false;
+      els.coachTraining.checked = false;
+      state.months = 3;
+      state.leaders = 1;
+      state.groups = 1;
+    } else if (name === "leadership-core") {
+      els.workshop.checked = false;
+      els.group.checked = false;
+      els.leadership.checked = true;
+      els.coachTraining.checked = false;
+      state.months = 3;
+      state.leaders = 1;
+      state.groups = 1;
+    } else if (name === "team-leaders") {
+      els.workshop.checked = true;
+      els.group.checked = true;
+      els.leadership.checked = true;
+      els.coachTraining.checked = false;
+      state.months = 3;
+      state.leaders = 1;
+      state.groups = 1;
+    }
+
+    setActive(els.durationGrid, "data-months", state.months);
+    setActive(els.leaderGrid, "data-leaders", state.leaders);
+    setActive(els.groupGrid, "data-groups", state.groups);
+    render();
+  }
+
+  function clearPackageSelection() {
+    state.package = "";
+    els.packages.forEach((card) => card.classList.remove("active"));
+  }
+
+  function render() {
+    const band = BANDS[state.band];
+    const isCustomWorkshop = state.band === "xl";
+
+    els.priceWorkshop.textContent = band.workshop == null ? "Custom" : money(band.workshop);
+    els.priceGroup.textContent = money(GROUP_MONTHLY) + " / mo per group";
+    els.leaderControls.classList.toggle("visible", els.leadership.checked);
+    els.groupControls.classList.toggle("visible", els.group.checked);
+    els.customNote.classList.toggle("hidden", !(isCustomWorkshop && els.workshop.checked));
+
+    const contextParts = [];
+    if (els.workshop.checked) contextParts.push("Workshop " + band.label.replace(" people", ""));
+    if (els.group.checked) {
+      contextParts.push(state.groups + " coaching group" + (state.groups > 1 ? "s" : ""));
+    }
+    contextParts.push(state.months + " months");
+    els.summaryContext.textContent = contextParts.join(" · ");
+
+    const lines = [];
+    let total = 0;
+    let hasCustom = false;
+
+    if (els.workshop.checked) {
+      if (band.workshop == null) {
+        lines.push({ label: "90-minute workshop", value: "Custom" });
+        hasCustom = true;
+      } else {
+        lines.push({ label: "90-minute workshop · " + band.label, value: money(band.workshop) });
+        total += band.workshop;
+      }
+    }
+
+    if (els.group.checked) {
+      const groupMonthly = GROUP_MONTHLY * state.groups;
+      const groupTotal = groupMonthly * state.months;
+      lines.push({
+        label: "Group coaching · " + state.groups + " group" + (state.groups > 1 ? "s" : "") + " × " + money(GROUP_MONTHLY) + "/mo × " + state.months,
+        value: money(groupTotal)
+      });
+      total += groupTotal;
+    }
+
+    if (els.leadership.checked) {
+      const leadershipTotal = LEADERSHIP_MONTHLY * state.leaders * state.months;
+      lines.push({
+        label: "Leadership coaching · " + state.leaders + " seat" + (state.leaders > 1 ? "s" : "") + " × " + state.months + " mo",
+        value: money(leadershipTotal)
+      });
+      total += leadershipTotal;
+    }
+
+    if (els.coachTraining.checked) {
+      lines.push({
+        label: "In-team coach training + light support",
+        value: money(COACH_TRAINING)
+      });
+      total += COACH_TRAINING;
+    }
+
+    if (!lines.length) {
+      els.quoteLines.innerHTML = '<li class="empty">Select a module to begin.</li>';
+      els.quoteTotal.textContent = "$0";
+      els.quoteNote.textContent = "Estimates are guidance for planning. Final scope can be confirmed on a call.";
+    } else {
+      els.quoteLines.innerHTML = lines.map(function (line) {
+        return "<li><span>" + line.label + "</span><strong>" + line.value + "</strong></li>";
+      }).join("");
+      els.quoteTotal.textContent = hasCustom && total === 0 ? "Custom" : money(total) + (hasCustom ? "+" : "");
+      els.quoteNote.textContent = hasCustom
+        ? "Part of this estimate needs a conversation because of workshop audience size."
+        : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
+    }
+
+    const summaryParts = [
+      "Workshop audience: " + (els.workshop.checked ? band.label : "n/a"),
+      "Coaching groups: " + (els.group.checked ? state.groups : "0"),
+      "Duration: " + state.months + " months",
+      "Workshop: " + (els.workshop.checked ? "yes" : "no"),
+      "Group coaching: " + (els.group.checked ? "yes" : "no"),
+      "Leadership seats: " + (els.leadership.checked ? state.leaders : "0"),
+      "In-team coach training: " + (els.coachTraining.checked ? "yes" : "no"),
+      "Estimated total: " + (hasCustom && total === 0 ? "custom" : money(total) + (hasCustom ? "+" : ""))
+    ];
+
+    const body = "Hi Luke,%0D%0A%0D%0AI put together an orangery.team estimate:%0D%0A%0D%0A" +
+      summaryParts.join("%0D%0A") +
+      "%0D%0A%0D%0ALooking forward to talking it through.";
+
+    els.quoteEmail.href = "mailto:lukehaythorpe@orangery.solutions?subject=" +
+      encodeURIComponent("orangery.team quote estimate") +
+      "&body=" + body;
+  }
+
+  els.bandGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-band]");
+    if (!btn) return;
+    state.band = btn.getAttribute("data-band");
+    setActive(els.bandGrid, "data-band", state.band);
+    clearPackageSelection();
+    render();
+  });
+
+  els.durationGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-months]");
+    if (!btn) return;
+    state.months = Number(btn.getAttribute("data-months"));
+    setActive(els.durationGrid, "data-months", state.months);
+    clearPackageSelection();
+    render();
+  });
+
+  els.leaderGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-leaders]");
+    if (!btn) return;
+    state.leaders = Number(btn.getAttribute("data-leaders"));
+    setActive(els.leaderGrid, "data-leaders", state.leaders);
+    clearPackageSelection();
+    render();
+  });
+
+  els.groupGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-groups]");
+    if (!btn) return;
+    state.groups = Number(btn.getAttribute("data-groups"));
+    setActive(els.groupGrid, "data-groups", state.groups);
+    clearPackageSelection();
+    render();
+  });
+
+  [els.workshop, els.group, els.leadership, els.coachTraining].forEach(function (input) {
+    input.addEventListener("change", function () {
+      clearPackageSelection();
+      render();
+    });
+  });
+
+  els.packages.forEach(function (card) {
+    card.addEventListener("click", function () {
+      applyPackage(card.getAttribute("data-package"));
+    });
+  });
+
+  applyPackage("team-reset");
+})();
 </script>
 </body>
 </html>
