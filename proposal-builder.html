@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal Builder · orangery.team</title>
+<link rel="icon" href="ORANGE.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #121417;
+  --muted: #5c6570;
+  --line: #e6e8eb;
+  --orange: #f07828;
+  --orange-light: #f48c42;
+  --green: #2f9e4f;
+  --panel: #f7f8fa;
+  --white: #ffffff;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--char);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+nav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1180px; margin: 0 auto; padding: 16px 32px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.02em; }
+.brand img { width: 28px; height: 28px; }
+.nav-links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.nav-links a:hover { color: var(--orange); }
+.wrap {
+  max-width: 1180px; margin: 0 auto; padding: 40px 32px 80px;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr); gap: 28px;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
+}
+.eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--orange); }
+h1 {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(32px, 4vw, 44px);
+  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 10px;
+}
+.lead { color: var(--muted); max-width: 54ch; margin-bottom: 28px; }
+.card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 22px; margin-bottom: 16px;
+}
+.card h2 { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+.field { margin-bottom: 14px; }
+.field label, .label {
+  display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.field input, .field textarea, .field select, .line-input {
+  width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 11px 12px;
+  font: inherit; background: var(--white); color: var(--char);
+}
+.field textarea { min-height: 88px; resize: vertical; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1.4fr 0.7fr 0.7fr auto; gap: 8px; align-items: end; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  appearance: none; border: 1px solid var(--line); background: var(--white); border-radius: 4px;
+  padding: 9px 12px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--muted);
+}
+.pill.active { background: var(--char); border-color: var(--char); color: white; }
+.module {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start;
+  padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); margin-bottom: 10px;
+}
+.module strong { display: block; margin-bottom: 4px; }
+.module .hint { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.module .price-edit { width: 110px; }
+.subcontrols {
+  margin: 10px 0 16px; padding: 14px; border: 1px dashed var(--line); border-radius: 8px; display: none;
+}
+.subcontrols.visible { display: block; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 16px; border-radius: 4px; font-size: 14px; font-weight: 600; border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary { background: var(--orange); color: white; border-color: var(--orange); }
+.btn-primary:hover { background: var(--orange-light); }
+.btn-secondary { background: white; color: var(--char); border-color: var(--line); }
+.btn-secondary:hover { border-color: var(--char); }
+.btn-ghost { background: transparent; color: var(--muted); border-color: transparent; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.summary { position: sticky; top: 84px; }
+.summary .card { background: var(--panel); }
+.lines { list-style: none; display: grid; gap: 10px; margin: 14px 0; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.lines li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); }
+.lines strong { color: var(--char); }
+.math { display: grid; gap: 8px; margin-bottom: 12px; font-size: 14px; }
+.math-row { display: flex; justify-content: space-between; gap: 12px; }
+.math-row.discount { color: var(--green); }
+.total { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 8px; }
+.total span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.total strong { font-family: var(--font-display); font-size: 40px; letter-spacing: -0.03em; font-weight: 500; }
+.note { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+.custom-lines { display: grid; gap: 8px; margin-bottom: 10px; }
+.custom-line {
+  display: grid; grid-template-columns: 1fr 100px auto; gap: 8px; align-items: center;
+}
+.custom-line button { border: 1px solid var(--line); background: white; border-radius: 4px; padding: 10px 12px; cursor: pointer; }
+.steps {
+  display: grid; gap: 10px; margin-top: 8px;
+}
+.step {
+  display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start;
+  font-size: 13px; color: var(--muted); line-height: 1.55;
+}
+.step-num {
+  width: 28px; height: 28px; border-radius: 4px; background: var(--char); color: white;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;
+}
+.link-box {
+  margin-top: 10px; padding: 12px; border-radius: 4px; background: white; border: 1px solid var(--line);
+  font-size: 12px; word-break: break-all; color: var(--muted); display: none;
+}
+.link-box.visible { display: block; }
+@media (max-width: 920px) {
+  .wrap, .grid-2, .grid-3, .custom-line { grid-template-columns: 1fr; }
+  .summary { position: static; }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="orangery-team.html"><img src="ORANGE.png" alt=""> Proposal Builder</a>
+      <div class="nav-links">
+        <a href="orangery-team.html">orangery.team</a>
+        <a href="orangery-pro.html">orangery.pro</a>
+        <a href="proposal.html">Client proposal view</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Internal tool</span>
+      <h1>Build a client proposal</h1>
+      <p class="lead">Create a clear proposal from the same service modules as the quote tool. Adjust prices, add custom items, apply discounts, then open a client-ready page for review, signature, PDF, and payment.</p>
+
+      <div class="card">
+        <h2>1. Client details</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="client-name">Client / contact name</label>
+            <input id="client-name" type="text" placeholder="e.g. Sam Taylor">
+          </div>
+          <div class="field">
+            <label for="client-company">Organisation</label>
+            <input id="client-company" type="text" placeholder="e.g. Northline Group">
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="client-email">Client email</label>
+            <input id="client-email" type="email" placeholder="sam@company.com">
+          </div>
+          <div class="field">
+            <label for="proposal-title">Proposal title</label>
+            <input id="proposal-title" type="text" value="Leadership & team development proposal">
+          </div>
+        </div>
+        <div class="field">
+          <label for="scope-notes">Scope / context notes</label>
+          <textarea id="scope-notes" placeholder="What this engagement is for, who is involved, and any important context..."></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2. Engagement length</h2>
+        <div class="pills" id="duration-grid">
+          <button type="button" class="pill active" data-months="6">6 months</button>
+          <button type="button" class="pill" data-months="12">12 months</button>
+          <button type="button" class="pill" data-months="24">2 years</button>
+        </div>
+        <p class="note" style="margin-top:12px;margin-bottom:0;">Default coaching discounts: 10% at 12 months, 20% at 2 years. You can override the discount amount below.</p>
+      </div>
+
+      <div class="card">
+        <h2>3. Services</h2>
+        <p class="note">Tick what is included. Edit any price directly. Workshop package size follows engagement length, but you can override the price.</p>
+
+        <label class="module">
+          <input type="checkbox" id="mod-workshop" checked>
+          <span>
+            <strong>Workshop package</strong>
+            <span class="hint" id="workshop-help">2 × 90-minute workshops</span>
+          </span>
+          <input class="line-input price-edit" id="price-workshop" type="number" min="0" step="50">
+        </label>
+
+        <label class="module">
+          <input type="checkbox" id="mod-group" checked>
+          <span>
+            <strong>Group coaching</strong>
+            <span class="hint">$500 / month per group · 2 sessions / month · up to 6 people</span>
+          </span>
+          <input class="line-input price-edit" id="price-group-monthly" type="number" min="0" step="50" value="500" title="Monthly rate per group">
+        </label>
+        <div class="subcontrols" id="group-controls">
+          <div class="label">Number of coaching groups</div>
+          <div class="pills" id="group-grid">
+            <button type="button" class="pill active" data-groups="1">1</button>
+            <button type="button" class="pill" data-groups="2">2</button>
+            <button type="button" class="pill" data-groups="3">3</button>
+            <button type="button" class="pill" data-groups="4">4</button>
+          </div>
+        </div>
+
+        <label class="module">
+          <input type="checkbox" id="mod-leadership">
+          <span>
+            <strong>Leadership coaching</strong>
+            <span class="hint">$1,200 / month per leader · up to 4 sessions / month · no rollover</span>
+          </span>
+          <input class="line-input price-edit" id="price-leadership-monthly" type="number" min="0" step="50" value="1200" title="Monthly rate per leader">
+        </label>
+        <div class="subcontrols" id="leader-controls">
+          <div class="label">Leadership seats</div>
+          <div class="pills" id="leader-grid">
+            <button type="button" class="pill active" data-leaders="1">1</button>
+            <button type="button" class="pill" data-leaders="2">2</button>
+            <button type="button" class="pill" data-leaders="3">3</button>
+            <button type="button" class="pill" data-leaders="4">4</button>
+          </div>
+        </div>
+
+        <label class="module">
+          <input type="checkbox" id="mod-coach-training">
+          <span>
+            <strong>In-team coach training</strong>
+            <span class="hint">Training block + light as-needed support</span>
+          </span>
+          <input class="line-input price-edit" id="price-coach-training" type="number" min="0" step="50" value="4500">
+        </label>
+      </div>
+
+      <div class="card">
+        <h2>4. Custom services</h2>
+        <div class="custom-lines" id="custom-lines"></div>
+        <div class="grid-3">
+          <div class="field" style="margin:0;">
+            <label for="custom-label">Description</label>
+            <input id="custom-label" type="text" placeholder="e.g. Exec facilitation day">
+          </div>
+          <div class="field" style="margin:0;">
+            <label for="custom-amount">Amount</label>
+            <input id="custom-amount" type="number" min="0" step="50" placeholder="2500">
+          </div>
+          <div class="field" style="margin:0;">
+            <label>&nbsp;</label>
+            <button type="button" class="btn btn-secondary" id="add-custom" style="width:100%;">Add item</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>5. Discount & payment notes</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="discount-amount">Discount amount ($)</label>
+            <input id="discount-amount" type="number" min="0" step="50" value="0">
+          </div>
+          <div class="field">
+            <label for="discount-label">Discount label</label>
+            <input id="discount-label" type="text" value="Engagement discount">
+          </div>
+        </div>
+        <div class="field">
+          <label for="payment-notes">Payment instructions (shown to client)</label>
+          <textarea id="payment-notes">Payment is made securely through Stripe after you review and sign this proposal. The total shown is payable to confirm the engagement. If your organisation requires an invoice first, reply to this proposal and we will arrange that.</textarea>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label for="valid-days">Proposal valid for (days)</label>
+          <input id="valid-days" type="number" min="1" max="90" value="14">
+        </div>
+      </div>
+    </div>
+
+    <aside class="summary">
+      <div class="card">
+        <h2>Proposal total</h2>
+        <ul class="lines" id="summary-lines"><li>Add services to begin.</li></ul>
+        <div class="math">
+          <div class="math-row"><span>Subtotal</span><strong id="summary-subtotal">$0</strong></div>
+          <div class="math-row discount" id="summary-discount-row" style="display:none;"><span id="summary-discount-label">Discount</span><strong id="summary-discount">-$0</strong></div>
+        </div>
+        <div class="total"><span>Total due</span><strong id="summary-total">$0</strong></div>
+        <p class="note" id="summary-note">Defaults follow the public quote rates. Edit any field to customise this proposal.</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="open-proposal">Open client proposal -></button>
+          <button type="button" class="btn btn-secondary" id="copy-link">Copy share link</button>
+        </div>
+        <div class="link-box" id="link-box"></div>
+      </div>
+
+      <div class="card">
+        <h2>How this works</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div>Build the proposal here with the right services, prices, and notes.</div></div>
+          <div class="step"><div class="step-num">2</div><div>Open or share the client proposal page. They can review, print to PDF, and sign.</div></div>
+          <div class="step"><div class="step-num">3</div><div>After signing, they pay the exact total through Stripe Checkout.</div></div>
+          <div class="step"><div class="step-num">4</div><div>You receive the signed acceptance and payment confirmation.</div></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+<script>
+(function () {
+  const WORKSHOP_PACKAGES = {
+    6: { count: 2, price: 4500, help: "Includes 2 × 90-minute workshops across 6 months." },
+    12: { count: 3, price: 6000, help: "Includes 3 × 90-minute workshops across 12 months." },
+    24: { count: 6, price: 12000, help: "Includes 6 × 90-minute workshops across 2 years." }
+  };
+  const DURATION_DISCOUNT_RATE = { 6: 0, 12: 0.1, 24: 0.2 };
+
+  const state = {
+    months: 6,
+    groups: 1,
+    leaders: 1,
+    customItems: [],
+    autoDiscount: true
+  };
+
+  const els = {
+    clientName: document.getElementById("client-name"),
+    clientCompany: document.getElementById("client-company"),
+    clientEmail: document.getElementById("client-email"),
+    proposalTitle: document.getElementById("proposal-title"),
+    scopeNotes: document.getElementById("scope-notes"),
+    paymentNotes: document.getElementById("payment-notes"),
+    validDays: document.getElementById("valid-days"),
+    discountAmount: document.getElementById("discount-amount"),
+    discountLabel: document.getElementById("discount-label"),
+    workshop: document.getElementById("mod-workshop"),
+    group: document.getElementById("mod-group"),
+    leadership: document.getElementById("mod-leadership"),
+    coachTraining: document.getElementById("mod-coach-training"),
+    priceWorkshop: document.getElementById("price-workshop"),
+    priceGroupMonthly: document.getElementById("price-group-monthly"),
+    priceLeadershipMonthly: document.getElementById("price-leadership-monthly"),
+    priceCoachTraining: document.getElementById("price-coach-training"),
+    workshopHelp: document.getElementById("workshop-help"),
+    groupControls: document.getElementById("group-controls"),
+    leaderControls: document.getElementById("leader-controls"),
+    summaryLines: document.getElementById("summary-lines"),
+    summarySubtotal: document.getElementById("summary-subtotal"),
+    summaryDiscountRow: document.getElementById("summary-discount-row"),
+    summaryDiscountLabel: document.getElementById("summary-discount-label"),
+    summaryDiscount: document.getElementById("summary-discount"),
+    summaryTotal: document.getElementById("summary-total"),
+    summaryNote: document.getElementById("summary-note"),
+    customLines: document.getElementById("custom-lines"),
+    customLabel: document.getElementById("custom-label"),
+    customAmount: document.getElementById("custom-amount"),
+    linkBox: document.getElementById("link-box")
+  };
+
+  function money(n) { return "$" + Math.round(n).toLocaleString("en-AU"); }
+  function num(el) { return Math.max(0, Number(el.value || 0)); }
+
+  function setActive(container, attr, value) {
+    container.querySelectorAll(".pill").forEach((btn) => {
+      btn.classList.toggle("active", btn.getAttribute(attr) === String(value));
+    });
+  }
+
+  function syncWorkshopDefaults() {
+    const pack = WORKSHOP_PACKAGES[state.months];
+    els.workshopHelp.textContent = pack.help;
+    if (!els.priceWorkshop.dataset.touched) els.priceWorkshop.value = pack.price;
+    if (state.autoDiscount) {
+      // Discount is calculated against coaching only in buildProposal; placeholder shows estimated coaching discount
+      const coaching = estimatedCoachingSubtotal();
+      const rate = DURATION_DISCOUNT_RATE[state.months] || 0;
+      els.discountAmount.value = Math.round(coaching * rate);
+      els.discountLabel.value = state.months === 12
+        ? "12-month coaching discount (10%)"
+        : state.months === 24
+          ? "2-year coaching discount (20%)"
+          : "Engagement discount";
+    }
+  }
+
+  function estimatedCoachingSubtotal() {
+    let total = 0;
+    if (els.group.checked) total += num(els.priceGroupMonthly) * state.groups * state.months;
+    if (els.leadership.checked) total += num(els.priceLeadershipMonthly) * state.leaders * state.months;
+    return total;
+  }
+
+  function buildProposal() {
+    const pack = WORKSHOP_PACKAGES[state.months];
+    const lines = [];
+    let subtotal = 0;
+
+    if (els.workshop.checked) {
+      const amount = num(els.priceWorkshop);
+      lines.push({
+        id: "workshop",
+        label: "Workshop package · " + pack.count + " × 90-min · " + (state.months === 24 ? "2 years" : state.months + " months"),
+        amount: amount
+      });
+      subtotal += amount;
+    }
+
+    if (els.group.checked) {
+      const amount = num(els.priceGroupMonthly) * state.groups * state.months;
+      lines.push({
+        id: "group",
+        label: "Group coaching · " + state.groups + " group" + (state.groups > 1 ? "s" : "") + " × " + state.months + " months",
+        amount: amount
+      });
+      subtotal += amount;
+    }
+
+    if (els.leadership.checked) {
+      const amount = num(els.priceLeadershipMonthly) * state.leaders * state.months;
+      lines.push({
+        id: "leadership",
+        label: "Leadership coaching · " + state.leaders + " seat" + (state.leaders > 1 ? "s" : "") + " × " + state.months + " months",
+        amount: amount
+      });
+      subtotal += amount;
+    }
+
+    if (els.coachTraining.checked) {
+      const amount = num(els.priceCoachTraining);
+      lines.push({
+        id: "coach-training",
+        label: "In-team coach training + light support",
+        amount: amount
+      });
+      subtotal += amount;
+    }
+
+    state.customItems.forEach((item, index) => {
+      lines.push({
+        id: "custom-" + index,
+        label: item.label,
+        amount: item.amount
+      });
+      subtotal += item.amount;
+    });
+
+    const discount = Math.min(num(els.discountAmount), subtotal);
+    const total = Math.max(0, subtotal - discount);
+    const validDays = Math.max(1, Number(els.validDays.value || 14));
+    const createdAt = new Date().toISOString();
+    const validUntil = new Date(Date.now() + validDays * 24 * 60 * 60 * 1000).toISOString();
+
+    return {
+      version: 1,
+      title: els.proposalTitle.value.trim() || "Leadership & team development proposal",
+      client: {
+        name: els.clientName.value.trim(),
+        company: els.clientCompany.value.trim(),
+        email: els.clientEmail.value.trim()
+      },
+      months: state.months,
+      groups: state.groups,
+      leaders: state.leaders,
+      scopeNotes: els.scopeNotes.value.trim(),
+      paymentNotes: els.paymentNotes.value.trim(),
+      lines: lines,
+      discount: {
+        label: els.discountLabel.value.trim() || "Discount",
+        amount: discount
+      },
+      subtotal: subtotal,
+      total: total,
+      currency: "AUD",
+      createdAt: createdAt,
+      validUntil: validUntil,
+      provider: {
+        name: "Luke Haythorpe",
+        brand: "orangery.team",
+        email: "lukehaythorpe@orangery.solutions"
+      }
+    };
+  }
+
+  function renderCustomItems() {
+    els.customLines.innerHTML = state.customItems.map((item, index) => {
+      return '<div class="custom-line">' +
+        '<input class="line-input" data-custom-label="' + index + '" value="' + escapeAttr(item.label) + '">' +
+        '<input class="line-input" type="number" min="0" step="50" data-custom-amount="' + index + '" value="' + item.amount + '">' +
+        '<button type="button" data-remove-custom="' + index + '">Remove</button>' +
+      '</div>';
+    }).join("");
+  }
+
+  function escapeAttr(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  }
+
+  function render() {
+    const pack = WORKSHOP_PACKAGES[state.months];
+    els.groupControls.classList.toggle("visible", els.group.checked);
+    els.leaderControls.classList.toggle("visible", els.leadership.checked);
+    if (!els.priceWorkshop.dataset.touched) els.priceWorkshop.value = pack.price;
+    els.workshopHelp.textContent = pack.help;
+
+    const proposal = buildProposal();
+    if (!proposal.lines.length) {
+      els.summaryLines.innerHTML = "<li>Add services to begin.</li>";
+    } else {
+      els.summaryLines.innerHTML = proposal.lines.map((line) =>
+        "<li><span>" + line.label + "</span><strong>" + money(line.amount) + "</strong></li>"
+      ).join("");
+    }
+    els.summarySubtotal.textContent = money(proposal.subtotal);
+    const showDiscount = proposal.discount.amount > 0;
+    els.summaryDiscountRow.style.display = showDiscount ? "flex" : "none";
+    els.summaryDiscountLabel.textContent = proposal.discount.label;
+    els.summaryDiscount.textContent = "-" + money(proposal.discount.amount);
+    els.summaryTotal.textContent = money(proposal.total);
+    els.summaryNote.textContent = proposal.client.name
+      ? "Ready for " + proposal.client.name + (proposal.client.company ? " · " + proposal.client.company : "") + "."
+      : "Add client details before sending. You can still preview the proposal now.";
+  }
+
+  function encodeProposal(proposal) {
+    const json = JSON.stringify(proposal);
+    const bytes = new TextEncoder().encode(json);
+    let binary = "";
+    bytes.forEach((b) => { binary += String.fromCharCode(b); });
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  }
+
+  function proposalUrl(proposal) {
+    return new URL("proposal.html#p=" + encodeProposal(proposal), window.location.href).toString();
+  }
+
+  document.getElementById("duration-grid").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-months]");
+    if (!btn) return;
+    state.months = Number(btn.getAttribute("data-months"));
+    state.autoDiscount = true;
+    setActive(document.getElementById("duration-grid"), "data-months", state.months);
+    syncWorkshopDefaults();
+    render();
+  });
+
+  document.getElementById("group-grid").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-groups]");
+    if (!btn) return;
+    state.groups = Number(btn.getAttribute("data-groups"));
+    state.autoDiscount = true;
+    setActive(document.getElementById("group-grid"), "data-groups", state.groups);
+    syncWorkshopDefaults();
+    render();
+  });
+
+  document.getElementById("leader-grid").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-leaders]");
+    if (!btn) return;
+    state.leaders = Number(btn.getAttribute("data-leaders"));
+    state.autoDiscount = true;
+    setActive(document.getElementById("leader-grid"), "data-leaders", state.leaders);
+    syncWorkshopDefaults();
+    render();
+  });
+
+  [els.workshop, els.group, els.leadership, els.coachTraining].forEach((input) => {
+    input.addEventListener("change", () => {
+      state.autoDiscount = true;
+      syncWorkshopDefaults();
+      render();
+    });
+  });
+
+  els.priceWorkshop.addEventListener("input", () => {
+    els.priceWorkshop.dataset.touched = "1";
+    render();
+  });
+  [els.priceGroupMonthly, els.priceLeadershipMonthly, els.priceCoachTraining, els.clientName, els.clientCompany, els.clientEmail, els.proposalTitle, els.scopeNotes, els.paymentNotes, els.validDays].forEach((input) => {
+    input.addEventListener("input", render);
+  });
+  els.discountAmount.addEventListener("input", () => {
+    state.autoDiscount = false;
+    render();
+  });
+  els.discountLabel.addEventListener("input", () => {
+    state.autoDiscount = false;
+    render();
+  });
+
+  document.getElementById("add-custom").addEventListener("click", () => {
+    const label = els.customLabel.value.trim();
+    const amount = Number(els.customAmount.value || 0);
+    if (!label || amount < 0) return;
+    state.customItems.push({ label: label, amount: amount });
+    els.customLabel.value = "";
+    els.customAmount.value = "";
+    renderCustomItems();
+    render();
+  });
+
+  els.customLines.addEventListener("input", (event) => {
+    const labelIndex = event.target.getAttribute("data-custom-label");
+    const amountIndex = event.target.getAttribute("data-custom-amount");
+    if (labelIndex != null) state.customItems[Number(labelIndex)].label = event.target.value;
+    if (amountIndex != null) state.customItems[Number(amountIndex)].amount = Number(event.target.value || 0);
+    render();
+  });
+  els.customLines.addEventListener("click", (event) => {
+    const removeIndex = event.target.getAttribute("data-remove-custom");
+    if (removeIndex == null) return;
+    state.customItems.splice(Number(removeIndex), 1);
+    renderCustomItems();
+    render();
+  });
+
+  document.getElementById("open-proposal").addEventListener("click", () => {
+    const proposal = buildProposal();
+    window.open(proposalUrl(proposal), "_blank");
+  });
+
+  document.getElementById("copy-link").addEventListener("click", async () => {
+    const proposal = buildProposal();
+    const url = proposalUrl(proposal);
+    els.linkBox.textContent = url;
+    els.linkBox.classList.add("visible");
+    try {
+      await navigator.clipboard.writeText(url);
+      document.getElementById("copy-link").textContent = "Link copied";
+      setTimeout(() => { document.getElementById("copy-link").textContent = "Copy share link"; }, 1600);
+    } catch (_) {
+      document.getElementById("copy-link").textContent = "Copy from box below";
+    }
+  });
+
+  syncWorkshopDefaults();
+  render();
+})();
+</script>
+</body>
+</html>
