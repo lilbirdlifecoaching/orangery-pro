@@ -918,6 +918,97 @@ footer {
   line-height: 1.65;
 }
 
+.proof-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.proof-item {
+  padding: 26px 24px 24px;
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-height: 100%;
+}
+
+.proof-quote {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--char);
+}
+
+.proof-author {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.proof-face {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--stone);
+}
+
+.proof-face.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--char);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.proof-item.featured {
+  grid-column: 1 / -1;
+}
+
+.proof-item.featured .proof-quote {
+  font-size: clamp(18px, 2vw, 24px);
+  max-width: 58ch;
+}
+
+@media (max-width: 920px) {
+  .proof-item.featured {
+    grid-column: auto;
+  }
+}
+
+.proof-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--char);
+  line-height: 1.3;
+}
+
+.proof-role {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.proof-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 @media (max-width: 920px) {
   .hero-grid,
   .offerings-grid,
@@ -926,7 +1017,8 @@ footer {
   .light-fit-grid,
   .cta-box,
   .package-grid,
-  .quote-shell {
+  .quote-shell,
+  .proof-grid {
     grid-template-columns: 1fr;
   }
 
@@ -967,6 +1059,7 @@ footer {
       </a>
       <ul class="nav-links">
         <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#proof">Proof</a></li>
         <li><a href="#quote">Build a quote</a></li>
         <li><a href="#fit">Who it's for</a></li>
         <li><a href="orangery-pro.html">orangery.pro</a></li>
@@ -1054,6 +1147,61 @@ footer {
           </ul>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="section-inner">
+      <span class="eyebrow">Proof from the work</span>
+      <h2 class="section-headline">When teams invest in coaching, they need evidence it can handle <em>real complexity.</em></h2>
+      <p class="section-sub">These voices come from leaders who worked with Luke one-to-one. They speak to the same craft behind orangery.team: clear tools, honest reflection, and support that builds maturity under pressure.</p>
+
+      <div class="proof-grid">
+        <article class="proof-item featured fade-up">
+          <p class="proof-quote">“The 5 Voices workshops has impacted my team exponentially in such positive ways — giving us language in how to best work together. Luke and his team do such a great job at clearly communicating the different voices' strengths and growth opportunities — both as individuals but also how to best work together on a team of diverse voices and experiences. It's been helpful to have a better understanding of others' experiences on teams, what could be potentially harmful to team dynamics, and how to invite new voices to be not only heard, but celebrated. I can't recommend Luke and his trainings enough!”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Gabby-A.jpg" alt="Gabby Altzate" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Gabby Altzate</p>
+              <p class="proof-role">Executive Director, Because Justice Matters</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“If you're looking to elevate your game and find a coach who genuinely sees you — Luke is your go-to.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Jen-D.jpg" alt="Jen Dorrough" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Jen Dorrough</p>
+              <p class="proof-role">Director, YWAM North Cascades</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“I uncovered blind spots, gained practical tools, and felt recognised for who I was becoming — not just what I was producing. A powerful experience for anyone ready to grow.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Nathan-D.jpeg" alt="Nathan Dunn" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Nathan Dunn</p>
+              <p class="proof-role">Mechanical Engineering Manager, Lam Research</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“His coaching gave me the clarity, tools, and confidence to lead with purpose — and the impact showed up in both my personal life and professional recognition.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Confidence-U-web.jpg" alt="Confidence Udegbue" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Confidence Udegbue</p>
+              <p class="proof-role">VP of Product, Freeletics · Forbes 30 Under 30</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="proof-note">Selected from client voices published on lilbird.life. Team engagements use the same underlying coaching systems — GiANT tools, 5 Voices language, and practical follow-through.</p>
     </div>
   </section>
 
