@@ -1009,6 +1009,102 @@ footer {
   line-height: 1.6;
 }
 
+.writing-shell {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.writing-list {
+  display: grid;
+  gap: 12px;
+}
+
+.writing-item {
+  display: block;
+  text-decoration: none;
+  padding: 18px 20px;
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  background: var(--white);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.writing-item:hover {
+  border-color: var(--char);
+  transform: translateY(-1px);
+}
+
+.writing-item-meta {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.writing-item strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--char);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.writing-item span {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.writing-panel {
+  padding: 26px 24px;
+  background: var(--char);
+  color: var(--off);
+  border-radius: 8px;
+}
+
+.writing-panel h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.writing-panel p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.writing-panel .btn-primary {
+  width: 100%;
+  justify-content: center;
+}
+
+.writing-panel .btn-secondary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  background: transparent;
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.writing-panel .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 920px) {
   .hero-grid,
   .offerings-grid,
@@ -1018,7 +1114,8 @@ footer {
   .cta-box,
   .package-grid,
   .quote-shell,
-  .proof-grid {
+  .proof-grid,
+  .writing-shell {
     grid-template-columns: 1fr;
   }
 
@@ -1059,9 +1156,8 @@ footer {
       </a>
       <ul class="nav-links">
         <li><a href="#offerings">Offerings</a></li>
-        <li><a href="#proof">Proof</a></li>
-        <li><a href="#quote">Build a quote</a></li>
-        <li><a href="#fit">Who it's for</a></li>
+        <li><a href="#quote">Quote</a></li>
+        <li><a href="#writing">Writing</a></li>
         <li><a href="orangery-pro.html">orangery.pro</a></li>
         <li><a href="https://cal.com/lukehaythorpe/30min">Talk with us</a></li>
       </ul>
@@ -1409,6 +1505,46 @@ footer {
     </div>
   </section>
 
+  <section class="stone-section" id="writing">
+    <div class="section-inner">
+      <span class="eyebrow">Writing</span>
+      <h2 class="section-headline">Ideas and tools for leaders who want healthier <em>team dynamics.</em></h2>
+      <p class="section-sub">Short essays on 5 Voices, influence, and the moments that make teams harder than the org chart suggests.</p>
+
+      <div class="writing-shell">
+        <div class="writing-list fade-up">
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/when-you-re-not-a-pioneer" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Aug 12, 2026 · 3 min</span>
+            <strong>When You're Not a Pioneer</strong>
+            <span>But you still have to lead like one.</span>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-nurturer-s-dilemma" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Aug 4, 2026 · 3 min</span>
+            <strong>The Nurturer's Dilemma</strong>
+            <span>And what to do about it.</span>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-voice-you-keep-dismissing-might-be-the-one-you-need-most" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Jul 23, 2026 · 3 min</span>
+            <strong>The Voice You Keep Dismissing Might Be the One You Need Most</strong>
+            <span>An ode to the Connector.</span>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/when-your-caution-reads-as-criticism" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Jul 13, 2026 · 3 min</span>
+            <strong>When Your Caution Reads as Criticism</strong>
+            <span>From the diary of a foundational Guardian voice.</span>
+          </a>
+        </div>
+
+        <aside class="writing-panel fade-up">
+          <h3>Read the archive. Or get the next one by email.</h3>
+          <p>Leadership &amp; Team Dynamics is Luke's ongoing writing on influence, 5 Voices, and healthier team dynamics.</p>
+          <a class="btn-primary" href="https://orangery-leadership.beehiiv.com/" target="_blank" rel="noreferrer">Browse all articles -></a>
+          <a class="btn-secondary" href="https://orangery-leadership.beehiiv.com/" target="_blank" rel="noreferrer">Subscribe on Beehiiv</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <section class="cta-band">
     <div class="section-inner">
       <div class="cta-box fade-up">
@@ -1436,7 +1572,9 @@ footer {
       </div>
       <div class="footer-links">
         <a href="#offerings">Offerings</a>
-        <a href="#quote">Build a quote</a>
+        <a href="#proof">Proof</a>
+        <a href="#quote">Quote</a>
+        <a href="#writing">Writing</a>
         <a href="proposal-builder.html">Proposal builder</a>
         <a href="orangery-pro.html">orangery.pro</a>
         <a href="https://orangery.solutions" target="_blank" rel="noreferrer">orangery.solutions</a>
