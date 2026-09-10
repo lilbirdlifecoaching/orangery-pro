@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>orangery.team - Team Coaching, Workshops, and Leadership Development</title>
+<meta name="orangery-worker-url" content="https://orangery-relational-dynamics.cwwq46sn7m.workers.dev">
 <link rel="icon" href="ORANGE.png" type="image/png">
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1512,26 +1513,22 @@ footer {
       <p class="section-sub">Short essays on 5 Voices, influence, and the moments that make teams harder than the org chart suggests.</p>
 
       <div class="writing-shell">
-        <div class="writing-list fade-up">
+        <div class="writing-list fade-up" id="writing-list">
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/what-kind-of-confidence-does-your-leadership-carry" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Sep 10, 2026</span>
+            <strong>What kind of confidence does your leadership carry?</strong>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-room-reads-you-before-you-speak" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Sep 2, 2026</span>
+            <strong>The Room Reads You Before You Speak</strong>
+          </a>
           <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/when-you-re-not-a-pioneer" target="_blank" rel="noreferrer">
-            <span class="writing-item-meta">Aug 12, 2026 · 3 min</span>
+            <span class="writing-item-meta">Aug 12, 2026</span>
             <strong>When You're Not a Pioneer</strong>
-            <span>But you still have to lead like one.</span>
           </a>
           <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-nurturer-s-dilemma" target="_blank" rel="noreferrer">
-            <span class="writing-item-meta">Aug 4, 2026 · 3 min</span>
+            <span class="writing-item-meta">Aug 4, 2026</span>
             <strong>The Nurturer's Dilemma</strong>
-            <span>And what to do about it.</span>
-          </a>
-          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-voice-you-keep-dismissing-might-be-the-one-you-need-most" target="_blank" rel="noreferrer">
-            <span class="writing-item-meta">Jul 23, 2026 · 3 min</span>
-            <strong>The Voice You Keep Dismissing Might Be the One You Need Most</strong>
-            <span>An ode to the Connector.</span>
-          </a>
-          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/when-your-caution-reads-as-criticism" target="_blank" rel="noreferrer">
-            <span class="writing-item-meta">Jul 13, 2026 · 3 min</span>
-            <strong>When Your Caution Reads as Criticism</strong>
-            <span>From the diary of a foundational Guardian voice.</span>
           </a>
         </div>
 
@@ -1595,6 +1592,48 @@ const fadeObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 observers.forEach((node) => fadeObserver.observe(node));
+
+(function loadLatestWriting() {
+  const list = document.getElementById("writing-list");
+  if (!list) return;
+
+  const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
+  const raw = (window.ORANGERY_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const workerUrl = raw && !/^https?:\/\//i.test(raw) ? "https://" + raw : raw;
+  if (!workerUrl) return;
+
+  function formatDate(iso) {
+    try {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  fetch(workerUrl.replace(/\/$/, "") + "/writing/latest?limit=4")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data || !data.ok || !Array.isArray(data.posts) || !data.posts.length) return;
+      list.innerHTML = data.posts.map(function (post) {
+        const meta = formatDate(post.publishedAt);
+        return '<a class="writing-item" href="' + escapeHtml(post.url) + '" target="_blank" rel="noreferrer">' +
+          (meta ? '<span class="writing-item-meta">' + escapeHtml(meta) + "</span>" : "") +
+          "<strong>" + escapeHtml(post.title) + "</strong>" +
+          "</a>";
+      }).join("");
+    })
+    .catch(function () { /* keep static fallback posts */ });
+})();
 
 (function () {
   const WORKSHOP_PACKAGES = {
