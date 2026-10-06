@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>orangery.team - Team Coaching, Workshops, and Leadership Development</title>
+<meta name="orangery-worker-url" content="https://orangery-relational-dynamics.cwwq46sn7m.workers.dev">
+<link rel="icon" href="ORANGE.png" type="image/png">
+<link rel="apple-touch-icon" href="ORANGE.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #121417;
+  --char-mid: #1a1d21;
+  --char-light: #3a424c;
+  --sage: #2f9e4f;
+  --rust: #f07828;
+  --rust-light: #f48c42;
+  --gold: #2f9e4f;
+  --off: #ffffff;
+  --stone: #f7f8fa;
+  --stone-deep: #e6e8eb;
+  --white: #ffffff;
+  --muted: #5c6570;
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --shadow-soft: 0 1px 0 rgba(18, 20, 23, 0.04);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--off);
+  color: var(--char);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.section-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 84px 48px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--rust);
+  flex-shrink: 0;
+}
+
+.section-headline {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.section-headline em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.section-sub {
+  max-width: 640px;
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--stone-deep);
+}
+
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.nav-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-brand-name {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.nav-brand-sub {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  list-style: none;
+  font-size: 14px;
+  color: var(--char-light);
+}
+
+.nav-links a:hover {
+  color: var(--rust);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--rust);
+  color: white;
+  border: 1px solid var(--rust);
+}
+
+.btn-primary:hover {
+  background: var(--rust-light);
+  border-color: var(--rust-light);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--char);
+  border: 1px solid rgba(30, 32, 32, 0.18);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(30, 32, 32, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero {
+  padding: 72px 0 24px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 36px;
+  align-items: end;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.hero-sub {
+  max-width: 560px;
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-panel {
+  background: var(--char);
+  color: var(--off);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: none;
+}
+
+.hero-panel-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 240, 232, 0.48);
+  margin-bottom: 14px;
+}
+
+.hero-panel h2 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-panel p {
+  font-size: 15px;
+  color: rgba(243, 240, 232, 0.72);
+  line-height: 1.75;
+}
+
+.hero-panel ul {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-panel li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.78);
+  line-height: 1.6;
+}
+
+.hero-panel li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.stone-section {
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
+}
+
+.dark-section {
+  background: var(--char);
+  color: var(--off);
+}
+
+.dark-section .section-headline {
+  color: var(--off);
+}
+
+.dark-section .section-sub {
+  color: rgba(243, 240, 232, 0.62);
+}
+
+.offerings-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.offer-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.offer-card .offer-tag {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(30, 32, 32, 0.12);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--char-light);
+}
+
+.offer-card h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.offer-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.offer-card ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.offer-card li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.65;
+}
+
+.offer-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.fit-grid,
+.process-grid {
+  margin-top: 36px;
+  display: grid;
+  gap: 16px;
+}
+
+.fit-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.process-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fit-card,
+.process-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.fit-card h3,
+.process-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.fit-card p,
+.process-card p {
+  font-size: 14px;
+  color: rgba(243, 240, 232, 0.7);
+  line-height: 1.7;
+}
+
+.process-step {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.light-fit-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.light-fit-card {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  padding: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.light-fit-card h3 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.light-fit-card p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.light-fit-card ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.light-fit-card li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.65;
+}
+
+.light-fit-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.cta-band {
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+}
+
+.cta-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  gap: 24px;
+  align-items: center;
+  background: var(--char);
+  color: var(--off);
+  border-radius: 8px;
+  padding: 34px;
+  box-shadow: var(--shadow-soft);
+}
+
+.cta-box h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.cta-box h2 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.cta-box p {
+  font-size: 15px;
+  color: rgba(243, 240, 232, 0.72);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cta-actions .btn-secondary {
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cta-actions .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+footer {
+  border-top: 1px solid rgba(216, 207, 192, 0.8);
+}
+
+.footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 48px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  width: 32px;
+  height: 32px;
+}
+
+.footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-brand-copy strong {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.footer-brand-copy span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-links a:hover {
+  color: var(--rust);
+}
+
+.quote-section {
+  background: var(--stone);
+  border-top: 1px solid var(--stone-deep);
+  border-bottom: 1px solid var(--stone-deep);
+}
+
+.package-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.package-card {
+  text-align: left;
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  padding: 22px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-soft);
+  font: inherit;
+  color: inherit;
+}
+
+.package-card:hover,
+.package-card.active {
+  border-color: rgba(200, 84, 58, 0.45);
+  transform: translateY(-2px);
+}
+
+.package-card.active {
+  box-shadow: 0 18px 40px rgba(200, 84, 58, 0.12);
+}
+
+.package-card .package-kicker {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.package-card h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.package-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.quote-shell {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.quote-builder,
+.quote-summary {
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  padding: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.quote-builder h3,
+.quote-summary h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.quote-lead {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.quote-field {
+  margin-bottom: 18px;
+}
+
+.quote-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--char-light);
+  margin-bottom: 10px;
+}
+
+.band-grid,
+.duration-grid,
+.leader-grid,
+.group-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice-pill {
+  appearance: none;
+  border: 1px solid var(--stone-deep);
+  background: var(--white);
+  border-radius: 4px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--char-light);
+}
+
+.choice-pill.active {
+  background: var(--char);
+  border-color: var(--char);
+  color: var(--off);
+}
+
+.module-list {
+  display: grid;
+  gap: 10px;
+}
+
+.module-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  background: rgba(247, 243, 234, 0.55);
+  cursor: pointer;
+}
+
+.module-option input {
+  margin-top: 4px;
+}
+
+.module-option strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.module-option span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.module-price {
+  font-size: 13px;
+  color: var(--char-light);
+  white-space: nowrap;
+}
+
+.leader-controls,
+.group-controls {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px dashed rgba(30, 32, 32, 0.18);
+  display: none;
+}
+
+.leader-controls.visible,
+.group-controls.visible {
+  display: block;
+}
+
+.custom-note {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: rgba(240, 120, 40, 0.10);
+  border: 1px solid rgba(240, 120, 40, 0.24);
+  font-size: 13px;
+  color: #5d5220;
+  line-height: 1.7;
+}
+
+.custom-note.hidden {
+  display: none;
+}
+
+.quote-summary {
+  position: sticky;
+  top: 92px;
+}
+
+.quote-lines {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--stone-deep);
+}
+
+.quote-lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--char-light);
+  line-height: 1.5;
+}
+
+.quote-lines .empty {
+  color: var(--muted);
+}
+
+.quote-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.quote-total-row span {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.quote-math {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.quote-math-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--char-light);
+}
+
+.quote-math-row.discount {
+  color: #2f6b3a;
+}
+
+.quote-math-row.discount.hidden,
+.quote-math-row.subtotal.hidden {
+  display: none;
+}
+
+.quote-total {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--char);
+}
+
+.quote-total-note {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.quote-disclaimer {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(30, 32, 32, 0.04);
+  border: 1px solid rgba(30, 32, 32, 0.08);
+}
+
+.quote-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quote-actions .btn-primary,
+.quote-actions .btn-secondary {
+  justify-content: center;
+}
+
+.rate-card {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--stone-deep);
+}
+
+.rate-card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.proof-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.proof-item {
+  padding: 26px 24px 24px;
+  background: var(--white);
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-height: 100%;
+}
+
+.proof-quote {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--char);
+}
+
+.proof-author {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.proof-face {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--stone);
+}
+
+.proof-face.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--char);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.proof-item.featured {
+  grid-column: 1 / -1;
+}
+
+.proof-item.featured .proof-quote {
+  font-size: clamp(18px, 2vw, 24px);
+  max-width: 58ch;
+}
+
+@media (max-width: 920px) {
+  .proof-item.featured {
+    grid-column: auto;
+  }
+}
+
+.proof-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--char);
+  line-height: 1.3;
+}
+
+.proof-role {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.proof-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.writing-shell {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.writing-list {
+  display: grid;
+  gap: 12px;
+}
+
+.writing-item {
+  display: block;
+  text-decoration: none;
+  padding: 18px 20px;
+  border: 1px solid var(--stone-deep);
+  border-radius: 8px;
+  background: var(--white);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.writing-item:hover {
+  border-color: var(--char);
+  transform: translateY(-1px);
+}
+
+.writing-item-meta {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.writing-item strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--char);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.writing-item span {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.writing-panel {
+  padding: 26px 24px;
+  background: var(--char);
+  color: var(--off);
+  border-radius: 8px;
+}
+
+.writing-panel h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.writing-panel p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.writing-panel .btn-primary {
+  width: 100%;
+  justify-content: center;
+}
+
+.writing-panel .btn-secondary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  background: transparent;
+  color: var(--off);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.writing-panel .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 920px) {
+  .hero-grid,
+  .offerings-grid,
+  .fit-grid,
+  .process-grid,
+  .light-fit-grid,
+  .cta-box,
+  .package-grid,
+  .quote-shell,
+  .proof-grid,
+  .writing-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-summary {
+    position: static;
+  }
+
+  .section-inner,
+  .nav-inner,
+  .footer-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-inner,
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">
+        <img src="ORANGE.png" alt="orangery.team">
+        <span class="nav-brand-copy">
+          <span class="nav-brand-name">orangery.team</span>
+          <span class="nav-brand-sub">Team development</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#quote">Quote</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="orangery-pro.html">orangery.pro</a></li>
+        <li><a href="https://cal.com/lukehaythorpe/30min">Talk with us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="section-inner">
+      <div class="hero-grid">
+        <div class="fade-up">
+          <span class="eyebrow">For teams, exec groups, and organisations</span>
+          <h1 class="hero-title">When leadership gets bigger than <em>one person.</em></h1>
+          <p class="hero-sub">orangery.team is for leaders who need support beyond individual coaching. We help teams communicate more clearly, navigate tension with maturity, and build healthier dynamics across the rooms that actually shape the culture.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#quote">Build a self-guided quote -></a>
+            <a class="btn-secondary" href="#offerings">See the offerings</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel fade-up">
+          <span class="hero-panel-label">What this stream is for</span>
+          <h2>Team health, not just individual growth</h2>
+          <p>Useful when the challenge sits between people, not only inside one leader.</p>
+          <ul>
+            <li>Intact team coaching</li>
+            <li>Workshops on communication and dynamics</li>
+            <li>In-team coach training</li>
+            <li>Exec, board, and company-wide pathways</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section class="stone-section" id="offerings">
+    <div class="section-inner">
+      <span class="eyebrow">The offerings</span>
+      <h2 class="section-headline">A simple set of options for leaders who need help with the <em>whole room.</em></h2>
+      <p class="section-sub">These can stand alone or combine. The aim is practical movement in communication, trust, conflict, and shared leadership maturity.</p>
+
+      <div class="offerings-grid">
+        <article class="offer-card fade-up">
+          <span class="offer-tag">01 · Team coaching</span>
+          <h3>Intact team coaching</h3>
+          <p>For leadership teams or working groups who need a steadier rhythm of reflection, clarity, and follow-through together.</p>
+          <ul>
+            <li>Shared language for how the team currently operates</li>
+            <li>Live work on trust, ownership, and hard conversations</li>
+            <li>A coaching cadence that builds maturity between meetings</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">02 · Workshops</span>
+          <h3>Communication and dynamics workshops</h3>
+          <p>Focused sessions that help people understand wiring, reduce friction, and communicate with more intention under pressure.</p>
+          <ul>
+            <li>5 Voices and GiANT tools applied to real team dynamics</li>
+            <li>Practical work on feedback, conflict, and influence</li>
+            <li>Useful for offsites, leadership days, or reset moments</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">03 · In-team coach</span>
+          <h3>Train an in-team coach</h3>
+          <p>Build capacity inside the organisation so someone can hold lighter coaching and facilitation between formal sessions.</p>
+          <ul>
+            <li>A defined training block using GiANT and 5 Voices language</li>
+            <li>Light as-needed support via Slack, messages, and a monthly call</li>
+            <li>Stronger continuity without needing outside support for every moment</li>
+          </ul>
+        </article>
+
+        <article class="offer-card fade-up">
+          <span class="offer-tag">04 · Exec / board / org</span>
+          <h3>Exec, board, and company-wide support</h3>
+          <p>For senior rooms or broader organisational pathways where the need is larger than a single team package.</p>
+          <ul>
+            <li>Facilitation for alignment and decision-making conversations</li>
+            <li>Support around tension, trust, and leadership presence</li>
+            <li>Custom scoping through conversation rather than self-quote</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="section-inner">
+      <span class="eyebrow">Proof from the work</span>
+      <h2 class="section-headline">When teams invest in coaching, they need evidence it can handle <em>real complexity.</em></h2>
+      <p class="section-sub">These voices come from leaders who worked with Luke one-to-one. They speak to the same craft behind orangery.team: clear tools, honest reflection, and support that builds maturity under pressure.</p>
+
+      <div class="proof-grid">
+        <article class="proof-item featured fade-up">
+          <p class="proof-quote">“The 5 Voices workshops has impacted my team exponentially in such positive ways — giving us language in how to best work together. Luke and his team do such a great job at clearly communicating the different voices' strengths and growth opportunities — both as individuals but also how to best work together on a team of diverse voices and experiences. It's been helpful to have a better understanding of others' experiences on teams, what could be potentially harmful to team dynamics, and how to invite new voices to be not only heard, but celebrated. I can't recommend Luke and his trainings enough!”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Gabby-A.jpg" alt="Gabby Altzate" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Gabby Altzate</p>
+              <p class="proof-role">Executive Director, Because Justice Matters</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“If you're looking to elevate your game and find a coach who genuinely sees you — Luke is your go-to.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Jen-D.jpg" alt="Jen Dorrough" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Jen Dorrough</p>
+              <p class="proof-role">Director, YWAM North Cascades</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“I uncovered blind spots, gained practical tools, and felt recognised for who I was becoming — not just what I was producing. A powerful experience for anyone ready to grow.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Nathan-D.jpeg" alt="Nathan Dunn" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Nathan Dunn</p>
+              <p class="proof-role">Mechanical Engineering Manager, Lam Research</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="proof-item fade-up">
+          <p class="proof-quote">“His coaching gave me the clarity, tools, and confidence to lead with purpose — and the impact showed up in both my personal life and professional recognition.”</p>
+          <div class="proof-author">
+            <img class="proof-face" src="Testimonials/Confidence-U-web.jpg" alt="Confidence Udegbue" loading="lazy" decoding="async" width="52" height="52">
+            <div>
+              <p class="proof-name">Confidence Udegbue</p>
+              <p class="proof-role">VP of Product, Freeletics · Forbes 30 Under 30</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section" id="quote">
+    <div class="section-inner">
+      <span class="eyebrow">Transparent pricing</span>
+      <h2 class="section-headline">Build a self-guided quote around the support your team <em>actually needs.</em></h2>
+      <p class="section-sub">Start with a suggested package, or mix the modules yourself. Workshop packages follow the engagement length. Group coaching is priced by how many coaching groups you need. Exec, board, and company-wide work still begins with a conversation.</p>
+
+      <div class="package-grid">
+        <button type="button" class="package-card fade-up" data-package="team-reset">
+          <span class="package-kicker">Suggested · Team Reset</span>
+          <h3>Workshop + group rhythm</h3>
+          <p>One 90-minute workshop plus 6 months of group coaching. A strong starting point for intact teams.</p>
+        </button>
+        <button type="button" class="package-card fade-up" data-package="leadership-core">
+          <span class="package-kicker">Suggested · Leadership Core</span>
+          <h3>Individual leadership seats</h3>
+          <p>6 months of leadership coaching for key leaders who need sharper personal support alongside the team.</p>
+        </button>
+        <button type="button" class="package-card fade-up" data-package="team-leaders">
+          <span class="package-kicker">Suggested · Team + Leaders</span>
+          <h3>Workshop, group, and seats</h3>
+          <p>Workshop + 6 months group coaching + one leadership coaching seat. Useful when both the room and a key leader need help.</p>
+        </button>
+      </div>
+
+      <div class="quote-shell fade-up">
+        <div class="quote-builder">
+          <h3>Build your mix</h3>
+          <p class="quote-lead">Workshop packages are tied to engagement length. Group coaching is priced per coaching group (up to 6 people each). Leadership coaching is priced per leader. In-team coach training is a flat program with light as-needed support.</p>
+
+          <div class="quote-field">
+            <span class="quote-label">Coaching duration</span>
+            <div class="duration-grid" id="duration-grid">
+              <button type="button" class="choice-pill active" data-months="6">6 months</button>
+              <button type="button" class="choice-pill" data-months="12">12 months · 10% off</button>
+              <button type="button" class="choice-pill" data-months="24">2 years · 20% off</button>
+            </div>
+          </div>
+
+          <div class="quote-field">
+            <span class="quote-label">Modules</span>
+            <div class="module-list">
+              <label class="module-option">
+                <input type="checkbox" id="mod-workshop" checked>
+                <span>
+                  <strong>Workshop package</strong>
+                  <span id="workshop-help">Includes 2 × 90-minute workshops across a 6-month engagement.</span>
+                </span>
+                <span class="module-price" id="price-workshop">$4,500</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-group" checked>
+                <span>
+                  <strong>Group coaching</strong>
+                  <span>$500 / month per coaching group. 2 sessions per month. Up to 6 people per group.</span>
+                </span>
+                <span class="module-price" id="price-group">$500 / mo per group</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-leadership">
+                <span>
+                  <strong>Leadership coaching</strong>
+                  <span>$1,200 / month per leader. Up to 4 sessions per month. No rollover.</span>
+                </span>
+                <span class="module-price">$1,200 / mo</span>
+              </label>
+
+              <label class="module-option">
+                <input type="checkbox" id="mod-coach-training">
+                <span>
+                  <strong>In-team coach training</strong>
+                  <span>Defined training block plus light as-needed support (Slack, messages, monthly call).</span>
+                </span>
+                <span class="module-price">$4,500</span>
+              </label>
+            </div>
+
+            <div class="group-controls" id="group-controls">
+              <span class="quote-label">Number of coaching groups</span>
+              <div class="group-grid" id="group-grid">
+                <button type="button" class="choice-pill active" data-groups="1">1 group</button>
+                <button type="button" class="choice-pill" data-groups="2">2 groups</button>
+                <button type="button" class="choice-pill" data-groups="3">3 groups</button>
+                <button type="button" class="choice-pill" data-groups="4">4 groups</button>
+              </div>
+              <p class="quote-lead" style="margin: 12px 0 0;">A group is usually formed around shared leadership responsibility, not overall company size. Larger organisations may only need one key-leader group.</p>
+            </div>
+
+            <div class="leader-controls" id="leader-controls">
+              <span class="quote-label">Number of leadership coaching seats</span>
+              <div class="leader-grid" id="leader-grid">
+                <button type="button" class="choice-pill active" data-leaders="1">1 leader</button>
+                <button type="button" class="choice-pill" data-leaders="2">2 leaders</button>
+                <button type="button" class="choice-pill" data-leaders="3">3 leaders</button>
+                <button type="button" class="choice-pill" data-leaders="4">4 leaders</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="quote-summary">
+          <h3>Your estimate</h3>
+          <div class="quote-field" style="margin-bottom: 14px;">
+            <span class="quote-label">Display currency</span>
+            <div class="choice-pills" id="currency-grid">
+              <button type="button" class="choice-pill active" data-currency="USD">USD</button>
+              <button type="button" class="choice-pill" data-currency="AUD">AUD</button>
+            </div>
+            <p class="quote-lead" id="currency-note" style="margin: 10px 0 0;">List prices are in USD. AUD uses today's exchange rate for planning only.</p>
+          </div>
+          <p class="quote-lead" id="summary-context">2 workshops · 1 coaching group · 6 months</p>
+          <ul class="quote-lines" id="quote-lines">
+            <li class="empty">Select a module to begin.</li>
+          </ul>
+          <div class="quote-math">
+            <div class="quote-math-row subtotal hidden" id="quote-subtotal-row">
+              <span>Subtotal</span>
+              <strong id="quote-subtotal">$0</strong>
+            </div>
+            <div class="quote-math-row discount hidden" id="quote-discount-row">
+              <span id="quote-discount-label">Duration discount</span>
+              <strong id="quote-discount">-$0</strong>
+            </div>
+          </div>
+          <div class="quote-total-row">
+            <span>Estimated total</span>
+            <div class="quote-total" id="quote-total">$0</div>
+          </div>
+          <p class="quote-total-note" id="quote-total-note">Estimates are guidance for planning. Final scope can be confirmed on a call.</p>
+          <p class="quote-disclaimer">Longer engagements include a duration discount on coaching. Early cancellation is available, but refunds are limited once the engagement has begun. Unused months are not fully refundable.</p>
+          <div class="quote-actions">
+            <a class="btn-primary" id="quote-book" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
+            <a class="btn-secondary" id="quote-email" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20quote">Email this estimate</a>
+          </div>
+          <div class="rate-card">
+            <p>Workshop packages: 6 months = 2 workshops ($4,500) · 12 months = 3 workshops ($6,000) · 2 years = 6 workshops ($12,000). Group coaching $500 / month per group · leadership coaching $1,200 / month · in-team coach training $4,500. Coaching discounts: 10% at 12 months, 20% at 2 years. Exec, board, and company-wide work is scoped by conversation.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="section-inner">
+      <span class="eyebrow">Who this is for</span>
+      <h2 class="section-headline">Built for organisations that feel the cost of unclear communication and messy <em>people dynamics.</em></h2>
+      <p class="section-sub">If individual coaching is helping one leader, but the system around them is still creating friction, this is usually the better door.</p>
+
+      <div class="light-fit-grid">
+        <article class="light-fit-card fade-up">
+          <h3>A strong fit</h3>
+          <p>orangery.team tends to land well when:</p>
+          <ul>
+            <li>A leadership team needs clearer ownership and healthier challenge</li>
+            <li>Communication has become either too careful or too blunt</li>
+            <li>An exec group or board wants better alignment without theatrics</li>
+            <li>You want practical development, not generic culture slogans</li>
+          </ul>
+        </article>
+
+        <article class="light-fit-card fade-up">
+          <h3>Probably better elsewhere</h3>
+          <p>This may not be the right stream if:</p>
+          <ul>
+            <li>You primarily need one-to-one coaching for a single leader — start with <a href="orangery-pro.html"><strong>orangery.pro</strong></a></li>
+            <li>You are looking for pure consulting strategy with no relational work</li>
+            <li>You want a one-off motivational talk with no follow-through</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section" id="process">
+    <div class="section-inner">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-headline">We keep the process light enough to start, and clear enough to <em>build on.</em></h2>
+      <p class="section-sub">Most engagements begin with a conversation about the people, the politics, and the outcome that would actually make a difference.</p>
+
+      <div class="process-grid">
+        <article class="process-card fade-up">
+          <span class="process-step">01</span>
+          <h3>Talk it through</h3>
+          <p>We clarify the team, the pressure points, and whether this is a coaching, workshop, or broader development need.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">02</span>
+          <h3>Shape the right offer</h3>
+          <p>We choose a focused path rather than forcing a package that does not match the real problem.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">03</span>
+          <h3>Work the live dynamics</h3>
+          <p>Sessions stay practical: communication, trust, conflict, influence, and the maturity of the people in the room.</p>
+        </article>
+        <article class="process-card fade-up">
+          <span class="process-step">04</span>
+          <h3>Leave with traction</h3>
+          <p>The goal is not another workshop high. It is clearer language, better conversations, and stronger follow-through.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="stone-section" id="writing">
+    <div class="section-inner">
+      <span class="eyebrow">Writing</span>
+      <h2 class="section-headline">Ideas and tools for leaders who want healthier <em>team dynamics.</em></h2>
+      <p class="section-sub">Short essays on 5 Voices, influence, and the moments that make teams harder than the org chart suggests.</p>
+
+      <div class="writing-shell">
+        <div class="writing-list fade-up" id="writing-list">
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/what-kind-of-confidence-does-your-leadership-carry" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Sep 10, 2026</span>
+            <strong>What kind of confidence does your leadership carry?</strong>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-room-reads-you-before-you-speak" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Sep 2, 2026</span>
+            <strong>The Room Reads You Before You Speak</strong>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/when-you-re-not-a-pioneer" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Aug 12, 2026</span>
+            <strong>When You're Not a Pioneer</strong>
+          </a>
+          <a class="writing-item" href="https://orangery-leadership.beehiiv.com/p/the-nurturer-s-dilemma" target="_blank" rel="noreferrer">
+            <span class="writing-item-meta">Aug 4, 2026</span>
+            <strong>The Nurturer's Dilemma</strong>
+          </a>
+        </div>
+
+        <aside class="writing-panel fade-up">
+          <h3>Read the archive. Or get the next one by email.</h3>
+          <p>Leadership &amp; Team Dynamics is Luke's ongoing writing on influence, 5 Voices, and healthier team dynamics.</p>
+          <a class="btn-primary" href="https://orangery-leadership.beehiiv.com/" target="_blank" rel="noreferrer">Browse all articles -></a>
+          <a class="btn-secondary" href="https://orangery-leadership.beehiiv.com/" target="_blank" rel="noreferrer">Subscribe on Beehiiv</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="section-inner">
+      <div class="cta-box fade-up">
+        <div>
+          <span class="eyebrow" style="color: var(--rust);">Ready to explore</span>
+          <h2>If the need is bigger than one leader, let's talk about the <em>right room.</em></h2>
+          <p>Book a conversation and we can sort out whether team coaching, a workshop, exec support, or a broader pathway is the better next step.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn-primary" href="https://cal.com/lukehaythorpe/30min">Book a conversation -></a>
+          <a class="btn-secondary" href="mailto:lukehaythorpe@orangery.solutions?subject=orangery.team%20enquiry">Email Luke</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="ORANGE.png" alt="orangery.team">
+        <div class="footer-brand-copy">
+          <strong>orangery.team</strong>
+          <span>Team development inside the Orangery ecosystem</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#offerings">Offerings</a>
+        <a href="#proof">Proof</a>
+        <a href="#quote">Quote</a>
+        <a href="#writing">Writing</a>
+        <a href="proposal-builder.html">Proposal builder</a>
+        <a href="orangery-pro.html">orangery.pro</a>
+        <a href="https://orangery.solutions" target="_blank" rel="noreferrer">orangery.solutions</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const observers = document.querySelectorAll(".fade-up");
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+observers.forEach((node) => fadeObserver.observe(node));
+
+(function loadLatestWriting() {
+  const list = document.getElementById("writing-list");
+  if (!list) return;
+
+  const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
+  const raw = (window.ORANGERY_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
+  const workerUrl = raw && !/^https?:\/\//i.test(raw) ? "https://" + raw : raw;
+  if (!workerUrl) return;
+
+  function formatDate(iso) {
+    try {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  fetch(workerUrl.replace(/\/$/, "") + "/writing/latest?limit=4")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data || !data.ok || !Array.isArray(data.posts) || !data.posts.length) return;
+      list.innerHTML = data.posts.map(function (post) {
+        const meta = formatDate(post.publishedAt);
+        return '<a class="writing-item" href="' + escapeHtml(post.url) + '" target="_blank" rel="noreferrer">' +
+          (meta ? '<span class="writing-item-meta">' + escapeHtml(meta) + "</span>" : "") +
+          "<strong>" + escapeHtml(post.title) + "</strong>" +
+          "</a>";
+      }).join("");
+    })
+    .catch(function () { /* keep static fallback posts */ });
+})();
+
+(function () {
+  const WORKSHOP_PACKAGES = {
+    6: { count: 2, price: 4500, help: "Includes 2 × 90-minute workshops across a 6-month engagement." },
+    12: { count: 3, price: 6000, help: "Includes 3 × 90-minute workshops across a 12-month engagement." },
+    24: { count: 6, price: 12000, help: "Includes 6 × 90-minute workshops across a 2-year engagement." }
+  };
+
+  const COACH_TRAINING = 4500;
+  const LEADERSHIP_MONTHLY = 1200;
+  const GROUP_MONTHLY = 500;
+  const DURATION_DISCOUNTS = {
+    6: 0,
+    12: 0.1,
+    24: 0.2
+  };
+
+  const state = {
+    months: 6,
+    leaders: 1,
+    groups: 1,
+    package: "team-reset",
+    currency: "USD",
+    usdToAud: 1.5
+  };
+
+  const els = {
+    durationGrid: document.getElementById("duration-grid"),
+    leaderGrid: document.getElementById("leader-grid"),
+    groupGrid: document.getElementById("group-grid"),
+    currencyGrid: document.getElementById("currency-grid"),
+    currencyNote: document.getElementById("currency-note"),
+    leaderControls: document.getElementById("leader-controls"),
+    groupControls: document.getElementById("group-controls"),
+    workshop: document.getElementById("mod-workshop"),
+    group: document.getElementById("mod-group"),
+    leadership: document.getElementById("mod-leadership"),
+    coachTraining: document.getElementById("mod-coach-training"),
+    priceWorkshop: document.getElementById("price-workshop"),
+    priceGroup: document.getElementById("price-group"),
+    workshopHelp: document.getElementById("workshop-help"),
+    quoteLines: document.getElementById("quote-lines"),
+    quoteTotal: document.getElementById("quote-total"),
+    quoteNote: document.getElementById("quote-total-note"),
+    summaryContext: document.getElementById("summary-context"),
+    quoteEmail: document.getElementById("quote-email"),
+    quoteSubtotalRow: document.getElementById("quote-subtotal-row"),
+    quoteDiscountRow: document.getElementById("quote-discount-row"),
+    quoteSubtotal: document.getElementById("quote-subtotal"),
+    quoteDiscount: document.getElementById("quote-discount"),
+    quoteDiscountLabel: document.getElementById("quote-discount-label"),
+    packages: document.querySelectorAll("[data-package]")
+  };
+
+  function money(valueUsd) {
+    const amount = state.currency === "AUD" ? valueUsd * state.usdToAud : valueUsd;
+    const code = state.currency === "AUD" ? "AUD" : "USD";
+    const locale = code === "AUD" ? "en-AU" : "en-US";
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: code,
+      maximumFractionDigits: 0
+    }).format(Math.round(amount));
+  }
+
+  function setActive(container, attr, value) {
+    container.querySelectorAll(".choice-pill").forEach((btn) => {
+      btn.classList.toggle("active", btn.getAttribute(attr) === String(value));
+    });
+  }
+
+  function applyPackage(name) {
+    state.package = name;
+    els.packages.forEach((card) => {
+      card.classList.toggle("active", card.getAttribute("data-package") === name);
+    });
+
+    if (name === "team-reset") {
+      els.workshop.checked = true;
+      els.group.checked = true;
+      els.leadership.checked = false;
+      els.coachTraining.checked = false;
+      state.months = 6;
+      state.leaders = 1;
+      state.groups = 1;
+    } else if (name === "leadership-core") {
+      els.workshop.checked = false;
+      els.group.checked = false;
+      els.leadership.checked = true;
+      els.coachTraining.checked = false;
+      state.months = 6;
+      state.leaders = 1;
+      state.groups = 1;
+    } else if (name === "team-leaders") {
+      els.workshop.checked = true;
+      els.group.checked = true;
+      els.leadership.checked = true;
+      els.coachTraining.checked = false;
+      state.months = 6;
+      state.leaders = 1;
+      state.groups = 1;
+    }
+
+    setActive(els.durationGrid, "data-months", state.months);
+    setActive(els.leaderGrid, "data-leaders", state.leaders);
+    setActive(els.groupGrid, "data-groups", state.groups);
+    render();
+  }
+
+  function clearPackageSelection() {
+    state.package = "";
+    els.packages.forEach((card) => card.classList.remove("active"));
+  }
+
+  function render() {
+    const workshopPackage = WORKSHOP_PACKAGES[state.months];
+    const durationLabel = state.months === 24 ? "2 years" : state.months + " months";
+
+    els.priceWorkshop.textContent = money(workshopPackage.price);
+    els.workshopHelp.textContent = workshopPackage.help;
+    els.priceGroup.textContent = money(GROUP_MONTHLY) + " / mo per group";
+    els.leaderControls.classList.toggle("visible", els.leadership.checked);
+    els.groupControls.classList.toggle("visible", els.group.checked);
+
+    const contextParts = [];
+    if (els.workshop.checked) {
+      contextParts.push(workshopPackage.count + " workshop" + (workshopPackage.count > 1 ? "s" : ""));
+    }
+    if (els.group.checked) {
+      contextParts.push(state.groups + " coaching group" + (state.groups > 1 ? "s" : ""));
+    }
+    contextParts.push(durationLabel);
+
+    const lines = [];
+    let oneOffTotal = 0;
+    let recurringTotal = 0;
+
+    if (els.workshop.checked) {
+      lines.push({
+        label: "Workshop package · " + workshopPackage.count + " × 90-min · " + durationLabel,
+        value: money(workshopPackage.price)
+      });
+      oneOffTotal += workshopPackage.price;
+    }
+
+    if (els.group.checked) {
+      const groupMonthly = GROUP_MONTHLY * state.groups;
+      const groupTotal = groupMonthly * state.months;
+      lines.push({
+        label: "Group coaching · " + state.groups + " group" + (state.groups > 1 ? "s" : "") + " × " + money(GROUP_MONTHLY) + "/mo × " + state.months,
+        value: money(groupTotal)
+      });
+      recurringTotal += groupTotal;
+    }
+
+    if (els.leadership.checked) {
+      const leadershipTotal = LEADERSHIP_MONTHLY * state.leaders * state.months;
+      lines.push({
+        label: "Leadership coaching · " + state.leaders + " seat" + (state.leaders > 1 ? "s" : "") + " × " + state.months + " mo",
+        value: money(leadershipTotal)
+      });
+      recurringTotal += leadershipTotal;
+    }
+
+    if (els.coachTraining.checked) {
+      lines.push({
+        label: "In-team coach training + light support",
+        value: money(COACH_TRAINING)
+      });
+      oneOffTotal += COACH_TRAINING;
+    }
+
+    const discountRate = DURATION_DISCOUNTS[state.months] || 0;
+    const discountAmount = Math.round(recurringTotal * discountRate);
+    const subtotal = oneOffTotal + recurringTotal;
+    const total = subtotal - discountAmount;
+
+    if (!lines.length) {
+      els.quoteLines.innerHTML = '<li class="empty">Select a module to begin.</li>';
+      els.quoteTotal.textContent = "$0";
+      els.quoteSubtotalRow.classList.add("hidden");
+      els.quoteDiscountRow.classList.add("hidden");
+      els.quoteNote.textContent = "Estimates are guidance for planning. Final scope can be confirmed on a call.";
+    } else {
+      els.quoteLines.innerHTML = lines.map(function (line) {
+        return "<li><span>" + line.label + "</span><strong>" + line.value + "</strong></li>";
+      }).join("");
+
+      const showDiscountMath = discountRate > 0 && recurringTotal > 0;
+      els.quoteSubtotalRow.classList.toggle("hidden", !showDiscountMath);
+      els.quoteDiscountRow.classList.toggle("hidden", !showDiscountMath);
+      els.quoteSubtotal.textContent = money(subtotal);
+      els.quoteDiscountLabel.textContent = state.months === 12
+        ? "12-month commitment · 10% off coaching"
+        : "2-year commitment · 20% off coaching";
+      els.quoteDiscount.textContent = "-" + money(discountAmount);
+      els.quoteTotal.textContent = money(total);
+      els.quoteNote.textContent = showDiscountMath
+        ? "Duration discount applies to group and leadership coaching only. Workshop packages and in-team coach training stay at the package rate."
+        : "Includes selected modules only. Exec, board, and company-wide work is scoped separately.";
+    }
+
+    els.summaryContext.textContent = contextParts.join(" · ");
+    if (els.currencyNote) {
+      els.currencyNote.textContent = state.currency === "AUD"
+        ? "AUD shown using today's rate (1 USD ≈ " + state.usdToAud.toFixed(4) + " AUD). Final proposals lock a pay currency."
+        : "List prices are in USD. Switch to AUD for an approximate conversion using today's rate.";
+    }
+
+    const summaryParts = [
+      "Duration: " + durationLabel,
+      "Display currency: " + state.currency,
+      "Workshop package: " + (els.workshop.checked ? workshopPackage.count + " workshops (" + money(workshopPackage.price) + ")" : "no"),
+      "Coaching groups: " + (els.group.checked ? state.groups : "0"),
+      "Leadership seats: " + (els.leadership.checked ? state.leaders : "0"),
+      "In-team coach training: " + (els.coachTraining.checked ? "yes" : "no"),
+      "Subtotal: " + money(subtotal),
+      "Duration discount: " + (discountAmount > 0 ? "-" + money(discountAmount) : "none"),
+      "Estimated total: " + money(total)
+    ];
+
+    const body = "Hi Luke,%0D%0A%0D%0AI put together an orangery.team estimate:%0D%0A%0D%0A" +
+      summaryParts.join("%0D%0A") +
+      "%0D%0A%0D%0ALooking forward to talking it through.";
+
+    els.quoteEmail.href = "mailto:lukehaythorpe@orangery.solutions?subject=" +
+      encodeURIComponent("orangery.team quote estimate") +
+      "&body=" + body;
+  }
+
+  els.currencyGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-currency]");
+    if (!btn) return;
+    state.currency = btn.getAttribute("data-currency") === "AUD" ? "AUD" : "USD";
+    setActive(els.currencyGrid, "data-currency", state.currency);
+    render();
+  });
+
+  els.durationGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-months]");
+    if (!btn) return;
+    state.months = Number(btn.getAttribute("data-months"));
+    setActive(els.durationGrid, "data-months", state.months);
+    clearPackageSelection();
+    render();
+  });
+
+  els.leaderGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-leaders]");
+    if (!btn) return;
+    state.leaders = Number(btn.getAttribute("data-leaders"));
+    setActive(els.leaderGrid, "data-leaders", state.leaders);
+    clearPackageSelection();
+    render();
+  });
+
+  els.groupGrid.addEventListener("click", function (event) {
+    const btn = event.target.closest("[data-groups]");
+    if (!btn) return;
+    state.groups = Number(btn.getAttribute("data-groups"));
+    setActive(els.groupGrid, "data-groups", state.groups);
+    clearPackageSelection();
+    render();
+  });
+
+  [els.workshop, els.group, els.leadership, els.coachTraining].forEach(function (input) {
+    input.addEventListener("change", function () {
+      clearPackageSelection();
+      render();
+    });
+  });
+
+  els.packages.forEach(function (card) {
+    card.addEventListener("click", function () {
+      applyPackage(card.getAttribute("data-package"));
+    });
+  });
+
+  applyPackage("team-reset");
+
+  fetch("https://api.frankfurter.app/latest?from=USD&to=AUD")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && data.rates && data.rates.AUD) {
+        state.usdToAud = Number(data.rates.AUD);
+        if (state.currency === "AUD") render();
+        else if (els.currencyNote) {
+          els.currencyNote.textContent = "List prices are in USD. Switch to AUD for an approximate conversion using today's rate.";
+        }
+      }
+    })
+    .catch(function () { /* keep fallback rate */ });
+})();
+</script>
+</body>
+</html>
