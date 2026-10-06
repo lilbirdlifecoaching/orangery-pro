@@ -1,7 +1,15 @@
 name = "orangery-relational-dynamics"
 main = "src/index.js"
 compatibility_date = "2026-05-26"
+keep_vars = true
+
+[[kv_namespaces]]
+binding = "PROPOSALS"
+id = "b9111860569b40b1a68b8795f134670d"
 
 [vars]
-ALLOWED_ORIGINS = ""
-ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
+ALLOWED_ORIGINS = "https://orangery.pro,https://www.orangery.pro,https://lilbirdlifecoaching.github.io"
+ANTHROPIC_MODEL = "claude-haiku-4-5"
+BEEHIIV_PUBLICATION_ID = "pub_4b113d69-194d-46cc-ae0e-53efb3cdebce"
+NOTIFY_EMAIL = "lukehaythorpe@orangery.solutions"
+PROPOSAL_PUBLIC_URL = "https://orangery.pro/proposal.html"

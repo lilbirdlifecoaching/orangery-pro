@@ -9,27 +9,27 @@
 <link rel="apple-touch-icon" href="ORANGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --char: #1e2020;
-  --char-mid: #2e3830;
-  --char-light: #3a4840;
-  --sage: #7a9980;
-  --rust: #c8543a;
-  --rust-light: #d97055;
-  --gold: #c9a052;
-  --off: #f3f0e8;
-  --stone: #e8e0d4;
-  --stone-deep: #d8cfc0;
-  --white: #fffdf8;
-  --muted: #6a6a60;
+  --char: #121417;
+  --char-mid: #1a1d21;
+  --char-light: #3a424c;
+  --sage: #2f9e4f;
+  --rust: #f07828;
+  --rust-light: #f48c42;
+  --gold: #2f9e4f;
+  --off: #ffffff;
+  --stone: #f7f8fa;
+  --stone-deep: #e6e8eb;
+  --white: #ffffff;
+  --muted: #5c6570;
   --warning: #7a6020;
   --warning-bg: #f5eccf;
   --danger-bg: #fceae4;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
-  --shadow-soft: 0 20px 50px rgba(30, 32, 32, 0.08);
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --shadow-soft: 0 1px 0 rgba(18, 20, 23, 0.04);
 }
 
 *,
@@ -62,8 +62,8 @@ textarea {
 }
 
 nav {
-  background: rgba(30, 32, 32, 0.96);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .nav-inner,
@@ -102,33 +102,34 @@ nav {
 }
 
 .nav-brand-name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--off);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--char);
 }
 
 .nav-brand-sub {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(243, 240, 232, 0.46);
+  color: var(--muted);
 }
 
 .nav-back {
   font-size: 13px;
-  color: rgba(243, 240, 232, 0.66);
+  color: var(--muted);
   text-decoration: none;
 }
 
 .nav-back:hover {
-  color: rgba(243, 240, 232, 0.95);
+  color: var(--rust);
 }
 
 .hero {
   padding: 72px 0 30px;
-  background:
-    radial-gradient(circle at top right, rgba(201, 160, 82, 0.16), transparent 32%),
-    linear-gradient(135deg, #f7f2e7 0%, #f1ebdf 48%, #ece3d5 100%);
+  background: var(--stone);
+  border-bottom: 1px solid var(--stone-deep);
 }
 
 .eyebrow {
@@ -179,7 +180,7 @@ nav {
 
 .meta-pill {
   border: 1px solid rgba(30, 32, 32, 0.16);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 7px 14px;
   font-size: 12px;
   color: var(--char-light);
@@ -193,7 +194,7 @@ nav {
 .tool-shell {
   background: var(--white);
   border: 1px solid var(--stone-deep);
-  border-radius: 18px;
+  border-radius: 8px;
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
@@ -201,13 +202,14 @@ nav {
 .tool-top {
   padding: 28px 28px 24px;
   border-bottom: 1px solid var(--stone-deep);
-  background: linear-gradient(180deg, rgba(243, 240, 232, 0.68) 0%, rgba(255, 253, 248, 1) 100%);
+  background: var(--stone);
 }
 
 .tool-top h2 {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 40px);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 10px;
 }
@@ -227,8 +229,8 @@ nav {
 .coaching-note {
   margin-top: 18px;
   padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(201, 160, 82, 0.36);
+  border-radius: 8px;
+  border: 1px solid rgba(240, 120, 40, 0.28);
   background: var(--warning-bg);
 }
 
@@ -277,7 +279,7 @@ nav {
   display: block;
   height: 100%;
   padding: 16px 16px 18px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1.5px solid var(--stone-deep);
   background: var(--off);
   cursor: pointer;
@@ -318,7 +320,7 @@ nav {
 
 .form-card {
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   background: #fff;
 }
@@ -349,7 +351,7 @@ nav {
 .field input,
 .field textarea {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1.5px solid var(--stone-deep);
   background: var(--off);
   color: var(--char);
@@ -381,7 +383,7 @@ nav {
 .context-card {
   margin-top: 18px;
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   background: rgba(232, 224, 212, 0.36);
 }
@@ -418,7 +420,7 @@ nav {
   padding: 13px 22px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -455,48 +457,50 @@ nav {
 
 .loading-copy {
   display: none;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--sage);
+  margin-top: 16px;
 }
 
 .loading-copy.visible {
-  display: inline-flex;
+  display: block;
 }
 
-.loading-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--char-light);
+}
+
+.progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--stone-deep);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
   background: var(--rust);
-  animation: pulse 1s ease infinite;
+  transition: width 0.2s linear;
 }
 
-.loading-dot:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.loading-dot:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.85);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.progress-note {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 .status-message {
   margin-top: 14px;
   display: none;
   padding: 14px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -580,7 +584,7 @@ nav {
 .result-card {
   background: #fff;
   border: 1px solid var(--stone-deep);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 22px;
   box-shadow: var(--shadow-soft);
 }
@@ -636,11 +640,105 @@ nav {
   background: var(--gold);
 }
 
+.read-gate {
+  margin: 8px 0 18px;
+  padding: 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(240, 120, 40, 0.28);
+  background: #fff;
+}
+
+.read-gate[hidden],
+.result-full[hidden] {
+  display: none;
+}
+
+.read-gate .read-gate-kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.read-gate h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.read-gate p {
+  max-width: 640px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.read-gate-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.read-gate-form input {
+  flex: 1 1 220px;
+  border-radius: 8px;
+  border: 1.5px solid var(--stone-deep);
+  background: var(--off);
+  color: var(--char);
+  padding: 13px 14px;
+  outline: none;
+}
+
+.read-gate-form input:focus {
+  border-color: var(--sage);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(122, 153, 128, 0.12);
+}
+
+.read-gate-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.read-gate-status {
+  display: none;
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--char-mid);
+}
+
+.read-gate-status.visible {
+  display: block;
+}
+
+.read-gate-status.error {
+  color: #8a3b28;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .result-footer {
   margin-top: 8px;
   padding: 18px 20px;
-  border-radius: 16px;
-  border: 1px solid rgba(201, 160, 82, 0.34);
+  border-radius: 8px;
+  border: 1px solid rgba(240, 120, 40, 0.28);
   background: var(--warning-bg);
 }
 
@@ -667,37 +765,39 @@ nav {
 .session-prompt {
   margin-top: 24px;
   padding: 24px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(30, 32, 32, 0.98), rgba(44, 53, 43, 0.96));
+  border-radius: 8px;
+  background: var(--char);
   color: var(--off);
-  border: 1px solid rgba(201, 160, 82, 0.18);
-  box-shadow: 0 18px 36px rgba(30, 32, 32, 0.18);
+  border: 1px solid var(--char);
+  box-shadow: none;
 }
 
 .session-prompt-label {
   display: inline-flex;
   align-items: center;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(201, 160, 82, 0.18);
-  color: var(--gold);
+  border-radius: 4px;
+  background: rgba(240, 120, 40, 0.16);
+  color: var(--rust);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
 .session-prompt h3 {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 38px);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   line-height: 1.08;
   margin-bottom: 10px;
 }
 
 .session-prompt h3 em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--rust);
 }
 
 .session-prompt p {
@@ -863,12 +963,17 @@ nav {
             <div class="submit-row">
               <button id="submit-btn" class="btn-primary" type="submit">Read the dynamic -></button>
               <button id="reset-btn" class="btn-secondary" type="button">Reset</button>
-              <div id="loading-copy" class="loading-copy" aria-live="polite">
-                <span class="loading-dot"></span>
-                <span class="loading-dot"></span>
-                <span class="loading-dot"></span>
-                <span>Building your reflection</span>
+            </div>
+
+            <div id="loading-copy" class="loading-copy">
+              <div class="progress-meta">
+                <span id="progress-label" aria-live="polite">Reading both profiles</span>
+                <span id="progress-percent" aria-hidden="true">0%</span>
               </div>
+              <div id="progress-track" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Building your reflection">
+                <div id="progress-fill" class="progress-fill"></div>
+              </div>
+              <p class="progress-note">Keep this tab open. The reflection is being written.</p>
             </div>
 
             <div id="status-message" class="status-message" role="alert"></div>
@@ -892,40 +997,62 @@ nav {
                 <p id="result-you-need"></p>
               </article>
 
-              <article class="result-card full">
-                <h3>Power and politics in play</h3>
-                <p id="result-power"></p>
+              <article class="result-card full" id="friction-preview-card">
+                <h3>One place this may rub</h3>
+                <p id="result-friction-one"></p>
               </article>
+            </div>
 
-              <article class="result-card warning">
-                <h3>Likely points of friction</h3>
-                <ul id="result-friction"></ul>
-              </article>
+            <div id="read-gate" class="read-gate" hidden>
+              <p class="read-gate-kicker">Practical leadership notes</p>
+              <h3>Get the rest of this read</h3>
+              <p>Power, politics, the questions worth sitting with, and the next conversation moves. You’ll also get occasional practical leadership notes by email.</p>
+              <form id="gate-form" class="read-gate-form">
+                <label class="sr-only" for="gate-email">Email</label>
+                <input id="gate-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+                <button id="gate-submit" class="btn-primary" type="submit">Send the rest of this read</button>
+              </form>
+              <p class="read-gate-note">Already on the list? Use the same email and the rest of this read will open.</p>
+              <p id="gate-status" class="read-gate-status" role="status"></p>
+            </div>
 
-              <article class="result-card warning">
-                <h3>Political watchouts</h3>
-                <ul id="result-politics"></ul>
-              </article>
+            <div id="result-full" class="result-full" hidden>
+              <div class="result-grid">
+                <article class="result-card full">
+                  <h3>Power and politics in play</h3>
+                  <p id="result-power"></p>
+                </article>
 
-              <article class="result-card">
-                <h3>Reflection questions</h3>
-                <ul id="result-questions"></ul>
-              </article>
+                <article class="result-card warning" id="friction-rest-card">
+                  <h3>Other points of friction</h3>
+                  <ul id="result-friction"></ul>
+                </article>
 
-              <article class="result-card tip">
-                <h3>Do more of this</h3>
-                <ul id="result-do-more"></ul>
-              </article>
+                <article class="result-card warning">
+                  <h3>Political watchouts</h3>
+                  <ul id="result-politics"></ul>
+                </article>
 
-              <article class="result-card warning">
-                <h3>Avoid doing this</h3>
-                <ul id="result-avoid"></ul>
-              </article>
+                <article class="result-card">
+                  <h3>Reflection questions</h3>
+                  <ul id="result-questions"></ul>
+                </article>
 
-              <article class="result-card tip">
-                <h3>Next conversation moves</h3>
-                <ul id="result-next-steps"></ul>
-              </article>
+                <article class="result-card tip">
+                  <h3>Do more of this</h3>
+                  <ul id="result-do-more"></ul>
+                </article>
+
+                <article class="result-card warning">
+                  <h3>Avoid doing this</h3>
+                  <ul id="result-avoid"></ul>
+                </article>
+
+                <article class="result-card tip">
+                  <h3>Next conversation moves</h3>
+                  <ul id="result-next-steps"></ul>
+                </article>
+              </div>
             </div>
 
             <div class="result-footer">
@@ -956,8 +1083,20 @@ nav {
   const submitBtn = document.getElementById("submit-btn");
   const resetBtn = document.getElementById("reset-btn");
   const loadingCopy = document.getElementById("loading-copy");
+  const progressFill = document.getElementById("progress-fill");
+  const progressTrack = document.getElementById("progress-track");
+  const progressLabel = document.getElementById("progress-label");
+  const progressPercent = document.getElementById("progress-percent");
   const statusMessage = document.getElementById("status-message");
+  let progressTimer = null;
   const resultShell = document.getElementById("result-shell");
+  const gate = document.getElementById("read-gate");
+  const gateForm = document.getElementById("gate-form");
+  const gateEmail = document.getElementById("gate-email");
+  const gateSubmit = document.getElementById("gate-submit");
+  const gateStatus = document.getElementById("gate-status");
+  const resultFull = document.getElementById("result-full");
+  const UNLOCK_KEY = "orangery-newsletter-unlocked";
   const workerMeta = document.querySelector('meta[name="orangery-worker-url"]');
   const RAW_WORKER_URL = (window.ORANGERY_RELATIONAL_WORKER_URL || (workerMeta ? workerMeta.content : "")).trim();
   const WORKER_URL = RAW_WORKER_URL && !/^https?:\/\//i.test(RAW_WORKER_URL)
@@ -1003,10 +1142,46 @@ nav {
     statusMessage.className = "status-message visible " + tone;
   }
 
+  function stageFor(value) {
+    if (value >= 80) return "Writing the next conversation moves";
+    if (value >= 62) return "Drafting friction and watchouts";
+    if (value >= 40) return "Working through power and politics";
+    if (value >= 18) return "Mapping how the two styles meet";
+    return "Reading both profiles";
+  }
+
+  function paintProgress(value) {
+    const rounded = Math.max(0, Math.min(100, Math.round(value)));
+    progressFill.style.width = rounded + "%";
+    progressTrack.setAttribute("aria-valuenow", String(rounded));
+    progressPercent.textContent = rounded + "%";
+    const stage = rounded >= 100 ? "Reflection ready" : stageFor(rounded);
+    if (progressLabel.textContent !== stage) progressLabel.textContent = stage;
+  }
+
+  function stopProgressTimer() {
+    if (progressTimer) {
+      clearInterval(progressTimer);
+      progressTimer = null;
+    }
+  }
+
+  function startProgress() {
+    stopProgressTimer();
+    paintProgress(6);
+    const started = Date.now();
+    progressTimer = setInterval(function () {
+      const elapsed = Date.now() - started;
+      paintProgress(6 + 86 * (1 - Math.exp(-elapsed / 18000)));
+    }, 180);
+  }
+
   function setLoading(isLoading) {
     submitBtn.disabled = isLoading;
     loadingCopy.classList.toggle("visible", isLoading);
     submitBtn.textContent = isLoading ? "Building your reflection..." : "Read the dynamic ->";
+    if (isLoading) startProgress();
+    else stopProgressTimer();
   }
 
   function escapeHtml(value) {
@@ -1041,6 +1216,9 @@ nav {
   function resetForm() {
     form.reset();
     setStatus("", "info");
+    setGateStatus("", "");
+    gate.hidden = true;
+    resultFull.hidden = true;
     resultShell.classList.remove("visible");
     applyDirectionCopy(normalizeDirection(new URLSearchParams(window.location.search).get("relationship")));
   }
@@ -1075,6 +1253,29 @@ nav {
     };
   }
 
+  function hasUnlockedRead() {
+    try {
+      return localStorage.getItem(UNLOCK_KEY) === "1";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function setGateStatus(message, tone) {
+    if (!message) {
+      gateStatus.textContent = "";
+      gateStatus.className = "read-gate-status";
+      return;
+    }
+    gateStatus.textContent = message;
+    gateStatus.className = "read-gate-status visible" + (tone === "error" ? " error" : "");
+  }
+
+  function revealFullRead() {
+    gate.hidden = true;
+    resultFull.hidden = false;
+  }
+
   function renderResponse(data) {
     document.getElementById("result-direction").textContent = directionLabel(data.relationshipDirection) + " relational read";
     document.getElementById("result-title").textContent = data.pairingTitle;
@@ -1084,15 +1285,63 @@ nav {
     document.getElementById("result-power").textContent = data.powerDynamics;
     document.getElementById("result-reminder").textContent = data.coachingReminder;
 
-    renderList("result-friction", data.frictionPoints);
+    const friction = Array.isArray(data.frictionPoints) ? data.frictionPoints.filter(Boolean) : [];
+    document.getElementById("result-friction-one").textContent = friction[0] || "";
+    document.getElementById("friction-preview-card").hidden = !friction[0];
+    renderList("result-friction", friction.slice(1));
+    document.getElementById("friction-rest-card").hidden = friction.length < 2;
     renderList("result-politics", data.politicalWatchouts);
     renderList("result-questions", data.reflectionQuestions);
     renderList("result-do-more", data.doMoreOf);
     renderList("result-avoid", data.avoidDoing);
     renderList("result-next-steps", data.nextConversationSteps);
 
+    if (hasUnlockedRead()) {
+      revealFullRead();
+    } else {
+      gate.hidden = false;
+      resultFull.hidden = true;
+      setGateStatus("", "");
+    }
+
     resultShell.classList.add("visible");
     resultShell.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function handleGateSubmit(event) {
+    event.preventDefault();
+    setGateStatus("", "");
+
+    const email = gateEmail.value.trim();
+    if (!email || email.indexOf("@") === -1) {
+      setGateStatus("Add the email where you want the notes.", "error");
+      return;
+    }
+
+    gateSubmit.disabled = true;
+    gateSubmit.textContent = "Opening the rest...";
+
+    try {
+      const response = await fetch(WORKER_URL.replace(/\/$/, "") + "/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email })
+      });
+      const data = await response.json().catch(function () { return {}; });
+      if (!response.ok) {
+        throw new Error(data.error || "Could not open the rest of this read.");
+      }
+      try {
+        localStorage.setItem(UNLOCK_KEY, "1");
+      } catch (err) {}
+      revealFullRead();
+      resultFull.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      setGateStatus(error.message || "Could not open the rest of this read.", "error");
+    } finally {
+      gateSubmit.disabled = false;
+      gateSubmit.textContent = "Send the rest of this read";
+    }
   }
 
   async function handleSubmit(event) {
@@ -1149,6 +1398,7 @@ nav {
   }
 
   form.addEventListener("submit", handleSubmit);
+  gateForm.addEventListener("submit", handleGateSubmit);
   resetBtn.addEventListener("click", resetForm);
 
   form.querySelectorAll('input[name="relationshipDirection"]').forEach((input) => {

@@ -1,1 +1,11 @@
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
+# Optional: add relational-dynamics readers to the Beehiiv leadership notes
+# BEEHIIV_API_KEY=
+# BEEHIIV_PUBLICATION_ID=pub_4b113d69-194d-46cc-ae0e-53efb3cdebce
+STRIPE_SECRET_KEY=sk_test_or_live_key_here
+STRIPE_WEBHOOK_SECRET=whsec_...
+# Optional: email delivery for proposals / client questions / paid confirmations
+# RESEND_API_KEY=re_...
+# NOTIFY_EMAIL=lukehaythorpe@orangery.solutions
+# NOTIFY_FROM=Orangery Proposals <onboarding@resend.dev>
+# IMPLEMENTATION_CAL_URL=https://cal.com/lukehaythorpe/30min
